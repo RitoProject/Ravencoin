@@ -1,0 +1,22 @@
+[Unit]
+Description=Rito's distributed currency daemon
+After=network.target
+
+[Service]
+User=rito
+Group=rito
+
+Type=forking
+PIDFile=/var/lib/ritod/ritod.pid
+ExecStart=/usr/bin/ritod -daemon -pid=/var/lib/ritod/ritod.pid \
+-conf=/etc/rito/rito.conf -datadir=/var/lib/ritod -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

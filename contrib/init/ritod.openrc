@@ -1,0 +1,92 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/rito/.rito" ]; then
+	RITOD_DEFAULT_DATADIR="/var/lib/rito/.rito"
+else
+	RITOD_DEFAULT_DATADIR="/var/lib/ritod"
+fi
+
+RITOD_CONFIGFILE=${RITOD_CONFIGFILE:-/etc/rito/rito.conf}
+RITOD_PIDDIR=${RITOD_PIDDIR:-/var/run/ritod}
+RITOD_PIDFILE=${RITOD_PIDFILE:-${RITOD_PIDDIR}/ritod.pid}
+RITOD_DATADIR=${RITOD_DATADIR:-${RITOD_DEFAULT_DATADIR}}
+RITOD_USER=${RITOD_USER:-${RITO_USER:-rito}}
+RITOD_GROUP=${RITOD_GROUP:-rito}
+RITOD_BIN=${RITOD_BIN:-/usr/bin/ritod}
+RITOD_NICE=${RITOD_NICE:-${NICELEVEL:-0}}
+RITOD_OPTS="${RITOD_OPTS:-${RITO_OPTS}}"
+
+name="Rito Core Daemon"
+description="Rito cryptocurrency P2P network daemon"
+
+command="/usr/bin/ritod"
+command_args="-pid=\"${RITOD_PIDFILE}\" \
+		-conf=\"${RITOD_CONFIGFILE}\" \
+		-datadir=\"${RITOD_DATADIR}\" \
+		-daemon \
+		${RITOD_OPTS}"
+
+required_files="${RITOD_CONFIGFILE}"
+start_stop_daemon_args="-u ${RITOD_USER} \
+			-N ${RITOD_NICE} -w 2000"
+pidfile="${RITOD_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${RITOD_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${RITOD_USER}:${RITOD_GROUP}" \
+	"${RITOD_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${RITOD_USER}:${RITOD_GROUP}" \
+	"${RITOD_PIDDIR}"
+
+	checkpath -f \
+	-o ${RITOD_USER}:${RITOD_GROUP} \
+	-m 0660 \
+	${RITOD_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${RITOD_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run ritod."
+		eerror "The setting must appear in ${RITOD_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Rito Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

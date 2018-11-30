@@ -7,10 +7,10 @@
 """Test node disconnect and ban behavior"""
 
 import time
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error, connect_nodes_bi, wait_until
 
-class DisconnectBanTest(RavenTestFramework):
+class DisconnectBanTest(RitoTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
 

@@ -17,10 +17,10 @@ disconnected.
 from decimal import Decimal
 import os
 import shutil
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import assert_equal, connect_nodes, disconnect_nodes, sync_blocks
 
-class ReorgsRestoreTest(RavenTestFramework):
+class ReorgsRestoreTest(RitoTestFramework):
     def set_test_params(self):
         self.num_nodes = 3
 

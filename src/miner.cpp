@@ -6,6 +6,8 @@
 
 #include "miner.h"
 
+#include "base58.h"
+#include "init.h"
 #include "amount.h"
 #include "chain.h"
 #include "chainparams.h"
@@ -41,7 +43,7 @@
 extern std::vector<CWalletRef> vpwallets;
 //////////////////////////////////////////////////////////////////////////////
 //
-// RavenMiner
+// RitoMiner
 //
 
 //
@@ -178,6 +180,14 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
     coinbaseTx.vout[0].nValue = nFees + GetBlockSubsidy(nHeight, chainparams.GetConsensus());
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
+
+    if (nHeight <= DEV_FUND_UNTIL) {
+      CRitoAddress address(DEV_ADDRESS);
+      coinbaseTx.vout.resize(2);
+      coinbaseTx.vout[1].scriptPubKey = GetScriptForDestination(CRitoAddress(address).Get());
+      coinbaseTx.vout[1].nValue = GetDevCoin(coinbaseTx.vout[0].nValue);
+    }
+
     pblock->vtx[0] = MakeTransactionRef(std::move(coinbaseTx));
     pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, chainparams.GetConsensus());
     pblocktemplate->vTxFees[0] = -nFees;
@@ -535,14 +545,13 @@ CWallet *GetFirstWallet() {
     return(NULL);
 }
 
-void static RavenMiner(const CChainParams& chainparams)
+void static RitoMiner(const CChainParams& chainparams)
 {
-    LogPrintf("RavenMiner -- started\n");
+    LogPrintf("RitoMiner -- started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
-    RenameThread("raven-miner");
+    RenameThread("rito-miner");
 
     unsigned int nExtraNonce = 0;
-
 
     CWallet * pWallet = NULL;
 
@@ -551,7 +560,7 @@ void static RavenMiner(const CChainParams& chainparams)
 
 
     if (!EnsureWalletIsAvailable(pWallet, false)) {
-        LogPrintf("RavenMiner -- Wallet not available\n");
+        LogPrintf("RitoMiner -- Wallet not available\n");
     }
 #endif
 
@@ -595,6 +604,7 @@ void static RavenMiner(const CChainParams& chainparams)
                         break;
                     }
 
+                    LogPrintf("RitoMiner -- waiting for connections and blocks downloaded\n");
                     MilliSleep(1000);
                 } while (true);
             }
@@ -613,13 +623,13 @@ void static RavenMiner(const CChainParams& chainparams)
 
             if (!pblocktemplate.get())
             {
-                LogPrintf("RavenMiner -- Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
+                LogPrintf("RitoMiner -- Keypool ran out, please call keypoolrefill before restarting the mining thread\n");
                 return;
             }
             CBlock *pblock = &pblocktemplate->block;
             IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
 
-            LogPrintf("RavenMiner -- Running miner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
+            LogPrintf("RitoMiner -- Running miner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
                 ::GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION));
 
             //
@@ -640,7 +650,7 @@ void static RavenMiner(const CChainParams& chainparams)
                         pblock->mix_hash = mix_hash;
                         // Found a solution
                         SetThreadPriority(THREAD_PRIORITY_NORMAL);
-                        LogPrintf("RavenMiner:\n  proof-of-work found\n  hash: %s\n  target: %s\n", hash.GetHex(), hashTarget.GetHex());
+                        LogPrintf("RitoMiner:\n  proof-of-work found\n  hash: %s\n  target: %s\n", hash.GetHex(), hashTarget.GetHex());
                         ProcessBlockFound(pblock, chainparams);
                         SetThreadPriority(THREAD_PRIORITY_LOWEST);
                         coinbaseScript->KeepScript();
@@ -656,7 +666,7 @@ void static RavenMiner(const CChainParams& chainparams)
                     nHashesDone += 1;
                     if (nHashesDone % 500000 == 0) {   //Calculate hashing speed
                         nHashesPerSec = nHashesDone / (((GetTimeMicros() - nMiningTimeStart) / 1000000) + 1);
-                    } 
+                    }
                     if ((pblock->nNonce & 0xFF) == 0)
                         break;
                 }
@@ -687,17 +697,17 @@ void static RavenMiner(const CChainParams& chainparams)
     }
     catch (const boost::thread_interrupted&)
     {
-        LogPrintf("RavenMiner -- terminated\n");
+        LogPrintf("RitoMiner -- terminated\n");
         throw;
     }
     catch (const std::runtime_error &e)
     {
-        LogPrintf("RavenMiner -- runtime error: %s\n", e.what());
+        LogPrintf("RitoMiner -- runtime error: %s\n", e.what());
         return;
     }
 }
 
-int GenerateRavens(bool fGenerate, int nThreads, const CChainParams& chainparams)
+int GenerateRitos(bool fGenerate, int nThreads, const CChainParams& chainparams)
 {
 
     static boost::thread_group* minerThreads = NULL;
@@ -717,14 +727,14 @@ int GenerateRavens(bool fGenerate, int nThreads, const CChainParams& chainparams
         return numCores;
 
     minerThreads = new boost::thread_group();
-    
+
     //Reset metrics
     nMiningTimeStart = GetTimeMicros();
     nHashesDone = 0;
     nHashesPerSec = 0;
 
     for (int i = 0; i < nThreads; i++){
-        minerThreads->create_thread(boost::bind(&RavenMiner, boost::cref(chainparams)));
+        minerThreads->create_thread(boost::bind(&RitoMiner, boost::cref(chainparams)));
     }
 
     return(numCores);

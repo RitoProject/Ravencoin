@@ -1,0 +1,8 @@
+/usr/bin/rito-cli		--	gen_context(system_u:object_r:rito_exec_t,s0)
+/usr/sbin/ritod		--	gen_context(system_u:object_r:rito_exec_t,s0)
+/usr/lib(64)?/rito/ritod		--	gen_context(system_u:object_r:rito_exec_t,s0)
+
+/etc/rito(/.*)?		gen_context(system_u:object_r:rito_conf_t,s0)
+/var/lib/rito(/.*)?		gen_context(system_u:object_r:rito_var_lib_t,s0)
+
+(/var)?/run/ritod(/.*)?   gen_context(system_u:object_r:rito_var_run_t,s0)

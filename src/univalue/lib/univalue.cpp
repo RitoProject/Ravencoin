@@ -241,4 +241,3 @@ const UniValue& find_value(const UniValue& obj, const std::string& name)
 
     return NullUniValue;
 }
-

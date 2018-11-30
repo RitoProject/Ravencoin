@@ -3,13 +3,13 @@
 # Install pip3 (if not there)
 #   sudo apt-get install python3-pip
 
-# Install zmq with 
+# Install zmq with
 #   pip3 install pyzmq
 
-# Install bitcoinrpc with 
+# Install bitcoinrpc with
 #   pip3 install python-bitcoinrpc
 
-# Install ipfsapi with 
+# Install ipfsapi with
 #   pip3 install ipfsapi
 
 import sys
@@ -27,13 +27,13 @@ import signal  #Used for timeout
 JSON_ONLY_CHECK = False
 FILESIZE_THRESHOLD = 100000000
 
-#Set this to your raven-cli program
-cli = "raven-cli"
+#Set this to your rito-cli program
+cli = "rito-cli"
 
 #mode = "-testnet"
 mode = ""
-rpc_port = 8766
-#Set this information in your raven.conf file (in datadir, not testnet3)
+rpc_port = 8501
+#Set this information in your rito.conf file (in datadir, not testnet3)
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'
 
@@ -76,12 +76,12 @@ def get_rawtx(tx):
 
 def get_bci():
     bci = rpc_connection.getblockchaininfo()
-    return(bci)    
+    return(bci)
 
 # def decode_rawtx(txdata):
 #     print("decoding: " + txdata)
 #     txjson = rpc_connection.decoderawtransaction(txdata)
-#     return(txjson)    
+#     return(txjson)
 
 def decode_rawtx(txdata):
     #print("decoding: " + txdata)
@@ -136,7 +136,7 @@ def is_json_only(txt):
 		json.loads(txt)
 	except ValueError as e:
 		print('Invalid json: %s' % e)
-		return False 
+		return False
 	return(True)
 
 
@@ -199,7 +199,7 @@ def asset_handler(asset_script):
 def output_missing(file):
 	outf = open(file, 'w')
 	outf.write("MISSING")
-	outf.close()	
+	outf.close()
 
 def get_ipfs_file_wget(filename, hash):
     try:
@@ -210,7 +210,7 @@ def get_ipfs_file_wget(filename, hash):
 
     print("Downloading: " + hash + " as " + filename)
     try:
-        filedata = urllib2.urlopen('https://ipfs.io/ipfs/' + hash, timeout=20)  
+        filedata = urllib2.urlopen('https://ipfs.io/ipfs/' + hash, timeout=20)
         datatowrite = filedata.read()
 
         datatowrite.strip()
@@ -219,7 +219,7 @@ def get_ipfs_file_wget(filename, hash):
             return
 
 
-        with open(filename, 'wb') as f:  
+        with open(filename, 'wb') as f:
             f.write(datatowrite)
         print("Saving metadata file")
     except urllib2.URLError as e:
@@ -253,7 +253,7 @@ def file_to_asset(file):
 	asset = asset.replace(r'%3F', '?')
 	asset = asset.replace(r'%3A', ':')
 	asset = asset.replace(r'%3D', '=')
-	return(asset)	
+	return(asset)
 
 def check_ipfs_file_size(hash):
     #print("Checking size in IPFS")
@@ -272,7 +272,7 @@ def ipfs_add(file):
     	print(res)
     return(res['Hash'])
 
-def ipfs_get(hash):    
+def ipfs_get(hash):
     import ipfsapi
     api = ipfsapi.connect('127.0.0.1', 5001)
     res = api.get(hash)
@@ -317,7 +317,7 @@ def load_block():
 		return(args.block)
 
 	#Read from the config file for last blocks processed
-	if os.path.isfile(block_conf_filename()):  
+	if os.path.isfile(block_conf_filename()):
 		outf = open(block_conf_filename(), 'r')
 		saved_block = int(outf.read())
 		outf.close()
@@ -349,8 +349,8 @@ def scan_asset_blocks():
 	        print_debug("txinfo: " + tx_info)
 	        tx_detail = decode_rawtx(tx_info)
 	        for vout in tx_detail.get('vout'):
-	            if (vout.get('scriptPubKey').get('asm')[86:98] == "OP_RVN_ASSET"):
-	                print_debug("Found OP_RVN_ASSET")
+	            if (vout.get('scriptPubKey').get('asm')[86:98] == "OP_RITO_ASSET"):
+	                print_debug("Found OP_RITO_ASSET")
 	                print_debug(vout.get('scriptPubKey').get('hex'))
 	                asset_script = decode_script(vout.get('scriptPubKey').get('hex'))
 	                asset_handler(asset_script)
@@ -363,7 +363,7 @@ def monitor_zmq():
 	context = zmq.Context()
 	socket = context.socket(zmq.SUB)
 
-	print("Getting Ravencoin msgs")
+	print("Getting Ritocoin msgs")
 	socket.connect("tcp://localhost:28766")
 
 	#socket.setsockopt_string(zmq.SUBSCRIBE, u'hashtx')
@@ -400,8 +400,8 @@ def monitor_zmq():
 			for vout in tx_detail.get('vout'):
 			#print("vout: " + str(vout.get('value')))
 			#print(vout.get('scriptPubKey').get('asm'))
-				if (vout.get('scriptPubKey').get('asm')[86:98] == "OP_RVN_ASSET"):
-					#print("Found OP_RVN_ASSET")
+				if (vout.get('scriptPubKey').get('asm')[86:98] == "OP_RITO_ASSET"):
+					#print("Found OP_RITO_ASSET")
 					#print(vout.get('scriptPubKey').get('hex'))
 					asset_script = decode_script(vout.get('scriptPubKey').get('hex'))
 					asset_handler(asset_script)
@@ -445,4 +445,3 @@ def main(argv):
 
 if __name__ == "__main__":
    main(sys.argv[1:])
-

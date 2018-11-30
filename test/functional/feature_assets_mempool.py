@@ -6,17 +6,17 @@
 
 """Testing asset mempool use cases"""
 
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import assert_equal, disconnect_all_nodes, connect_all_nodes_bi
 
-class AssetMempoolTest(RavenTestFramework):
+class AssetMempoolTest(RitoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
 
 
     def activate_assets(self):
-        self.log.info("Generating RVN and activating assets...")
+        self.log.info("Generating RITO and activating assets...")
         n0, n1 = self.nodes[0], self.nodes[1]
 
         n0.generate(1)

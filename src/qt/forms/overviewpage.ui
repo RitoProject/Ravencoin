@@ -34,6 +34,18 @@
      <property name="bottomMargin">
       <number>0</number>
      </property>
+     <property name="leftMargin">
+      <number>40</number>
+     </property>
+     <property name="topMargin">
+      <number>40</number>
+     </property>
+     <property name="rightMargin">
+      <number>40</number>
+     </property>
+     <property name="bottomMargin">
+      <number>40</number>
+     </property>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
        <property name="spacing">
@@ -86,7 +98,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QLabel" name="rvnBalancesLabel">
+               <widget class="QLabel" name="ritoBalancesLabel">
                 <property name="font">
                  <font>
                   <weight>75</weight>
@@ -94,7 +106,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>RVN Balances</string>
+                 <string>RITO Balances</string>
                 </property>
                </widget>
               </item>
@@ -110,7 +122,7 @@
                  </size>
                 </property>
                 <property name="toolTip">
-                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Raven network after a connection is established, but this process has not completed yet.</string>
+                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Rito network after a connection is established, but this process has not completed yet.</string>
                 </property>
                 <property name="text">
                  <string/>
@@ -173,7 +185,7 @@
                  <string>Mined balance in watch-only addresses that has not yet matured</string>
                 </property>
                 <property name="text">
-                 <string notr="true">0.000 000 00 RVN</string>
+                 <string notr="true">0.000 000 00 RITO</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -218,7 +230,7 @@
                  <string>Your current balance in watch-only addresses</string>
                 </property>
                 <property name="text">
-                 <string notr="true">0.000 000 00 RVN</string>
+                 <string notr="true">0.000 000 00 RITO</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -243,7 +255,7 @@
                  <string>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</string>
                 </property>
                 <property name="text">
-                 <string notr="true">0.000 000 00 RVN</string>
+                 <string notr="true">0.000 000 00 RITO</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -304,7 +316,7 @@
                  <string>Current total balance in watch-only addresses</string>
                 </property>
                 <property name="text">
-                 <string notr="true">0.000 000 00 RVN</string>
+                 <string notr="true">0.000 000 00 RITO</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -346,7 +358,7 @@
                  <string>Your current total balance</string>
                 </property>
                 <property name="text">
-                 <string notr="true">0.000 000 00 RVN</string>
+                 <string notr="true">0.000 000 00 RITO</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -371,7 +383,7 @@
                  <string>Your current spendable balance</string>
                 </property>
                 <property name="text">
-                 <string notr="true">0.000 000 00 RVN</string>
+                 <string notr="true">0.000 000 00 RITO</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -410,7 +422,7 @@
                  <string>Mined balance that has not yet matured</string>
                 </property>
                 <property name="text">
-                 <string notr="true">0.000 000 00 RVN</string>
+                 <string notr="true">0.000 000 00 RITO</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -435,7 +447,7 @@
                  <string>Unconfirmed transactions to watch-only addresses</string>
                 </property>
                 <property name="text">
-                 <string notr="true">0.000 000 00 RVN</string>
+                 <string notr="true">0.000 000 00 RITO</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -517,7 +529,7 @@
                  </size>
                 </property>
                 <property name="toolTip">
-                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Raven network after a connection is established, but this process has not completed yet.</string>
+                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Rito network after a connection is established, but this process has not completed yet.</string>
                 </property>
                 <property name="text">
                  <string/>
@@ -697,7 +709,7 @@
                  </size>
                 </property>
                 <property name="toolTip">
-                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Raven network after a connection is established, but this process has not completed yet.</string>
+                 <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Rito network after a connection is established, but this process has not completed yet.</string>
                 </property>
                 <property name="text">
                  <string/>

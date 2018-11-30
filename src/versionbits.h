@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_CONSENSUS_VERSIONBITS
-#define RAVEN_CONSENSUS_VERSIONBITS
+#ifndef RITO_CONSENSUS_VERSIONBITS
+#define RITO_CONSENSUS_VERSIONBITS
 
 #include "chain.h"
 #include <map>

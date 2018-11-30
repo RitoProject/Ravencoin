@@ -12,10 +12,10 @@ filters are not enabled.
 """
 
 from test_framework.mininode import NodeConn, NodeConnCB, NetworkThread, MsgMempool
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import p2p_port, assert_equal
 
-class P2PMempoolTests(RavenTestFramework):
+class P2PMempoolTests(RitoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -35,6 +35,6 @@ class P2PMempoolTests(RavenTestFramework):
 
         #mininode must be disconnected at this point
         assert_equal(len(self.nodes[0].getpeerinfo()), 0)
-    
+
 if __name__ == '__main__':
     P2PMempoolTests().main()

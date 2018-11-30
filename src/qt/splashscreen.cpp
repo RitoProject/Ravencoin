@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/raven-config.h"
+#include "config/rito-config.h"
 #endif
 
 #include "splashscreen.h"
@@ -77,7 +77,7 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     QRect rGradient(QPoint(0,0), splashSize);
     pixPaint.fillRect(rGradient, gradient);
 
-    // draw the raven icon, expected size of PNG: 1024x1024
+    // draw the rito icon, expected size of PNG: 1024x1024
     QRect rectIcon(QPoint(-40,0), QSize(310,310));
 
     const QSize requiredSize(1024,1024);
@@ -115,7 +115,7 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     #else
     	int versionTextWidth  = fm.width(versionText);
     #endif
-    
+
     if(versionTextWidth > titleTextWidth+paddingRight-10) {
         pixPaint.setFont(QFont(font, 10*fontFactor));
         titleVersionVSpace -= 5;

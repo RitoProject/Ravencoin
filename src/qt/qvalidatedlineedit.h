@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_QVALIDATEDLINEEDIT_H
-#define RAVEN_QT_QVALIDATEDLINEEDIT_H
+#ifndef RITO_QT_QVALIDATEDLINEEDIT_H
+#define RITO_QT_QVALIDATEDLINEEDIT_H
 
 #include <QLineEdit>
 
@@ -35,10 +35,10 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void validationDidChange(QValidatedLineEdit *validatedLineEdit);
-    
+
 private Q_SLOTS:
     void markValid();
     void checkValidity();
 };
 
-#endif // RAVEN_QT_QVALIDATEDLINEEDIT_H
+#endif // RITO_QT_QVALIDATEDLINEEDIT_H

@@ -18,7 +18,7 @@ Generate 427 more blocks.
 
 from io import BytesIO
 import time
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import assert_raises_rpc_error, hex_str_to_bytes, assert_equal
 from test_framework.mininode import CTransaction, NetworkThread
 from test_framework.blocktools import create_coinbase, create_block, add_witness_commitment
@@ -41,7 +41,7 @@ def true_dummy(tx):
     tx.rehash()
 
 
-class NULLDUMMYTest(RavenTestFramework):
+class NULLDUMMYTest(RitoTestFramework):
 
     def set_test_params(self):
         self.num_nodes = 1

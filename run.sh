@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
 env
-if [[ -e /etc/raven/ravend.conf ]]; then
-    source /etc/raven/ravend.conf
-    /home/raven/ravend \
+if [[ -e /etc/rito/ritod.conf ]]; then
+    source /etc/rito/ritod.conf
+    /home/rito/ritod \
       -server=$SERVER \
       -printtoconsole=$PRINTTOCONSOLE \
       -maxconnections=$MAXCONNECTIONS \
@@ -37,7 +37,7 @@ else
     $SERVER_ARG = "-server=$SERVER"
   fi
 
-  /home/raven/ravend \
+  /home/rito/ritod \
     $SERVER_ARG \
     -printtoconsole=$PRINTTOCONSOLE \
     -maxconnections=$MAXCONNECTIONS \

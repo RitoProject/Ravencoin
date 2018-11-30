@@ -7,7 +7,7 @@
 """
 Test behavior of headers messages to announce blocks.
 
-Setup: 
+Setup:
 
 - Two nodes, two p2p connections to node0. One p2p connection should only ever
   receive inv's (omitted from testing description below, this is our control).
@@ -77,7 +77,7 @@ e. Announce one more that doesn't connect.
 """
 
 from test_framework.mininode import NodeConnCB, mininode_lock, MsgGetdata, MsgGetHeaders, MsgHeaders, NodeConn, NetworkThread, MsgBlock, CInv, MsgInv, CBlockHeader, MsgGetBlocks, MsgSendHeaders
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import wait_until, sync_blocks, p2p_port, assert_equal
 from test_framework.blocktools import create_block, create_coinbase
 
@@ -176,7 +176,7 @@ class TestNode(NodeConnCB):
         getblocks_message.locator.vHave = locator
         self.send_message(getblocks_message)
 
-class SendHeadersTest(RavenTestFramework):
+class SendHeadersTest(RitoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -342,7 +342,7 @@ class SendHeadersTest(RavenTestFramework):
             assert_equal(inv_node.check_last_announcement(inv=[tip]), True)
             assert_equal(test_node.check_last_announcement(headers=new_block_hashes), True)
 
-            block_time += 8 
+            block_time += 8
 
             # Mine a too-large reorg, which should be announced with a single inv
             new_block_hashes = self.mine_reorg(length=8)
@@ -380,7 +380,7 @@ class SendHeadersTest(RavenTestFramework):
                     test_node.get_data([tip])
                     test_node.wait_for_block(tip)
                     # This time, try sending either a getheaders to trigger resumption
-                    # of headers announcements, or mine a new block and inv it, also 
+                    # of headers announcements, or mine a new block and inv it, also
                     # triggering resumption of headers announcements.
                     if j == 0:
                         test_node.get_headers(locator=[tip], hashstop=0)

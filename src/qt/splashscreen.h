@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_SPLASHSCREEN_H
-#define RAVEN_QT_SPLASHSCREEN_H
+#ifndef RITO_QT_SPLASHSCREEN_H
+#define RITO_QT_SPLASHSCREEN_H
 
 #include <functional>
 #include <QSplashScreen>
@@ -14,7 +14,7 @@ class NetworkStyle;
 
 /** Class for the splashscreen with information of the running client.
  *
- * @note this is intentionally not a QSplashScreen. Raven Core initialization
+ * @note this is intentionally not a QSplashScreen. Rito Core initialization
  * can take a long time, and in that case a progress window that cannot be
  * moved around and minimized has turned out to be frustrating to the user.
  */
@@ -56,4 +56,4 @@ private:
     QList<CWallet*> connectedWallets;
 };
 
-#endif // RAVEN_QT_SPLASHSCREEN_H
+#endif // RITO_QT_SPLASHSCREEN_H

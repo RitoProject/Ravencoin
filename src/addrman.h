@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_ADDRMAN_H
-#define RAVEN_ADDRMAN_H
+#ifndef RITO_ADDRMAN_H
+#define RITO_ADDRMAN_H
 
 #include "netaddress.h"
 #include "protocol.h"
@@ -177,8 +177,8 @@ public:
 #define ADDRMAN_NEW_BUCKET_COUNT (1 << ADDRMAN_NEW_BUCKET_COUNT_LOG2)
 #define ADDRMAN_BUCKET_SIZE (1 << ADDRMAN_BUCKET_SIZE_LOG2)
 
-/** 
- * Stochastical (IP) address manager 
+/**
+ * Stochastical (IP) address manager
  */
 class CAddrMan
 {
@@ -603,4 +603,4 @@ public:
 
 };
 
-#endif // RAVEN_ADDRMAN_H
+#endif // RITO_ADDRMAN_H

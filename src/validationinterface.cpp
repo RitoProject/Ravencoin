@@ -35,7 +35,7 @@ struct MainSignalsInstance {
     boost::signals2::signal<void (const CMessage &)> NewAssetMessage;
     boost::signals2::signal<void (const std::string &)> AssetInventory;
 //    boost::signals2::signal<void (std::shared_ptr<CReserveScript>&)> ScriptForMining;
-    
+
     // We are not allowed to assume the scheduler only runs in one thread,
     // but must ensure all callbacks happen in-order, so we end up creating
     // our own queue here :(

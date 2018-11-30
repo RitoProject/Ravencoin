@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_CHECKQUEUE_H
-#define RAVEN_CHECKQUEUE_H
+#ifndef RITO_CHECKQUEUE_H
+#define RITO_CHECKQUEUE_H
 
 #include "sync.h"
 
@@ -17,7 +17,7 @@
 template <typename T>
 class CCheckQueueControl;
 
-/** 
+/**
  * Queue for verifications that have to be performed.
   * The verifications are represented by a type T, which must provide an
   * operator(), returning a bool.
@@ -167,7 +167,7 @@ public:
 
 };
 
-/** 
+/**
  * RAII-style controller object for a CCheckQueue that guarantees the passed
  * queue is finished before continuing.
  */
@@ -215,4 +215,4 @@ public:
     }
 };
 
-#endif // RAVEN_CHECKQUEUE_H
+#endif // RITO_CHECKQUEUE_H

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_WALLETMODEL_H
-#define RAVEN_QT_WALLETMODEL_H
+#ifndef RITO_QT_WALLETMODEL_H
+#define RITO_QT_WALLETMODEL_H
 
 #include "paymentrequestplus.h"
 #include "walletmodeltransaction.h"
@@ -162,7 +162,7 @@ public:
     }
 };
 
-/** Interface to Raven wallet from Qt view code. */
+/** Interface to Rito wallet from Qt view code. */
 class WalletModel : public QObject
 {
     Q_OBJECT
@@ -267,10 +267,10 @@ public:
     void getOutputs(const std::vector<COutPoint>& vOutpoints, std::vector<COutput>& vOutputs);
     bool isSpent(const COutPoint& outpoint) const;
     void listCoins(std::map<QString, std::vector<COutput> >& mapCoins) const;
-    /** RVN START */
+    /** RITO START */
     // Map of asset name to map of address to CTxOut
     void listAssets(std::map<QString, std::map<QString, std::vector<COutput> > >& mapCoins) const;
-    /** RVN END */
+    /** RITO END */
     bool isLockedCoin(uint256 hash, unsigned int n) const;
     void lockCoin(COutPoint& output);
     void unlockCoin(COutPoint& output);
@@ -368,4 +368,4 @@ public Q_SLOTS:
     void pollBalanceChanged();
 };
 
-#endif // RAVEN_QT_WALLETMODEL_H
+#endif // RITO_QT_WALLETMODEL_H

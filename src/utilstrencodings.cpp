@@ -733,4 +733,3 @@ bool ParseFixedPoint(const std::string &val, int decimals, int64_t *amount_out)
 
     return true;
 }
-

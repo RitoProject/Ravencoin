@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_TEST_COMPATTESTS_H
-#define RAVEN_QT_TEST_COMPATTESTS_H
+#ifndef RITO_QT_TEST_COMPATTESTS_H
+#define RITO_QT_TEST_COMPATTESTS_H
 
 #include <QObject>
 #include <QTest>
@@ -17,4 +17,4 @@ private Q_SLOTS:
     void bswapTests();
 };
 
-#endif // RAVEN_QT_TEST_COMPATTESTS_H
+#endif // RITO_QT_TEST_COMPATTESTS_H

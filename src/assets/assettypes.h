@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVENCOIN_NEWASSET_H
-#define RAVENCOIN_NEWASSET_H
+#ifndef RITOCOIN_NEWASSET_H
+#define RITOCOIN_NEWASSET_H
 
 #include <string>
 #include <sstream>
@@ -652,4 +652,4 @@ private:
     size_t maxSize;
 };
 
-#endif //RAVENCOIN_NEWASSET_H
+#endif //RITOCOIN_NEWASSET_H

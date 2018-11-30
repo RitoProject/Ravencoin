@@ -5,7 +5,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/raven-config.h"
+#include "config/rito-config.h"
 #endif
 
 #include "init.h"
@@ -144,7 +144,7 @@ bool ShutdownRequested()
 /**
  * This is a minimally invasive approach to shutdown on LevelDB read errors from the
  * chainstate, while keeping user interface out of the common library, which is shared
- * between ravend, and raven-qt and non-server tools.
+ * between ritod, and rito-qt and non-server tools.
 */
 class CCoinsViewErrorCatcher final : public CCoinsViewBacked
 {
@@ -194,7 +194,7 @@ void PrepareShutdown()
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("raven-shutoff");
+    RenameThread("rito-shutoff");
     mempool.AddTransactionsUpdated(1);
 
     StopHTTPRPC();
@@ -204,7 +204,7 @@ void PrepareShutdown()
 #ifdef ENABLE_WALLET
     FlushWallets();
 #endif
-    GenerateRavens(false, 0, GetParams());
+    GenerateRitos(false, 0, GetParams());
 
     MapPort(false);
 
@@ -263,7 +263,7 @@ void PrepareShutdown()
         delete pblocktree;
         pblocktree = nullptr;
 
-        /** RVN START */
+        /** RITO START */
         delete passets;
         passets = nullptr;
 
@@ -318,7 +318,7 @@ void PrepareShutdown()
         delete pDistributeSnapshotDb;
         pDistributeSnapshotDb = nullptr;
 
-        /** RVN END */
+        /** RITO END */
     }
 #ifdef ENABLE_WALLET
     StopWallets();
@@ -435,8 +435,8 @@ std::string HelpMessage(HelpMessageMode mode)
     if (showDebug)
         strUsage += HelpMessageOpt("-blocksonly", strprintf(_("Whether to operate in a blocks only mode (default: %u)"), DEFAULT_BLOCKSONLY));
     strUsage +=HelpMessageOpt("-assumevalid=<hex>", strprintf(_("If this block is in the chain assume that it and its ancestors are valid and potentially skip their script verification (0 to verify all, default: %s, testnet: %s)"), defaultChainParams->GetConsensus().defaultAssumeValid.GetHex(), testnetChainParams->GetConsensus().defaultAssumeValid.GetHex()));
-    strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), RAVEN_CONF_FILENAME));
-    if (mode == HMM_RAVEND)
+    strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), RITO_CONF_FILENAME));
+    if (mode == HMM_RITOD)
     {
 #if HAVE_DECL_DAEMON
         strUsage += HelpMessageOpt("-daemon", _("Run in the background as a daemon and accept commands"));
@@ -467,7 +467,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageOpt("-autofixmempool", strprintf(_("When set, if the CreateNewBlock fails because of a transaction. The mempool will be cleared. (default: %d)"), false));
     strUsage += HelpMessageOpt("-bypassdownload", strprintf(_("When set, if the chain is in initialblockdownload the getblocktemplate rpc call will still return block data (default: %d)"), false));
 #ifndef WIN32
-    strUsage += HelpMessageOpt("-pid=<file>", strprintf(_("Specify pid file (default: %s)"), RAVEN_PID_FILENAME));
+    strUsage += HelpMessageOpt("-pid=<file>", strprintf(_("Specify pid file (default: %s)"), RITO_PID_FILENAME));
 #endif
     strUsage += HelpMessageOpt("-prune=<n>", strprintf(_("Reduce storage requirements by enabling pruning (deleting) of old blocks. This allows the pruneblockchain RPC to be called to delete specific blocks, and enables automatic pruning of old blocks if a target size in MiB is provided. This mode is incompatible with -txindex and -rescan. "
             "Warning: Reverting this setting requires re-downloading the entire blockchain. "
@@ -627,8 +627,8 @@ std::string HelpMessage(HelpMessageMode mode)
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/RavenProject/Ravencoin>";
-    const std::string URL_WEBSITE = "<https://ravencoin.org>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/RitoProject/Ritocoin>";
+    const std::string URL_WEBSITE = "<https://ritocoin.org>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
@@ -641,7 +641,6 @@ std::string LicenseInfo()
            "\n" +
            "\n" +
            _("This is experimental software.") + "\n" +
-           strprintf(_("Distributed under the MIT software license, see the accompanying file %s or %s"), "COPYING", "<https://opensource.org/licenses/MIT>") + "\n" +
            "\n" +
            strprintf(_("This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard."), "<https://www.openssl.org>") +
            "\n";
@@ -732,7 +731,7 @@ void CleanupBlockRevFiles()
 void ThreadImport(std::vector<fs::path> vImportFiles)
 {
     const CChainParams& chainparams = GetParams();
-    RenameThread("raven-loadblk");
+    RenameThread("rito-loadblk");
 
     {
     CImportingNow imp;
@@ -802,7 +801,7 @@ void ThreadImport(std::vector<fs::path> vImportFiles)
 }
 
 /** Sanity checks
- *  Ensure that Raven is running in a usable environment with all
+ *  Ensure that Rito is running in a usable environment with all
  *  necessary library support.
  */
 bool InitSanityCheck(void)
@@ -926,7 +925,7 @@ void InitLogging()
     fLogIPs = gArgs.GetBoolArg("-logips", DEFAULT_LOGIPS);
 
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("Raven version %s\n", FormatFullVersion());
+    LogPrintf("Rito version %s\n", FormatFullVersion());
 }
 
 namespace { // Variables internal to initialization process only
@@ -1267,7 +1266,7 @@ static bool LockDataDirectory(bool probeOnly)
 {
     std::string strDataDir = GetDataDir().string();
 
-    // Make sure only a single Raven process is using the data directory.
+    // Make sure only a single Rito process is using the data directory.
     fs::path pathLockFile = GetDataDir() / ".lock";
     FILE* file = fsbridge::fopen(pathLockFile, "a"); // empty lock file; created if it doesn't exist.
     if (file) fclose(file);
@@ -1339,7 +1338,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
         LogPrintf("Startup time: %s\n", DateTimeStrFormat("%Y-%m-%d %H:%M:%S", GetTime()));
     LogPrintf("Default data directory %s\n", GetDefaultDataDir().string());
     LogPrintf("Using data directory %s\n", GetDataDir().string());
-    LogPrintf("Using config file %s\n", GetConfigFile(gArgs.GetArg("-conf", RAVEN_CONF_FILENAME)).string());
+    LogPrintf("Using config file %s\n", GetConfigFile(gArgs.GetArg("-conf", RITO_CONF_FILENAME)).string());
     LogPrintf("Using at most %i automatic connections (%i file descriptors available)\n", nMaxConnections, nFD);
 
     InitSignatureCache();
@@ -1379,7 +1378,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     bool fGenerate = gArgs.GetBoolArg("-regtest", false) ? false : DEFAULT_GENERATE;
     // Generate coins in the background
-    GenerateRavens(fGenerate, gArgs.GetArg("-genproclimit", DEFAULT_GENERATE_THREADS), chainparams);
+    GenerateRitos(fGenerate, gArgs.GetArg("-genproclimit", DEFAULT_GENERATE_THREADS), chainparams);
 
     // ********************************************************* Step 6: network initialization
     // Note that we absolutely cannot open any actual connections
@@ -1539,7 +1538,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
                 delete pblocktree;
                 pblocktree = new CBlockTreeDB(nBlockTreeDBCache, false, fReset, dbMaxFileSize);
 
-                /** RVN START */
+                /** RITO START */
                 {
                     // Basic assets
                     delete passets;
@@ -1619,7 +1618,7 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
                         LogPrintf("Messaging is enabled\n");
                     }
                 }
-                /** RVN END */
+                /** RITO END */
 
                 if (fReset) {
                     pblocktree->WriteReindexing(true);

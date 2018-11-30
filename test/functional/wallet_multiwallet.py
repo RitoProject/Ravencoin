@@ -5,15 +5,15 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test multiwallet.
 
-Verify that a ravend node can load multiple wallet files
+Verify that a ritod node can load multiple wallet files
 """
 import os
 import shutil
 
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import (assert_equal, assert_raises_rpc_error)
 
-class MultiWalletTest(RavenTestFramework):
+class MultiWalletTest(RitoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1

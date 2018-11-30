@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Rito Core
+Comment=Connect to the Rito P2P Network
+Comment[de]=Verbinde mit dem Rito peer-to-peer Netzwerk
+Comment[fr]=Rito, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Rito, eşten eşe kriptografik sanal para birimi
+Exec=rito-qt %u
+Terminal=false
+Type=Application
+Icon=rito128
+MimeType=x-scheme-handler/rito;
+Categories=Office;Finance;

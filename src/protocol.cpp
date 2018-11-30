@@ -212,4 +212,3 @@ std::string CInvAsset::ToString() const
 {
     return strprintf("%s %s", "CInvAsset for asset: ", name);
 }
-

@@ -21,13 +21,13 @@ EXCLUDE = [
     'src/secp256k1/include/secp256k1_ecdh.h',
     'src/secp256k1/include/secp256k1_recovery.h',
     'src/secp256k1/include/secp256k1_schnorr.h',
-    'src/secp256k1/src/java/org_raven_NativeSecp256k1.c',
-    'src/secp256k1/src/java/org_raven_NativeSecp256k1.h',
-    'src/secp256k1/src/java/org_raven_Secp256k1Context.c',
-    'src/secp256k1/src/java/org_raven_Secp256k1Context.h',
+    'src/secp256k1/src/java/org_rito_NativeSecp256k1.c',
+    'src/secp256k1/src/java/org_rito_NativeSecp256k1.h',
+    'src/secp256k1/src/java/org_rito_Secp256k1Context.c',
+    'src/secp256k1/src/java/org_rito_Secp256k1Context.h',
     # auto generated:
     'src/univalue/lib/univalue_escapes.h',
-    'src/qt/ravenstrings.cpp',
+    'src/qt/ritostrings.cpp',
     'src/chainparamsseeds.h',
     # other external copyrights:
     'src/tinyformat.h',
@@ -90,6 +90,11 @@ EXPECTED_HOLDER_NAMES = [
     "the Raven Core developers\n",
     "The Raven developers\n",
     "The LevelDB Authors\. All rights reserved\.\n",
+    "The Rito Core developers\n",
+    "The Rito Core developers \n",
+    "Rito Core Developers\n",
+    "the Rito Core developers\n",
+    "The Rito developers\n",
     "BitPay Inc\.\n",
     "BitPay, Inc\.\n",
     "University of Illinois at Urbana-Champaign\.\n",
@@ -278,14 +283,14 @@ Usage:
     $ ./copyright_header.py report <base_directory> [verbose]
 
 Arguments:
-    <base_directory> - The base directory of a raven source code repository.
+    <base_directory> - The base directory of a rito source code repository.
     [verbose] - Includes a list of every file of each subcategory in the report.
 """
 
 def report_cmd(argv):
     if len(argv) == 2:
         sys.exit(REPORT_USAGE)
-        
+
     base_directory = argv[2]
     if not os.path.exists(base_directory):
         sys.exit("*** bad <base_directory>: %s" % base_directory)
@@ -341,7 +346,7 @@ def write_file_lines(filename, file_lines):
 COPYRIGHT = 'Copyright \(c\)'
 YEAR = "20[0-9][0-9]"
 YEAR_RANGE = '(%s)(-%s)?' % (YEAR, YEAR)
-HOLDER = 'The Raven Core developers'
+HOLDER = 'The Rito Core developers'
 UPDATEABLE_LINE_COMPILED = re.compile(' '.join([COPYRIGHT, YEAR_RANGE, HOLDER]))
 
 def get_updatable_copyright_line(file_lines):
@@ -409,16 +414,18 @@ def exec_update_header_year(base_directory):
 ################################################################################
 
 UPDATE_USAGE = """
-Updates all the copyright headers of "The Raven Core developers" which were
+Updates all the copyright headers of "The Rito Core developers" which were
 changed in a year more recent than is listed. For example:
 
 // Copyright (c) <firstYear>-<lastYear> The Bitcoin Core developers
 // Copyright (c) 2017-2020 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
 
 will be updated to:
 
 // Copyright (c) <firstYear>-<lastModifiedYear> The Bitcoin Core developers
 // Copyright (c) 2017-2020 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
 
 where <lastModifiedYear> is obtained from the 'git log' history.
 
@@ -426,11 +433,13 @@ This subcommand also handles copyright headers that have only a single year. In 
 
 // Copyright (c) <year> The Bitcoin Core developers
 // Copyright (c) 2017-2020 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
 
 will be updated to:
 
 // Copyright (c) <year>-<lastModifiedYear> The Bitcoin Core developers
 // Copyright (c) 2017-2020 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
 
 where the update is appropriate.
 
@@ -438,7 +447,7 @@ Usage:
     $ ./copyright_header.py update <base_directory>
 
 Arguments:
-    <base_directory> - The base directory of a raven source code repository.
+    <base_directory> - The base directory of a rito source code repository.
 """
 
 def print_file_action_message(filename, action):
@@ -447,7 +456,7 @@ def print_file_action_message(filename, action):
 def update_cmd(argv):
     if len(argv) != 3:
         sys.exit(UPDATE_USAGE)
-    
+
     base_directory = argv[2]
     if not os.path.exists(base_directory):
         sys.exit("*** bad base_directory: %s" % base_directory)
@@ -465,6 +474,7 @@ def get_header_lines(header, start_year, end_year):
 CPP_HEADER = '''
 // Copyright (c) %s The Bitcoin Core developers
 // Copyright (c) 2017-2020 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
@@ -475,6 +485,7 @@ def get_cpp_header_lines_to_insert(start_year, end_year):
 PYTHON_HEADER = '''
 # Copyright (c) %s The Bitcoin Core developers
 # Copyright (c) 2017-2020 The Raven Core developers
+# Copyright (c) 2018 The Rito Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
@@ -511,7 +522,7 @@ def file_has_hashbang(file_lines):
 
 def insert_python_header(filename, file_lines, start_year, end_year):
     if file_has_hashbang(file_lines):
-        insert_idx = 1 
+        insert_idx = 1
     else:
         insert_idx = 0
     header_lines = get_python_header_lines_to_insert(start_year, end_year)
@@ -541,7 +552,7 @@ def exec_insert_header(filename, style):
 ################################################################################
 
 INSERT_USAGE = """
-Inserts a copyright header for "The Raven Core developers" at the top of the
+Inserts a copyright header for "The Rito Core developers" at the top of the
 file in either Python or C++ style as determined by the file extension. If the
 file is a Python file and it has a '#!' starting the first line, the header is
 inserted in the line below it.
@@ -555,14 +566,14 @@ where <year_introduced> is according to the 'git log' history. If
 
 "<current_year>"
 
-If the file already has a copyright for "The Raven Core developers", the
+If the file already has a copyright for "The Rito Core developers", the
 script will exit.
 
 Usage:
     $ ./copyright_header.py insert <file>
 
 Arguments:
-    <file> - A source file in the raven repository.
+    <file> - A source file in the rito repository.
 """
 
 def insert_cmd(argv):
@@ -575,19 +586,19 @@ def insert_cmd(argv):
     _, extension = os.path.splitext(filename)
     if extension not in ['.h', '.cpp', '.cc', '.c', '.py']:
         sys.exit("*** cannot insert for file extension %s" % extension)
-   
-    if extension == '.py': 
+
+    if extension == '.py':
         style = 'python'
     else:
         style = 'cpp'
     exec_insert_header(filename, style)
-         
+
 ################################################################################
 # UI
 ################################################################################
 
 USAGE = """
-copyright_header.py - utilities for managing copyright headers of 'The Raven
+copyright_header.py - utilities for managing copyright headers of 'The Rito
 Core developers' in repository source files.
 
 Usage:

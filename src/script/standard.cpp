@@ -35,11 +35,11 @@ const char* GetTxnOutputType(txnouttype t)
     case TX_WITNESS_V0_KEYHASH: return "witness_v0_keyhash";
     case TX_WITNESS_V0_SCRIPTHASH: return "witness_v0_scripthash";
 
-    /** RVN START */
+    /** RITO START */
     case TX_NEW_ASSET: return ASSET_NEW_STRING;
     case TX_TRANSFER_ASSET: return ASSET_TRANSFER_STRING;
     case TX_REISSUE_ASSET: return ASSET_REISSUE_STRING;
-    /** RVN END */
+    /** RITO END */
     }
     return nullptr;
 }
@@ -53,7 +53,7 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::v
         // Standard tx, sender provides pubkey, receiver adds signature
         mTemplates.insert(std::make_pair(TX_PUBKEY, CScript() << OP_PUBKEY << OP_CHECKSIG));
 
-        // Raven address tx, sender provides hash of pubkey, receiver provides signature and pubkey
+        // Rito address tx, sender provides hash of pubkey, receiver provides signature and pubkey
         mTemplates.insert(std::make_pair(TX_PUBKEYHASH, CScript() << OP_DUP << OP_HASH160 << OP_PUBKEYHASH << OP_EQUALVERIFY << OP_CHECKSIG));
 
         // Sender provides N pubkeys, receivers provides M signatures
@@ -71,7 +71,7 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::v
         vSolutionsRet.push_back(hashBytes);
         return true;
     }
-    /** RVN START */
+    /** RITO START */
     int nType = 0;
     bool fIsOwner = false;
     if (scriptPubKey.IsAssetScript(nType, fIsOwner)) {
@@ -80,7 +80,7 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::v
         vSolutionsRet.push_back(hashBytes);
         return true;
     }
-    /** RVN END */
+    /** RITO END */
 
     int witnessversion;
     std::vector<unsigned char> witnessprogram;
@@ -112,7 +112,7 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::v
     //
     // So long as script passes the IsUnspendable() test and all but the first three
     // byte passes the IsPushOnly()
-    if (scriptPubKey.size() >= 1 && scriptPubKey[0] == OP_RVN_ASSET && scriptPubKey.IsPushOnly(scriptPubKey.begin()+1)) {
+    if (scriptPubKey.size() >= 1 && scriptPubKey[0] == OP_RITO_ASSET && scriptPubKey.IsPushOnly(scriptPubKey.begin()+1)) {
         typeRet = TX_RESTRICTED_ASSET_DATA;
 
         if (scriptPubKey.size() >= 23 && scriptPubKey[1] != OP_RESERVED) {
@@ -233,7 +233,7 @@ bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
     {
         addressRet = CScriptID(uint160(vSolutions[0]));
         return true;
-    /** RVN START */
+    /** RITO START */
     } else if (whichType == TX_NEW_ASSET || whichType == TX_REISSUE_ASSET || whichType == TX_TRANSFER_ASSET) {
         addressRet = CKeyID(uint160(vSolutions[0]));
         return true;
@@ -243,7 +243,7 @@ bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
             return true;
         }
     }
-     /** RVN END */
+     /** RITO END */
     // Multisig txns have more than one address...
     return false;
 }
@@ -332,13 +332,13 @@ namespace
 
         bool operator()(const CKeyID &keyID) const {
             script->clear();
-            *script << OP_RVN_ASSET << ToByteVector(keyID);
+            *script << OP_RITO_ASSET << ToByteVector(keyID);
             return true;
         }
 
         bool operator()(const CScriptID &scriptID) const {
             script->clear();
-            *script << OP_RVN_ASSET << ToByteVector(scriptID);
+            *script << OP_RITO_ASSET << ToByteVector(scriptID);
             return true;
         }
     };

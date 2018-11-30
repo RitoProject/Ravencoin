@@ -4,7 +4,7 @@
 
 #include <assets/assets.h>
 
-#include <test/test_raven.h>
+#include <test/test_rito.h>
 
 #include <boost/test/unit_test.hpp>
 
@@ -51,7 +51,7 @@ BOOST_FIXTURE_TEST_SUITE(messaging_tests, BasicTestingSetup)
 
 
         // TODO, once messaging goes active on mainnet, we can move check from ContextualCheckTransfer to CheckTransfer
-        
+
     }
 
 

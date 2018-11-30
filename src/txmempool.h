@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_TXMEMPOOL_H
-#define RAVEN_TXMEMPOOL_H
+#ifndef RITO_TXMEMPOOL_H
+#define RITO_TXMEMPOOL_H
 
 #include <memory>
 #include <set>
@@ -726,7 +726,7 @@ private:
     void removeUnchecked(txiter entry, MemPoolRemovalReason reason = MemPoolRemovalReason::UNKNOWN);
 };
 
-/** 
+/**
  * CCoinsView that brings transactions from a memorypool into view.
  * It does not check for spendings by memory pool transactions.
  * Instead, it provides access to all Coins which are either unspent in the
@@ -847,4 +847,4 @@ struct ConnectedBlockAssetData
     std::set<CAssetCacheQualifierAddress> newQualifiersToAdd;
 };
 
-#endif // RAVEN_TXMEMPOOL_H
+#endif // RITO_TXMEMPOOL_H

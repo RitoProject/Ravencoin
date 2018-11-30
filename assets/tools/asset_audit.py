@@ -20,8 +20,8 @@ import json
 import logging
 
 
-#Set this to your raven-cli program
-cli = "raven-cli"
+#Set this to your rito-cli program
+cli = "rito-cli"
 
 mode = "-main"
 rpc_port = 8766
@@ -31,7 +31,7 @@ rpc_port = 8766
 #mode =  "-regtest"
 #rpc_port = 18444
 
-#Set this information in your raven.conf file (in datadir, not testnet6)
+#Set this information in your rito.conf file (in datadir, not current testnet directory)
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'
 
@@ -75,7 +75,7 @@ def log_failure(err):
 
 def send_notification(notification_to_emails, notification_subject, notification_content):
     sendgrid_api_key = ''
-    if "SENDGRID_API_KEY" in os.environ:  
+    if "SENDGRID_API_KEY" in os.environ:
       sendgrid_api_key = os.environ.get('SENDGRID_API_KEY')
       #print("Key="+sendgrid_api_key)
     else:
@@ -90,7 +90,7 @@ def send_notification(notification_to_emails, notification_subject, notification
     to_emails=notification_to_emails,
     subject=notification_subject,
     html_content=notification_content)
-    
+
     try:
       sg = sendgrid.SendGridAPIClient(sendgrid_api_key)
       response = sg.send(message)
@@ -98,7 +98,7 @@ def send_notification(notification_to_emails, notification_subject, notification
       #print(response.body)
       #print(response.headers)
     except:
-      print(e.message)      
+      print(e.message)
 
 
 def audit(filter):
@@ -106,7 +106,7 @@ def audit(filter):
     print("Auditing: " + filter)
     #print(assets)
     print("Asset count: " + str(len(assets)))
-    count = 0  
+    count = 0
     max_dist_asset_name = ""
     max_dist_address_count = 0
     audits_failed = 0
@@ -156,7 +156,7 @@ def audit(filter):
             print("Audit FAILED for " + asset)
             msg = "Audit FAILED for " + asset + " Issued="+str(total_issued)+ " Total="+str(total_for_asset)
             log_failure(msg)
-            send_notification(notification_emails, "Ravencoin Asset Audit Failed", msg)
+            send_notification(notification_emails, "Ritocoin Asset Audit Failed", msg)
             #exit(-1)
 
         if len(assets) == count:
@@ -164,7 +164,7 @@ def audit(filter):
             print("Stats:")
             print("  Max Distribed Asset: " + max_dist_asset_name + " with " + str(max_dist_address_count) + " addresses.")
             if (send_alerts_on_success and audits_failed == 0):
-              send_notification(notification_emails, "Ravencoin Asset Audit Success", "All " + str(len(assets)) + " assets audited.")
+              send_notification(notification_emails, "Ritocoin Asset Audit Success", "All " + str(len(assets)) + " assets audited.")
 
 if mode == "-regtest":  #If regtest then mine our own blocks
     import os

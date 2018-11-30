@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_WALLETMODELTRANSACTION_H
-#define RAVEN_QT_WALLETMODELTRANSACTION_H
+#ifndef RITO_QT_WALLETMODELTRANSACTION_H
+#define RITO_QT_WALLETMODELTRANSACTION_H
 
 #include "walletmodel.h"
 
@@ -46,4 +46,4 @@ private:
     CAmount fee;
 };
 
-#endif // RAVEN_QT_WALLETMODELTRANSACTION_H
+#endif // RITO_QT_WALLETMODELTRANSACTION_H

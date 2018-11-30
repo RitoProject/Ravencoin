@@ -6,10 +6,10 @@
 
 """Test the importprunedfunds and removeprunedfunds RPCs."""
 
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error, Decimal
 
-class ImportPrunedFundsTest(RavenTestFramework):
+class ImportPrunedFundsTest(RitoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -19,7 +19,7 @@ class ImportPrunedFundsTest(RavenTestFramework):
         self.nodes[0].generate(101)
 
         self.sync_all()
-        
+
         # address
         address1 = self.nodes[0].getnewaddress()
         # pubkey

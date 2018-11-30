@@ -27,7 +27,7 @@ Each emulated asset must have its own port that is available on the machine.
 The RPC username and password will use the same one as configured for Ravencoin.
 
 ### Detection of Emulation in Compatibility Mode
-An additional field is added to getblockchainfo for information. 
+An additional field is added to getblockchainfo for information.
 
 ```"emulate":"TRONCO:8888"```
 
@@ -45,5 +45,3 @@ Most of the Ravencoin RPC calls do not interact with assets.  These can be strai
 ```listunspent ( minconf maxconf  ["addresses",...] [include_unsafe] [query_options])```  
 ```getreceivedbyaddress "address" ( minconf )```  
 ```getunconfirmedbalance```  
-
-

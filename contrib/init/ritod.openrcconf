@@ -1,0 +1,33 @@
+# /etc/conf.d/ritod: config file for /etc/init.d/ritod
+
+# Config file location
+#RITOD_CONFIGFILE="/etc/rito/rito.conf"
+
+# What directory to write pidfile to?  (created and owned by $RITOD_USER)
+#RITOD_PIDDIR="/var/run/ritod"
+
+# What filename to give the pidfile
+#RITOD_PIDFILE="${RITOD_PIDDIR}/ritod.pid"
+
+# Where to write ritod data (be mindful that the blockchain is large)
+#RITOD_DATADIR="/var/lib/ritod"
+
+# User and group to own ritod process
+#RITOD_USER="rito"
+#RITOD_GROUP="rito"
+
+# Path to ritod executable
+#RITOD_BIN="/usr/bin/ritod"
+
+# Nice value to run ritod under
+#RITOD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#RITOD_OPTS=""
+
+# The timeout in seconds OpenRC will wait for ritod to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+RITOD_SIGTERM_TIMEOUT=60

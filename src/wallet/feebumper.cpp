@@ -289,4 +289,3 @@ bool CFeeBumper::commit(CWallet *pWallet)
     }
     return true;
 }
-

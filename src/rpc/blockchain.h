@@ -3,18 +3,12 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_RPC_BLOCKCHAIN_H
-#define RAVEN_RPC_BLOCKCHAIN_H
-#include <map>
-#include <string>
+#ifndef RITO_RPC_BLOCKCHAIN_H
+#define RITO_RPC_BLOCKCHAIN_H
 
 class CBlock;
 class CBlockIndex;
 class UniValue;
-
-
-// To be used by local rpc GPU mining only
-extern std::map<std::string, CBlock> mapRVNKAWBlockTemplates;
 
 /**
  * Get the difficulty of the net wrt to the given block index, or the chain tip if
@@ -41,5 +35,4 @@ UniValue mempoolToJSON(bool fVerbose = false);
 /** Block header to JSON */
 UniValue blockheaderToJSON(const CBlockIndex* blockindex);
 
-#endif
-
+#endif // RITO_RPC_BLOCKCHAIN_H

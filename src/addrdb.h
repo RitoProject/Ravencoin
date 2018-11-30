@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_ADDRDB_H
-#define RAVEN_ADDRDB_H
+#ifndef RITO_ADDRDB_H
+#define RITO_ADDRDB_H
 
 #include "fs.h"
 #include "serialize.h"
@@ -100,4 +100,4 @@ public:
     bool Read(banmap_t& banSet);
 };
 
-#endif // RAVEN_ADDRDB_H
+#endif // RITO_ADDRDB_H

@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_WALLET_WALLET_H
-#define RAVEN_WALLET_WALLET_H
+#ifndef RITO_WALLET_WALLET_H
+#define RITO_WALLET_WALLET_H
 
 #include "amount.h"
 #include "policy/feerate.h"
@@ -190,7 +190,7 @@ struct COutputEntry
     int vout;
 };
 
-/** RVN START */
+/** RITO START */
 struct CAssetOutputEntry
 {
     txnouttype type;
@@ -201,7 +201,7 @@ struct CAssetOutputEntry
     int64_t expireTime;
     int vout;
 };
-/** RVN END */
+/** RITO END */
 
 /** A transaction with a merkle branch linking it to the block chain. */
 class CMerkleTx
@@ -281,7 +281,7 @@ public:
     bool IsCoinBase() const { return tx->IsCoinBase(); }
 };
 
-/** 
+/**
  * A transaction with a bunch of additional info that only the owner cares about.
  * It includes any unrecorded transactions needed to link it back to the block chain.
  */
@@ -332,7 +332,7 @@ public:
     unsigned int nTimeSmart;
     /**
      * From me flag is set to 1 for transactions that were created by the wallet
-     * on this raven node, and set to 0 for transactions that were created
+     * on this rito node, and set to 0 for transactions that were created
      * externally and came in through the network or sendrawtransaction RPC.
      */
     char fFromMe;
@@ -669,7 +669,7 @@ private:
 };
 
 
-/** 
+/**
  * A CWallet is an extension of a keystore, which also maintains a set of transactions and balances,
  * and provides the ability to create new transactions.
  */
@@ -842,7 +842,7 @@ public:
      * populate vCoins with vector of available COutputs, and populates vAssetCoins in fWithAssets is set to true.
      */
     void AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::string, std::vector<COutput> >& mapAssetCoins,
-                            bool fGetRVN = true, bool fOnlyAssets = false,
+                            bool fGetRITO = true, bool fOnlyAssets = false,
                             bool fOnlySafe = true, const CCoinControl *coinControl = nullptr,
                             const CAmount& nMinimumAmount = 1, const CAmount& nMaximumAmount = MAX_MONEY,
                             const CAmount& nMinimumSumAmount = MAX_MONEY, const uint64_t& nMaximumCount = 0,
@@ -857,7 +857,7 @@ public:
                          const uint64_t &nMaximumCount = 0, const int &nMinDepth = 0, const int &nMaxDepth = 9999999) const;
 
     /**
-     * Helper function that calls AvailableCoinsAll, used to receive all coins, Assets and RVN
+     * Helper function that calls AvailableCoinsAll, used to receive all coins, Assets and RITO
      */
     void AvailableCoinsWithAssets(std::vector<COutput> &vCoins, std::map<std::string, std::vector<COutput> > &mapAssetCoins,
                                   bool fOnlySafe = true, const CCoinControl *coinControl = nullptr, const CAmount &nMinimumAmount = 1,
@@ -968,7 +968,7 @@ public:
     void GetKeyBirthTimes(std::map<CTxDestination, int64_t> &mapKeyBirth) const;
     unsigned int ComputeTimeSmart(const CWalletTx& wtx) const;
 
-    /** 
+    /**
      * Increment the next transaction order id
      * @return next transaction order id
      */
@@ -1006,7 +1006,7 @@ public:
     bool FundTransaction(CMutableTransaction& tx, CAmount& nFeeRet, int& nChangePosInOut, std::string& strFailReason, bool lockUnspents, const std::set<int>& setSubtractFeeFromOutputs, CCoinControl);
     bool SignTransaction(CMutableTransaction& tx);
 
-    /** RVN START */
+    /** RITO START */
     bool CreateTransactionWithAssets(const std::vector<CRecipient>& vecSend, CWalletTx& wtxNew, CReserveKey& reservekey, CAmount& nFeeRet, int& nChangePosInOut,
                                    std::string& strFailReason, const CCoinControl& coin_control, const std::vector<CNewAsset> assets, const CTxDestination destination, const AssetType& assetType, bool sign = true);
 
@@ -1032,7 +1032,7 @@ public:
 
     bool CreateNewChangeAddress(CReserveKey& reservekey, CKeyID& keyID, std::string& strFailReason);
 
-    /** RVN END */
+    /** RITO END */
 
     bool CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, CConnman* connman, CValidationState& state);
 
@@ -1109,7 +1109,7 @@ public:
     }
 
     void GetScriptForMining(std::shared_ptr<CReserveScript> &script); // override;
-    
+
     unsigned int GetKeyPoolSize()
     {
         AssertLockHeld(cs_wallet); // set{Ex,In}ternalKeyPool
@@ -1137,7 +1137,7 @@ public:
     void UpdateMyRestrictedAssets(std::string& address, std::string& asset_name,
                                   int type, uint32_t date);
 
-    /** 
+    /**
      * Address book entry changed.
      * @note called with lock cs_wallet held.
      */
@@ -1146,7 +1146,7 @@ public:
             const std::string &purpose,
             ChangeType status)> NotifyAddressBookChanged;
 
-    /** 
+    /**
      * Wallet transaction added, removed or updated.
      * @note called with lock cs_wallet held.
      */
@@ -1206,10 +1206,10 @@ public:
 
     /* Generates a new HD seed (will not be activated) */
     CPubKey GenerateNewSeed();
-    
+
     /* Derives a new HD seed (will not be activated) */
     CPubKey DeriveNewSeed(const CKey& key);
-    
+
     /* Set the current HD seed (will reset the chain child index counters)
        Sets the seed's version based on the current wallet version (so the
        caller must ensure the current wallet version is correct before calling
@@ -1249,7 +1249,7 @@ public:
 };
 
 
-/** 
+/**
  * Account information.
  * Stored in wallet with key "acc"+string account name.
  */
@@ -1315,4 +1315,4 @@ bool CWallet::DummySignTx(CMutableTransaction &txNew, const ContainerType &coins
     return allSigned;
 }
 
-#endif // RAVEN_WALLET_WALLET_H
+#endif // RITO_WALLET_WALLET_H

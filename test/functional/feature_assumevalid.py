@@ -38,7 +38,7 @@ from test_framework.blocktools import create_block, create_coinbase
 from test_framework.key import ECKey
 from test_framework.mininode import CBlockHeader, COutPoint, CTransaction, CTxIn, CTxOut, NetworkThread, NodeConn, NodeConnCB, MsgBlock, MsgHeaders
 from test_framework.script import CScript, OP_TRUE
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import p2p_port, assert_equal
 
 
@@ -49,7 +49,7 @@ class BaseNode(NodeConnCB):
         self.send_message(headers_message)
 
 
-class AssumeValidTest(RavenTestFramework):
+class AssumeValidTest(RitoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3

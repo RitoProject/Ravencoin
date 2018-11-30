@@ -8,17 +8,17 @@
 Testing messaging
 """
 
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error, assert_contains, assert_does_not_contain, assert_contains_pair
 
-class MessagingTest(RavenTestFramework):
+class MessagingTest(RitoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3
         self.extra_args = [['-assetindex'], ['-assetindex'], ['-assetindex']]
 
     def activate_messaging(self):
-        self.log.info("Generating RVN for node[0] and activating messaging...")
+        self.log.info("Generating RITO for node[0] and activating messaging...")
         n0 = self.nodes[0]
 
         n0.generate(1)

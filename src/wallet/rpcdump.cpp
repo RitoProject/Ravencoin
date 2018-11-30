@@ -63,7 +63,7 @@ std::string DecodeDumpString(const std::string &str) {
     for (unsigned int pos = 0; pos < str.length(); pos++) {
         unsigned char c = str[pos];
         if (c == '%' && pos+2 < str.length()) {
-            c = (((str[pos+1]>>6)*9+((str[pos+1]-'0')&15)) << 4) | 
+            c = (((str[pos+1]>>6)*9+((str[pos+1]-'0')&15)) << 4) |
                 ((str[pos+2]>>6)*9+((str[pos+2]-'0')&15));
             pos += 2;
         }
@@ -119,7 +119,7 @@ UniValue importprivkey(const JSONRPCRequest& request)
     if (fRescan && fPruneMode)
         throw JSONRPCError(RPC_WALLET_ERROR, "Rescan is disabled in pruned mode");
 
-    CRavenSecret vchSecret;
+    CRitoSecret vchSecret;
     bool fGood = vchSecret.SetString(strSecret);
 
     if (!fGood) throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key encoding");
@@ -276,7 +276,7 @@ UniValue importaddress(const JSONRPCRequest& request)
         std::vector<unsigned char> data(ParseHex(request.params[0].get_str()));
         ImportScript(pwallet, CScript(data.begin(), data.end()), strLabel, fP2SH);
     } else {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Raven address or script");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Rito address or script");
     }
 
     if (fRescan)
@@ -500,7 +500,7 @@ UniValue importwallet(const JSONRPCRequest& request)
         boost::split(vstr, line, boost::is_any_of(" "));
         if (vstr.size() < 2)
             continue;
-        CRavenSecret vchSecret;
+        CRitoSecret vchSecret;
         if (!vchSecret.SetString(vstr[0]))
             continue;
         CKey key = vchSecret.GetKey();
@@ -561,7 +561,7 @@ UniValue dumpprivkey(const JSONRPCRequest& request)
             "\nReveals the private key corresponding to 'address'.\n"
             "Then the importprivkey can be used with this output\n"
             "\nArguments:\n"
-            "1. \"address\"   (string, required) The raven address for the private key\n"
+            "1. \"address\"   (string, required) The rito address for the private key\n"
             "\nResult:\n"
             "\"key\"                (string) The private key\n"
             "\nExamples:\n"
@@ -577,7 +577,7 @@ UniValue dumpprivkey(const JSONRPCRequest& request)
     std::string strAddress = request.params[0].get_str();
     CTxDestination dest = DecodeDestination(strAddress);
     if (!IsValidDestination(dest)) {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Raven address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Rito address");
     }
     const CKeyID *keyID = boost::get<CKeyID>(&dest);
     if (!keyID) {
@@ -587,7 +587,7 @@ UniValue dumpprivkey(const JSONRPCRequest& request)
     if (!pwallet->GetKey(*keyID, vchSecret)) {
         throw JSONRPCError(RPC_WALLET_ERROR, "Private key for address " + strAddress + " is not known");
     }
-    return CRavenSecret(vchSecret).ToString();
+    return CRitoSecret(vchSecret).ToString();
 }
 
 
@@ -603,7 +603,7 @@ UniValue dumpwallet(const JSONRPCRequest& request)
             "dumpwallet \"filename\"\n"
             "\nDumps all wallet keys in a human-readable format to a server-side file. This does not allow overwriting existing files.\n"
             "\nArguments:\n"
-            "1. \"filename\"    (string, required) The filename with path (either absolute or relative to ravend)\n"
+            "1. \"filename\"    (string, required) The filename with path (either absolute or relative to ritod)\n"
             "\nResult:\n"
             "{                           (json object)\n"
             "  \"filename\" : {        (string) The filename with full absolute path\n"
@@ -649,7 +649,7 @@ UniValue dumpwallet(const JSONRPCRequest& request)
     std::sort(vKeyBirth.begin(), vKeyBirth.end());
 
     // produce output
-    file << strprintf("# Wallet dump created by Raven %s\n", CLIENT_BUILD);
+    file << strprintf("# Wallet dump created by Rito %s\n", CLIENT_BUILD);
     file << strprintf("# * Created on %s\n", EncodeDumpTime(GetTime()));
     file << strprintf("# * Best block at time of backup was %i (%s),\n", chainActive.Height(), chainActive.Tip()->GetBlockHash().ToString());
     file << strprintf("#   mined on %s\n", EncodeDumpTime(chainActive.Tip()->GetBlockTime()));
@@ -666,13 +666,13 @@ UniValue dumpwallet(const JSONRPCRequest& request)
                 CExtKey masterKey;
                 masterKey.SetSeed(seed.begin(), seed.size());
 
-                CRavenExtKey b58extkey;
+                CRitoExtKey b58extkey;
                 b58extkey.SetKey(masterKey);
 
                 CExtPubKey pubkey;
                 pubkey = masterKey.Neuter();
 
-                CRavenExtPubKey b58extpubkey;
+                CRitoExtPubKey b58extpubkey;
                 b58extpubkey.SetKey(pubkey);
 
                 file << "# extended private masterkey: " << b58extkey.ToString() << "\n\n";
@@ -694,13 +694,13 @@ UniValue dumpwallet(const JSONRPCRequest& request)
             CExtKey masterKey;
             masterKey.SetSeed(vchSeed.data(), vchSeed.size());
 
-            CRavenExtKey b58extkey;
+            CRitoExtKey b58extkey;
             b58extkey.SetKey(masterKey);
 
             CExtPubKey pubkey;
             pubkey = masterKey.Neuter();
 
-            CRavenExtPubKey b58extpubkey;
+            CRitoExtPubKey b58extpubkey;
             b58extpubkey.SetKey(pubkey);
 
             file << "# extended private masterkey: " << b58extkey.ToString() << "\n\n";
@@ -718,7 +718,7 @@ UniValue dumpwallet(const JSONRPCRequest& request)
         std::string strAddr = EncodeDestination(keyid);
         CKey key;
         if (pwallet->GetKey(keyid, key)) {
-            file << strprintf("%s %s ", CRavenSecret(key).ToString(), strTime);
+            file << strprintf("%s %s ", CRitoSecret(key).ToString(), strTime);
             if (pwallet->mapAddressBook.count(keyid)) {
                 file << strprintf("label=%s", EncodeDumpString(pwallet->mapAddressBook[keyid].name));
             } else if (keyid == seed_id) {
@@ -786,16 +786,16 @@ UniValue getmasterkeyinfo(const JSONRPCRequest& request)
                 CExtKey masterKey;
                 masterKey.SetSeed(seed.begin(), seed.size());;
 
-                // Get the Raven Ext Key from the master key
-                CRavenExtKey b58extkey;
+                // Get the Rito Ext Key from the master key
+                CRitoExtKey b58extkey;
                 b58extkey.SetKey(masterKey);
 
                 // Get the public key from the master key
                 CExtPubKey pubkey;
                 pubkey = masterKey.Neuter();
 
-                // Get the Raven Ext Key from the public key
-                CRavenExtPubKey b58extpubkey;
+                // Get the Rito Ext Key from the public key
+                CRitoExtPubKey b58extpubkey;
                 b58extpubkey.SetKey(pubkey);
 
                 // Add the private and public key to the output
@@ -811,12 +811,12 @@ UniValue getmasterkeyinfo(const JSONRPCRequest& request)
                 CExtPubKey account_extended_public_key;
                 account_extended_public_key = accountKey.Neuter();
 
-                // Create the Raven Account Ext Private Key
-                CRavenExtKey b58accountextprivatekey;
+                // Create the Rito Account Ext Private Key
+                CRitoExtKey b58accountextprivatekey;
                 b58accountextprivatekey.SetKey(accountKey);
 
-                // Create the Raven Account Ext Public Key
-                CRavenExtPubKey b58actextpubkey;
+                // Create the Rito Account Ext Public Key
+                CRitoExtPubKey b58actextpubkey;
                 b58actextpubkey.SetKey(account_extended_public_key);
 
                 // Add the account extended public and private keys to the return
@@ -841,16 +841,16 @@ UniValue getmasterkeyinfo(const JSONRPCRequest& request)
             CExtKey masterKey;
             masterKey.SetSeed(vchSeed.data(), vchSeed.size());
 
-            // Get the Raven Ext Key from the master key
-            CRavenExtKey b58extkey;
+            // Get the Rito Ext Key from the master key
+            CRitoExtKey b58extkey;
             b58extkey.SetKey(masterKey);
 
             // Get the public key from the master key
             CExtPubKey pubkey;
             pubkey = masterKey.Neuter();
 
-            // Get the Raven Ext Key from the public key
-            CRavenExtPubKey b58extpubkey;
+            // Get the Rito Ext Key from the public key
+            CRitoExtPubKey b58extpubkey;
             b58extpubkey.SetKey(pubkey);
 
             // Add the private and public key to the output
@@ -874,12 +874,12 @@ UniValue getmasterkeyinfo(const JSONRPCRequest& request)
             CExtPubKey account_extended_public_key;
             account_extended_public_key = accountKey.Neuter();
 
-            // Create the Raven Account Ext Private Key
-            CRavenExtKey b58accountextprivatekey;
+            // Create the Rito Account Ext Private Key
+            CRitoExtKey b58accountextprivatekey;
             b58accountextprivatekey.SetKey(accountKey);
 
-            // Create the Raven Account Ext Public Key
-            CRavenExtPubKey b58actextpubkey;
+            // Create the Rito Account Ext Public Key
+            CRitoExtPubKey b58actextpubkey;
             b58actextpubkey.SetKey(account_extended_public_key);
 
             // Add the account extended public and private keys to the return
@@ -1007,7 +1007,7 @@ UniValue ProcessImport(CWallet * const pwallet, const UniValue& data, const int6
                 for (size_t i = 0; i < keys.size(); i++) {
                     const std::string& privkey = keys[i].get_str();
 
-                    CRavenSecret vchSecret;
+                    CRitoSecret vchSecret;
                     bool fGood = vchSecret.SetString(privkey);
 
                     if (!fGood) {
@@ -1114,7 +1114,7 @@ UniValue ProcessImport(CWallet * const pwallet, const UniValue& data, const int6
                 const std::string& strPrivkey = keys[0].get_str();
 
                 // Checks.
-                CRavenSecret vchSecret;
+                CRitoSecret vchSecret;
                 bool fGood = vchSecret.SetString(strPrivkey);
 
                 if (!fGood) {
@@ -1348,7 +1348,7 @@ UniValue importmulti(const JSONRPCRequest& mainRequest)
                                       "block from time %d, which is after or within %d seconds of key creation, and "
                                       "could contain transactions pertaining to the key. As a result, transactions "
                                       "and coins using this key may not appear in the wallet. This error could be "
-                                      "caused by pruning or data corruption (see ravend log for details) and could "
+                                      "caused by pruning or data corruption (see ritod log for details) and could "
                                       "be dealt with by downloading and rescanning the relevant blocks (see -reindex "
                                       "and -rescan options).",
                                 GetImportTimestamp(request, now), scannedTime - TIMESTAMP_WINDOW - 1, TIMESTAMP_WINDOW)));

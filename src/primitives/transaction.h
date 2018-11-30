@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_PRIMITIVES_TRANSACTION_H
-#define RAVEN_PRIMITIVES_TRANSACTION_H
+#ifndef RITO_PRIMITIVES_TRANSACTION_H
+#define RITO_PRIMITIVES_TRANSACTION_H
 
 #include <stdint.h>
 #include "amount.h"
@@ -329,7 +329,7 @@ public:
     // GetValueIn() is a method on CCoinsViewCache, because
     // inputs must be known to compute value in.
 
-    /** RVN START */
+    /** RITO START */
     bool IsNewAsset() const;
     bool VerifyNewAsset(std::string& strError) const;
     bool IsNewUniqueAsset() const;
@@ -348,7 +348,7 @@ public:
     bool GetVerifierStringFromTx(CNullAssetTxVerifierString& verifier, std::string& strError) const;
     bool GetVerifierStringFromTx(CNullAssetTxVerifierString& verifier, std::string& strError, bool& fNotFound) const;
 
-    /** RVN END */
+    /** RITO END */
 
     /**
      * Get the total transaction size in bytes, including witness data.
@@ -437,4 +437,4 @@ typedef std::shared_ptr<const CTransaction> CTransactionRef;
 static inline CTransactionRef MakeTransactionRef() { return std::make_shared<const CTransaction>(); }
 template <typename Tx> static inline CTransactionRef MakeTransactionRef(Tx&& txIn) { return std::make_shared<const CTransaction>(std::forward<Tx>(txIn)); }
 
-#endif // RAVEN_PRIMITIVES_TRANSACTION_H
+#endif // RITO_PRIMITIVES_TRANSACTION_H

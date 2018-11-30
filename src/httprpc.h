@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_HTTPRPC_H
-#define RAVEN_HTTPRPC_H
+#ifndef RITO_HTTPRPC_H
+#define RITO_HTTPRPC_H
 
 #include <string>
 #include <map>

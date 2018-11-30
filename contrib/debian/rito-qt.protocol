@@ -1,0 +1,11 @@
+[Protocol]
+exec=rito-qt '%u'
+protocol=rito
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

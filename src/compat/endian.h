@@ -3,11 +3,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_COMPAT_ENDIAN_H
-#define RAVEN_COMPAT_ENDIAN_H
+#ifndef RITO_COMPAT_ENDIAN_H
+#define RITO_COMPAT_ENDIAN_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/raven-config.h"
+#include "config/rito-config.h"
 #endif
 
 #include "compat/byteswap.h"
@@ -194,4 +194,4 @@ inline uint64_t le64toh(uint64_t little_endian_64bits)
 
 #endif // WORDS_BIGENDIAN
 
-#endif // RAVEN_COMPAT_ENDIAN_H
+#endif // RITO_COMPAT_ENDIAN_H

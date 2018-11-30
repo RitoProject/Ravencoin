@@ -19,10 +19,10 @@ import subprocess
 import sys
 import tempfile
 import urllib
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import assert_equal, wait_until
 
-class LoadblockTest(RavenTestFramework):
+class LoadblockTest(RitoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2

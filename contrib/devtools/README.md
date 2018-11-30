@@ -98,7 +98,7 @@ the commit it claims to have been updated to.
 To use, make sure that you have fetched the upstream repository branch in which the subtree is
 maintained:
 * for `src/secp256k1`: https://github.com/raven-core/secp256k1.git (branch master)
-* for `src/leveldb`: https://github.com/raven-core/leveldb.git (branch raven-fork)
+* for `src/leveldb`: https://github.com/raven-core/leveldb.git (branch rito-fork)
 * for `src/univalue`: https://github.com/raven-core/univalue.git (branch master)
 * for `src/crypto/ctaes`: https://github.com/raven-core/ctaes.git (branch master)
 
@@ -116,7 +116,7 @@ For example:
   ./github-merge.py 3077
 
 (in any git repository) will help you merge pull request #3077 for the
-raven/raven repository.
+rito/rito repository.
 
 What it does:
 * Fetch master and the pull request.
@@ -134,16 +134,16 @@ couldn't mess with the sources.
 
 Setup
 ---------
-Configuring the github-merge tool for the raven repository is done in the following way:
+Configuring the github-merge tool for the rito repository is done in the following way:
 
-    git config githubmerge.repository raven/raven
+    git config githubmerge.repository rito/rito
     git config githubmerge.testcmd "make -j4 check" (adapt to whatever you want to use for testing)
     git config --global user.signingkey mykeyid (if you want to GPG sign)
 
 optimize-pngs.py
 ================
 
-A script to optimize png files in the raven
+A script to optimize png files in the rito
 repository (requires pngcrush).
 
 security-check.py and test-security-check.py
@@ -166,10 +166,10 @@ If only supported symbols are used the return value will be 0 and the output wil
 
 If there are 'unsupported' symbols, the return value will be 1 a list like this will be printed:
 
-    .../64/test_raven: symbol memcpy from unsupported version GLIBC_2.14
-    .../64/test_raven: symbol __fdelt_chk from unsupported version GLIBC_2.15
-    .../64/test_raven: symbol std::out_of_range::~out_of_range() from unsupported version GLIBCXX_3.4.15
-    .../64/test_raven: symbol _ZNSt8__detail15_List_nod from unsupported version GLIBCXX_3.4.15
+    .../64/test_rito: symbol memcpy from unsupported version GLIBC_2.14
+    .../64/test_rito: symbol __fdelt_chk from unsupported version GLIBC_2.15
+    .../64/test_rito: symbol std::out_of_range::~out_of_range() from unsupported version GLIBCXX_3.4.15
+    .../64/test_rito: symbol _ZNSt8__detail15_List_nod from unsupported version GLIBCXX_3.4.15
 
 update-translations.py
 ======================

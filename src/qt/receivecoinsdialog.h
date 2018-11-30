@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_RECEIVECOINSDIALOG_H
-#define RAVEN_QT_RECEIVECOINSDIALOG_H
+#ifndef RITO_QT_RECEIVECOINSDIALOG_H
+#define RITO_QT_RECEIVECOINSDIALOG_H
 
 #include "guiutil.h"
 
@@ -27,7 +27,7 @@ QT_BEGIN_NAMESPACE
 class QModelIndex;
 QT_END_NAMESPACE
 
-/** Dialog for requesting payment of ravens */
+/** Dialog for requesting payment of ritos */
 class ReceiveCoinsDialog : public QDialog
 {
     Q_OBJECT
@@ -80,4 +80,4 @@ private Q_SLOTS:
     void copyAmount();
 };
 
-#endif // RAVEN_QT_RECEIVECOINSDIALOG_H
+#endif // RITO_QT_RECEIVECOINSDIALOG_H

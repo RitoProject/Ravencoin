@@ -3,16 +3,16 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_CHAINPARAMSBASE_H
-#define RAVEN_CHAINPARAMSBASE_H
+#ifndef RITO_CHAINPARAMSBASE_H
+#define RITO_CHAINPARAMSBASE_H
 
 #include <memory>
 #include <string>
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between raven-cli and ravend)
- * of a given instance of the Raven system.
+ * CBaseChainParams defines the base parameters (shared between rito-cli and ritod)
+ * of a given instance of the Rito system.
  */
 class CBaseChainParams
 {
@@ -24,7 +24,7 @@ public:
 
     const std::string& DataDir() const { return strDataDir; }
     int RPCPort() const { return nRPCPort; }
- 
+
 
 protected:
     CBaseChainParams() {}
@@ -61,4 +61,4 @@ void SelectBaseParams(const std::string& chain);
  */
 std::string ChainNameFromCommandLine();
 
-#endif // RAVEN_CHAINPARAMSBASE_H
+#endif // RITO_CHAINPARAMSBASE_H

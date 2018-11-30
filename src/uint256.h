@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_UINT256_H
-#define RAVEN_UINT256_H
+#ifndef RITO_UINT256_H
+#define RITO_UINT256_H
 
 #include <assert.h>
 #include <cstring>
@@ -125,12 +125,12 @@ public:
     uint256() {}
     explicit uint256(const std::vector<unsigned char>& vch) : base_blob<256>(vch) {}
 
-    int GetNibble(int index) const 
+    int GetNibble(int index) const
     {
         index = 63 - index;
         if (index % 2 == 1)
             return(data[index / 2] >> 4);
-        return(data[index / 2] & 0x0F); 
+        return(data[index / 2] & 0x0F);
     }
     /** A cheap hash function that just returns 64 bits from the result, it can be
      * used when the contents are considered uniformly random. It is not appropriate
@@ -176,4 +176,4 @@ public:
         return result;
     }
 };
-#endif // RAVEN_UINT256_H
+#endif // RITO_UINT256_H

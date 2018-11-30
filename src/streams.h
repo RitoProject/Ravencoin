@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_STREAMS_H
-#define RAVEN_STREAMS_H
+#ifndef RITO_STREAMS_H
+#define RITO_STREAMS_H
 
 #include "support/allocators/zeroafterfree.h"
 #include "serialize.h"
@@ -459,7 +459,7 @@ private:
     const int nType;
     const int nVersion;
 
-    FILE* file;	
+    FILE* file;
 
 public:
     CAutoFile(FILE* filenew, int nTypeIn, int nVersionIn) : nType(nTypeIn), nVersion(nVersionIn)
@@ -707,4 +707,4 @@ public:
     }
 };
 
-#endif // RAVEN_STREAMS_H
+#endif // RITO_STREAMS_H

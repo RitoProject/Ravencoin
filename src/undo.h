@@ -4,10 +4,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_UNDO_H
-#define RAVEN_UNDO_H
+#ifndef RITO_UNDO_H
+#define RITO_UNDO_H
 
-#include "compressor.h" 
+#include "compressor.h"
 #include "consensus/consensus.h"
 #include "primitives/transaction.h"
 #include "serialize.h"
@@ -62,11 +62,11 @@ public:
 };
 
 static const size_t MIN_TRANSACTION_INPUT_WEIGHT = WITNESS_SCALE_FACTOR * ::GetSerializeSize(CTxIn(), SER_NETWORK, PROTOCOL_VERSION);
-/** RVN START */
+/** RITO START */
 // Deprecated for RIP2 implementation
 //static const size_t MAX_INPUTS_PER_BLOCK = /*fAssetsIsActive ? MAX_BLOCK_WEIGHT_RIP2 / MIN_TRANSACTION_INPUT_WEIGHT :*/ MAX_BLOCK_WEIGHT / MIN_TRANSACTION_INPUT_WEIGHT;
 
-/** RVN END */
+/** RITO END */
 
 /** Undo information for a CTransaction */
 class CTxUndo
@@ -120,4 +120,4 @@ public:
     }
 };
 
-#endif // RAVEN_UNDO_H
+#endif // RITO_UNDO_H

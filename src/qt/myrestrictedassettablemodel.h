@@ -1,4 +1,4 @@
-#include "ravenunits.h"
+#include "ritounits.h"
 
 #include <QAbstractTableModel>
 #include <QStringList>
@@ -53,7 +53,7 @@ public:
                 TxPlainTextRole,
         /** Unprocessed icon */
                 RawDecorationRole,
-        /** RVN or name of an asset */
+        /** RITO or name of an asset */
                 AssetNameRole,
     };
 
@@ -95,5 +95,3 @@ public Q_SLOTS:
 
     friend class MyRestrictedAssetsTablePriv;
 };
-
-

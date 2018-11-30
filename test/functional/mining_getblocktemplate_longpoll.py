@@ -7,7 +7,7 @@
 """Test longpolling with getblocktemplate."""
 
 import threading
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import get_rpc_proxy, random_transaction, Decimal
 
 class LongpollThread(threading.Thread):
@@ -23,7 +23,7 @@ class LongpollThread(threading.Thread):
     def run(self):
         self.node.getblocktemplate({'longpollid':self.longpollid})
 
-class GetBlockTemplateLPTest(RavenTestFramework):
+class GetBlockTemplateLPTest(RitoTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
 
@@ -69,4 +69,3 @@ class GetBlockTemplateLPTest(RavenTestFramework):
 
 if __name__ == '__main__':
     GetBlockTemplateLPTest().main()
-

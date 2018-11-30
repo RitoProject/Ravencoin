@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/raven-config.h"
+#include "config/rito-config.h"
 #endif
 
 #include "rpcconsole.h"
@@ -771,7 +771,7 @@ void RPCConsole::buildParameterlist(QString arg)
     // Append repair parameter to command line.
     args.append(arg);
 
-    // Send command-line arguments to RavenGUI::handleRestart()
+    // Send command-line arguments to RitoGUI::handleRestart()
     Q_EMIT handleRestart(args);
 }
 

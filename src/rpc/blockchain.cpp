@@ -151,9 +151,9 @@ UniValue blockToDeltasJSON(const CBlock& block, const CBlockIndex* blockindex)
 
                 if (GetSpentIndex(spentKey, spentInfo)) {
                     if (spentInfo.addressType == 1) {
-                        delta.push_back(Pair("address", CRavenAddress(CKeyID(spentInfo.addressHash)).ToString()));
+                        delta.push_back(Pair("address", CRitoAddress(CKeyID(spentInfo.addressHash)).ToString()));
                     } else if (spentInfo.addressType == 2)  {
-                        delta.push_back(Pair("address", CRavenAddress(CScriptID(spentInfo.addressHash)).ToString()));
+                        delta.push_back(Pair("address", CRitoAddress(CScriptID(spentInfo.addressHash)).ToString()));
                     } else {
                         continue;
                     }
@@ -181,11 +181,11 @@ UniValue blockToDeltasJSON(const CBlock& block, const CBlockIndex* blockindex)
 
             if (out.scriptPubKey.IsPayToScriptHash()) {
                 std::vector<unsigned char> hashBytes(out.scriptPubKey.begin()+2, out.scriptPubKey.begin()+22);
-                delta.push_back(Pair("address", CRavenAddress(CScriptID(uint160(hashBytes))).ToString()));
+                delta.push_back(Pair("address", CRitoAddress(CScriptID(uint160(hashBytes))).ToString()));
 
             } else if (out.scriptPubKey.IsPayToPublicKeyHash()) {
                 std::vector<unsigned char> hashBytes(out.scriptPubKey.begin()+3, out.scriptPubKey.begin()+23);
-                delta.push_back(Pair("address", CRavenAddress(CKeyID(uint160(hashBytes))).ToString()));
+                delta.push_back(Pair("address", CRitoAddress(CKeyID(uint160(hashBytes))).ToString()));
             } else {
                 continue;
             }
@@ -251,9 +251,6 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     result.push_back(Pair("bits", strprintf("%08x", block.nBits)));
     result.push_back(Pair("difficulty", GetDifficulty(blockindex)));
     result.push_back(Pair("chainwork", blockindex->nChainWork.GetHex()));
-    result.push_back(Pair("headerhash", block.GetKAWPOWHeaderHash().GetHex()));
-    result.push_back(Pair("mixhash", block.mix_hash.GetHex()));
-    result.push_back(Pair("nonce64", (uint64_t)block.nNonce64));
 
     if (blockindex->pprev)
         result.push_back(Pair("previousblockhash", blockindex->pprev->GetBlockHash().GetHex()));
@@ -286,9 +283,6 @@ UniValue decodeblockToJSON(const CBlock& block)
     result.push_back(Pair("time", block.GetBlockTime()));
     result.push_back(Pair("nonce", (uint64_t)block.nNonce));
     result.push_back(Pair("bits", strprintf("%08x", block.nBits)));
-    result.push_back(Pair("headerhash", block.GetKAWPOWHeaderHash().GetHex()));
-    result.push_back(Pair("mixhash", block.mix_hash.GetHex()));
-    result.push_back(Pair("nonce64", (uint64_t)block.nNonce64));
 
     return result;
 }
@@ -1242,8 +1236,8 @@ UniValue gettxout(const JSONRPCRequest& request)
             "     \"hex\" : \"hex\",        (string) \n"
             "     \"reqSigs\" : n,          (numeric) Number of required signatures\n"
             "     \"type\" : \"pubkeyhash\", (string) The type, eg pubkeyhash\n"
-            "     \"addresses\" : [          (array of string) array of raven addresses\n"
-            "        \"address\"     (string) raven address\n"
+            "     \"addresses\" : [          (array of string) array of rito addresses\n"
+            "        \"address\"     (string) rito address\n"
             "        ,...\n"
             "     ]\n"
             "  },\n"

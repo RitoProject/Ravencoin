@@ -6,18 +6,18 @@ EXPOSE $RPCPORT
 
 EXPOSE $PORT
 
-RUN useradd -ms /bin/bash raven
+RUN useradd -ms /bin/bash rito
 
-RUN mkdir /etc/raven
+RUN mkdir /etc/rito
 
-RUN mkdir /var/lib/raven
+RUN mkdir /var/lib/rito
 
-RUN chown raven:raven /etc/raven /var/lib/raven
+RUN chown rito:rito /etc/rito /var/lib/rito
 
-WORKDIR /home/raven
+WORKDIR /home/rito
 
-COPY --chown=raven:raven linux64/* ./run.sh /home/raven/
+COPY --chown=rito:rito linux64/* ./run.sh /home/rito/
 
-USER raven
+USER rito
 
-CMD ["/home/raven/run.sh"]
+CMD ["/home/rito/run.sh"]

@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_PRIMITIVES_BLOCK_H
-#define RAVEN_PRIMITIVES_BLOCK_H
+#ifndef RITO_PRIMITIVES_BLOCK_H
+#define RITO_PRIMITIVES_BLOCK_H
 
 #include "primitives/transaction.h"
 #include "serialize.h"
@@ -165,7 +165,7 @@ public:
         return block;
     }
 
-    // void SetPrevBlockHash(uint256 prevHash) 
+    // void SetPrevBlockHash(uint256 prevHash)
     // {
     //     block.hashPrevBlock = prevHash;
     // }
@@ -206,30 +206,4 @@ struct CBlockLocator
     }
 };
 
-/**
- * Custom serializer for CBlockHeader that omits the nNonce and mixHash, for use
- * as input to ProgPow.
- */
-class CKAWPOWInput : private CBlockHeader
-{
-public:
-    CKAWPOWInput(const CBlockHeader &header)
-    {
-        CBlockHeader::SetNull();
-        *((CBlockHeader*)this) = header;
-    }
-
-    ADD_SERIALIZE_METHODS;
-
-    template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action) {
-        READWRITE(this->nVersion);
-        READWRITE(hashPrevBlock);
-        READWRITE(hashMerkleRoot);
-        READWRITE(nTime);
-        READWRITE(nBits);
-        READWRITE(nHeight);
-    }
-};
-
-#endif // RAVEN_PRIMITIVES_BLOCK_H
+#endif // RITO_PRIMITIVES_BLOCK_H

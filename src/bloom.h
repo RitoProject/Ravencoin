@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_BLOOM_H
-#define RAVEN_BLOOM_H
+#ifndef RITO_BLOOM_H
+#define RITO_BLOOM_H
 
 #include "serialize.h"
 
@@ -34,9 +34,9 @@ enum bloomflags
 /**
  * BloomFilter is a probabilistic filter which SPV clients provide
  * so that we can filter the transactions we send them.
- * 
+ *
  * This allows for significantly more efficient transaction and block downloads.
- * 
+ *
  * Because bloom filters are probabilistic, a SPV node can increase the false-
  * positive rate, making us send it transactions which aren't actually its,
  * allowing clients to trade more bandwidth for more privacy by obfuscating which
@@ -141,4 +141,4 @@ private:
     int nHashFuncs;
 };
 
-#endif // RAVEN_BLOOM_H
+#endif // RITO_BLOOM_H

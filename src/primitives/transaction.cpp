@@ -102,7 +102,7 @@ CAmount CTransaction::GetValueOut(const bool fAreEnforcedValues) const
             if (tx_out.scriptPubKey.IsAssetScript())
                 continue;
         }
-        
+
         nValueOut += tx_out.nValue;
         if (!MoneyRange(tx_out.nValue) || !MoneyRange(nValueOut))
             throw std::runtime_error(std::string(__func__) + ": value out of range");

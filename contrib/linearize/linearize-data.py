@@ -7,6 +7,9 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #
+# linearize-data.py: Construct a linear, no-fork version of the chain.
+#
+#
 
 from __future__ import print_function, division
 import struct
@@ -50,7 +53,7 @@ def wordreverse(in_buf):
 	return b''.join(out_words)
 
 def calc_hash_str(blk_hdr):
-	x16r_hash_cmd = os.path.dirname(os.path.realpath(__file__)) + "/../../src/test/test_raven_hash"
+	x16r_hash_cmd = os.path.dirname(os.path.realpath(__file__)) + "/../../src/test/test_rito_hash"
 	cmd = [x16r_hash_cmd, hexlify(blk_hdr).decode('utf-8'), "2"]
 	blk_hash = subprocess.run(cmd, stdout=subprocess.PIPE, check=True).stdout.decode('ascii')
 	return blk_hash
@@ -160,7 +163,7 @@ class BlockDataCopier:
 			self.highTS = blkTS
 
 		if (self.blkCountOut % 1000) == 0:
-			print('%i blocks scanned, %i blocks written (of %i, %.1f%% complete)' % 
+			print('%i blocks scanned, %i blocks written (of %i, %.1f%% complete)' %
 					(self.blkCountIn, self.blkCountOut, len(self.blkindex), 100.0 * self.blkCountOut / len(self.blkindex)))
 
 	def inFileName(self, fn):

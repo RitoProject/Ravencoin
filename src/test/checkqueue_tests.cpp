@@ -7,7 +7,7 @@
 #include "utiltime.h"
 #include "validation.h"
 
-#include "test/test_raven.h"
+#include "test/test_rito.h"
 #include "checkqueue.h"
 #include <boost/test/unit_test.hpp>
 #include <boost/thread.hpp>
@@ -550,4 +550,3 @@ BOOST_FIXTURE_TEST_SUITE(checkqueue_tests, TestingSetup)
     }
 
 BOOST_AUTO_TEST_SUITE_END()
-

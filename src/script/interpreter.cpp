@@ -114,7 +114,7 @@ bool static IsCompressedPubKey(const valtype &vchPubKey)
  * Where R and S are not negative (their first byte has its highest bit not set), and not
  * excessively padded (do not start with a 0 byte, unless an otherwise negative number follows,
  * in which case a single 0 byte is necessary and even required).
- * 
+ *
  * See https://raventalk.org/index.php?topic=8392.msg127623#msg127623
  *
  * This function is consensus-critical since BIP66.
@@ -1114,10 +1114,10 @@ bool EvalScript(std::vector<std::vector<unsigned char> > &stack, const CScript &
                     }
                         break;
 
-                        /** RVN START */
-                    case OP_RVN_ASSET:
+                    /** RITO START */
+                    case OP_RITO_ASSET:
                         break;
-                        /** RVN END */
+                    /** RITO END */
 
 
                     default:

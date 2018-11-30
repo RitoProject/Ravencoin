@@ -12,7 +12,7 @@ Test processing of feefilter messages.
 
 import time
 from test_framework.mininode import mininode_lock, NodeConnCB, NodeConn, NetworkThread, MsgFeeFilter
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import sync_blocks, p2p_port, Decimal, sync_mempools
 
 def hash_to_hex(hash_data):
@@ -41,7 +41,7 @@ class TestNode(NodeConnCB):
         with mininode_lock:
             self.txinvs = []
 
-class FeeFilterTest(RavenTestFramework):
+class FeeFilterTest(RitoTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
 
@@ -76,7 +76,7 @@ class FeeFilterTest(RavenTestFramework):
         # Change tx fee rate to 1,350,000 corbies and test they are no longer received
         node1.settxfee(Decimal("0.013500000"))
         [node1.sendtoaddress(node1.getnewaddress(), 1) for _ in range(3)]
-        sync_mempools(self.nodes) # must be sure node 0 has received all txs 
+        sync_mempools(self.nodes) # must be sure node 0 has received all txs
 
         # Raise the tx fee back up above the mintxfee, submit 1 tx on node 0,
         # then sync nodes 0 and 1 - we should only have 1 tx (this one below since

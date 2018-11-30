@@ -7,7 +7,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 """
-Raven test framework primitive and message structures.
+Rito test framework primitive and message structures.
 
 CBlock, CTransaction, CBlockHeader, CTxIn, CTxOut, etc....:
     data structures that should map to corresponding structures in
@@ -41,7 +41,7 @@ MY_RELAY = 1  # from version 70001 onwards, fRelay should be appended to version
 MAX_INV_SZ = 50000
 MAX_BLOCK_BASE_SIZE = 1000000
 
-COIN = 100000000  # 1 rvn in Corbies
+COIN = 100000000  # 1 rito in Corbies
 BIP125_SEQUENCE_NUMBER = 0xfffffffd  # Sequence number that is BIP 125 opt-in and BIP 68-opt-out
 
 NODE_NETWORK = (1 << 0)
@@ -212,7 +212,7 @@ def to_hex(obj):
 
 class CAddress:
     """
-    Objects that map to ravend objects, which can be serialized/deserialized
+    Objects that map to ritod objects, which can be serialized/deserialized
     """
     __slots__ = ("ip", "nServices", "pchReserved", "port", "time")
 
@@ -549,7 +549,7 @@ class CTransaction:
         if len(self.vin) == 0:
             flags = struct.unpack("<B", f.read(1))[0]
             # Not sure why flags can't be zero, but this
-            # matches the implementation in ravend
+            # matches the implementation in ritod
             if flags != 0:
                 self.vin = deser_vector(f, CTxIn)
                 self.vout = deser_vector(f, CTxOut)
@@ -1493,7 +1493,7 @@ class MsgHeaders:
         self.headers = headers if headers is not None else []
 
     def deserialize(self, f):
-        # comment in ravend indicates these should be deserialized as blocks
+        # comment in ritod indicates these should be deserialized as blocks
         blocks = deser_vector(f, CBlock)
         for x in blocks:
             self.headers.append(CBlockHeader(x))

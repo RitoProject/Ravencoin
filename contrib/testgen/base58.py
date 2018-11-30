@@ -38,7 +38,7 @@ def b58encode(v):
         long_value = div
     result = __b58chars[long_value] + result
 
-    # Raven does a little leading-zero-compression:
+    # Rito does a little leading-zero-compression:
     # leading 0-bytes in the input become leading-1s
     nPad = 0
     for c in v:

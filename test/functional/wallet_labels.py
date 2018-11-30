@@ -15,10 +15,10 @@ RPCs tested are:
     - move (with account arguments)
 """
 
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import assert_equal
 
-class WalletAccountsTest(RavenTestFramework):
+class WalletAccountsTest(RitoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -36,7 +36,7 @@ class WalletAccountsTest(RavenTestFramework):
         assert_equal(node.getbalance(), 10000)
 
         # there should be 2 address groups
-        # each with 1 address with a balance of 50 Ravens
+        # each with 1 address with a balance of 50 Ritos
         address_groups = node.listaddressgroupings()
         assert_equal(len(address_groups), 2)
         # the addresses aren't linked now, but will be after we send to the
@@ -80,23 +80,23 @@ class WalletAccountsTest(RavenTestFramework):
         for account in accounts:
             address = node.getaccountaddress(account)
             account_addresses[account] = address
-            
+
             node.getnewaddress(account)
             assert_equal(node.getaccount(address), account)
             assert(address in node.getaddressesbyaccount(account))
-            
+
             node.sendfrom("", address, amount_to_send)
-        
+
         node.generate(1)
-        
+
         for i in range(len(accounts)):
             from_account = accounts[i]
             to_account = accounts[(i+1) % len(accounts)]
             to_address = account_addresses[to_account]
             node.sendfrom(from_account, to_address, amount_to_send)
-        
+
         node.generate(1)
-        
+
         for account in accounts:
             address = node.getaccountaddress(account)
             assert(address != account_addresses[account])
@@ -108,26 +108,26 @@ class WalletAccountsTest(RavenTestFramework):
         expected_account_balances = {"": 520000}
         for account in accounts:
             expected_account_balances[account] = 0
-        
+
         assert_equal(node.listaccounts(), expected_account_balances)
-        
+
         assert_equal(node.getbalance(""), 520000)
-        
+
         for account in accounts:
             address = node.getaccountaddress("")
             node.setaccount(address, account)
             assert(address in node.getaddressesbyaccount(account))
             assert(address not in node.getaddressesbyaccount(""))
-        
+
         for account in accounts:
             addresses = []
             for x in range(10):
                 addresses.append(node.getnewaddress())
             multisig_address = node.addmultisigaddress(5, addresses, account)
             node.sendfrom("", multisig_address, 50)
-        
+
         node.generate(101)
-        
+
         for account in accounts:
             assert_equal(node.getbalance(account), 50)
 

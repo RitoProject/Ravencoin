@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_KEYSTORE_H
-#define RAVEN_KEYSTORE_H
+#ifndef RITO_KEYSTORE_H
+#define RITO_KEYSTORE_H
 
 #include "key.h"
 #include "pubkey.h"
@@ -117,4 +117,4 @@ public:
 typedef std::vector<unsigned char, secure_allocator<unsigned char> > CKeyingMaterial;
 typedef std::map<CKeyID, std::pair<CPubKey, std::vector<unsigned char> > > CryptedKeyMap;
 
-#endif // RAVEN_KEYSTORE_H
+#endif // RITO_KEYSTORE_H

@@ -17,7 +17,7 @@ if uploadtarget has been reached.
 from collections import defaultdict
 import time
 from test_framework.mininode import NodeConn, NodeConnCB, NetworkThread, MsgGetdata, CInv
-from test_framework.test_framework import RavenTestFramework
+from test_framework.test_framework import RitoTestFramework
 from test_framework.util import p2p_port, mine_large_block, assert_equal
 
 
@@ -34,7 +34,7 @@ class TestNode(NodeConnCB):
         self.block_receive_map[message.block.x16r] += 1
 
 
-class MaxUploadTest(RavenTestFramework):
+class MaxUploadTest(RitoTestFramework):
 
     def set_test_params(self):
         self.setup_clean_chain = True
@@ -111,7 +111,7 @@ class MaxUploadTest(RavenTestFramework):
             assert_equal(test_nodes[0].block_receive_map[big_old_block], i + 1)
 
         assert_equal(len(self.nodes[0].getpeerinfo()), 3)
-        # At most a couple more tries should succeed (depending on how long 
+        # At most a couple more tries should succeed (depending on how long
         # the test has been running so far).
         for i in range(3):
             test_nodes[0].send_message(getdata_request)

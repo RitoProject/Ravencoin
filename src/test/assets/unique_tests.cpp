@@ -4,7 +4,7 @@
 
 
 #include <assets/assets.h>
-#include <test/test_raven.h>
+#include <test/test_rito.h>
 #include <boost/test/unit_test.hpp>
 #include <amount.h>
 #include <base58.h>

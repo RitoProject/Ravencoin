@@ -393,4 +393,3 @@ int main (int argc, char *argv[])
     univalue_readwrite();
     return 0;
 }
-

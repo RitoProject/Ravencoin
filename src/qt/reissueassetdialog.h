@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_REISSUEASSETDIALOG_H
-#define RAVEN_QT_REISSUEASSETDIALOG_H
+#ifndef RITO_QT_REISSUEASSETDIALOG_H
+#define RITO_QT_REISSUEASSETDIALOG_H
 
 #include "walletmodel.h"
 
@@ -104,7 +104,10 @@ private Q_SLOTS:
     void onReissueBoxChanged();
     void onUnitChanged(int value);
     void onClearButtonClicked();
+<<<<<<< HEAD
     void onVerifierStringChanged(QString verifier);
+=======
+>>>>>>> 16fb1c641... Ritocoin
 
     //CoinControl
     void coinControlFeatureChanged(bool);
@@ -133,11 +136,14 @@ private Q_SLOTS:
                     const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
     void updateDisplayUnit();
 
+<<<<<<< HEAD
     void focusReissueAsset(const QModelIndex &index);
 
+=======
+>>>>>>> 16fb1c641... Ritocoin
 Q_SIGNALS:
     // Fired when a message should be reported to the user
     void message(const QString &title, const QString &message, unsigned int style);
 };
 
-#endif // RAVEN_QT_REISSUEASSETDIALOG_H
+#endif // RITO_QT_REISSUEASSETDIALOG_H

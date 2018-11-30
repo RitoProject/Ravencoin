@@ -1,0 +1,81 @@
+policy_module(rito, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type rito_t;
+type rito_exec_t;
+init_daemon_domain(rito_t, rito_exec_t)
+
+permissive rito_t;
+
+type rito_initrc_exec_t;
+init_script_file(rito_initrc_exec_t)
+
+type rito_conf_t;
+files_type(rito_conf_t)
+
+type rito_var_lib_t;
+files_type(rito_var_lib_t)
+
+type rito_var_run_t;
+files_type(rito_var_run_t)
+
+type rito_port_t;
+corenet_port(rito_port_t)
+
+########################################
+#
+# rito local policy
+#
+allow rito_t self:process { fork };
+
+allow rito_t self:fifo_file rw_fifo_file_perms;
+allow rito_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(rito_t, rito_conf_t, rito_conf_t)
+manage_files_pattern(rito_t, rito_conf_t, rito_conf_t)
+
+manage_dirs_pattern(rito_t, rito_var_lib_t, rito_var_lib_t)
+manage_files_pattern(rito_t, rito_var_lib_t, rito_var_lib_t)
+files_var_lib_filetrans(rito_t, rito_var_lib_t, { dir file })
+
+manage_dirs_pattern(rito_t, rito_var_run_t, rito_var_run_t)
+manage_files_pattern(rito_t, rito_var_run_t, rito_var_run_t)
+
+sysnet_dns_name_resolve(rito_t)
+corenet_all_recvfrom_unlabeled(rito_t)
+
+allow rito_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(rito_t)
+corenet_tcp_sendrecv_generic_node(rito_t)
+corenet_tcp_sendrecv_all_ports(rito_t)
+corenet_tcp_bind_generic_node(rito_t)
+
+gen_require(`
+    type rito_port_t;
+')
+allow rito_t rito_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type rito_port_t;
+')
+allow rito_t rito_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(rito_t)
+
+files_read_etc_files(rito_t)
+
+miscfiles_read_localization(rito_t)
+
+sysnet_dns_name_resolve(rito_t)
+
+allow rito_t rito_exec_t:file execute_no_trans;
+allow rito_t self:process setsched;
+corecmd_exec_ls(rito_t)
+corenet_tcp_connect_http_port(rito_t)
+dev_read_urand(rito_t)
+fs_getattr_xattr_fs(rito_t)
+kernel_read_system_state(rito_t)

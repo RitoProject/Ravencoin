@@ -8,7 +8,7 @@
 #include "ui_assetsdialog.h"
 
 #include "addresstablemodel.h"
-#include "ravenunits.h"
+#include "ritounits.h"
 #include "clientmodel.h"
 #include "assetcontroldialog.h"
 #include "guiutil.h"
@@ -122,11 +122,11 @@ AssetsDialog::AssetsDialog(const PlatformStyle *_platformStyle, QWidget *parent)
     ui->checkBoxMinimumFee->setChecked(settings.value("fPayOnlyMinFee").toBool());
     minimizeFeeSection(settings.value("fFeeSectionMinimized").toBool());
 
-    /** RVN START */
+    /** RITO START */
     setupAssetControlFrame(platformStyle);
     setupScrollView(platformStyle);
     setupFeeControl(platformStyle);
-    /** RVN END */
+    /** RITO END */
 }
 
 void AssetsDialog::setClientModel(ClientModel *_clientModel)
@@ -439,7 +439,7 @@ void AssetsDialog::on_sendButton_clicked()
     {
         // append fee string if a fee is required
         questionString.append("<hr /><span style='color:#aa0000;'>");
-        questionString.append(RavenUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nFeeRequired));
+        questionString.append(RitoUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nFeeRequired));
         questionString.append("</span> ");
         questionString.append(tr("added as transaction fee"));
 
@@ -649,7 +649,7 @@ void AssetsDialog::setBalance(const CAmount& balance, const CAmount& unconfirmed
 
     if(model && model->getOptionsModel())
     {
-        ui->labelBalance->setText(RavenUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance));
+        ui->labelBalance->setText(RitoUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance));
     }
 }
 
@@ -696,7 +696,7 @@ void AssetsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn &se
             msgParams.second = CClientUIInterface::MSG_ERROR;
             break;
         case WalletModel::AbsurdFee:
-            msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee.").arg(RavenUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), maxTxFee));
+            msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee.").arg(RitoUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), maxTxFee));
             break;
         case WalletModel::PaymentRequestExpired:
             msgParams.first = tr("Payment request expired.");
@@ -758,7 +758,7 @@ void AssetsDialog::updateFeeMinimizedLabel()
     if (ui->radioSmartFee->isChecked())
         ui->labelFeeMinimized->setText(ui->labelSmartFee->text());
     else {
-        ui->labelFeeMinimized->setText(RavenUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), ui->customFee->value()) + "/kB");
+        ui->labelFeeMinimized->setText(RitoUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), ui->customFee->value()) + "/kB");
     }
 }
 
@@ -766,7 +766,7 @@ void AssetsDialog::updateMinFeeLabel()
 {
     if (model && model->getOptionsModel())
         ui->checkBoxMinimumFee->setText(tr("Pay only the required fee of %1").arg(
-                RavenUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), GetRequiredFee(1000)) + "/kB")
+                RitoUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), GetRequiredFee(1000)) + "/kB")
         );
 }
 
@@ -793,7 +793,7 @@ void AssetsDialog::updateSmartFeeLabel()
     FeeCalculation feeCalc;
     CFeeRate feeRate = CFeeRate(GetMinimumFee(1000, coin_control, ::mempool, ::feeEstimator, &feeCalc));
 
-    ui->labelSmartFee->setText(RavenUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), feeRate.GetFeePerK()) + "/kB");
+    ui->labelSmartFee->setText(RitoUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), feeRate.GetFeePerK()) + "/kB");
 
     if (feeCalc.reason == FeeReason::FALLBACK) {
         ui->labelSmartFee2->show(); // (Smart fee not initialized yet. This usually takes a few blocks...)
@@ -918,7 +918,7 @@ void AssetsDialog::assetControlChangeEdited(const QString& text)
         }
         else if (!IsValidDestination(dest)) // Invalid address
         {
-            ui->labelAssetControlChangeLabel->setText(tr("Warning: Invalid Raven address"));
+            ui->labelAssetControlChangeLabel->setText(tr("Warning: Invalid Rito address"));
         }
         else // Valid address
         {
@@ -997,7 +997,7 @@ void AssetsDialog::assetControlUpdateLabels()
     }
 }
 
-/** RVN START */
+/** RITO START */
 void AssetsDialog::assetControlUpdateSendCoinsDialog()
 {
     for(int i = 0; i < ui->entries->count(); ++i)
@@ -1062,4 +1062,32 @@ void AssetsDialog::handleFirstSelection()
         entry->refreshAssetList();
     }
 }
-/** RVN END */
+
+void AssetsDialog::focusAsset(const QModelIndex &idx)
+{
+
+    clear();
+
+    SendAssetsEntry *entry = qobject_cast<SendAssetsEntry*>(ui->entries->itemAt(0)->widget());
+    if(entry)
+    {
+        SendAssetsRecipient recipient;
+        recipient.assetName = idx.data(AssetTableModel::AssetNameRole).toString();
+
+        entry->setValue(recipient);
+        entry->setFocus();
+    }
+}
+
+void AssetsDialog::focusAssetListBox()
+{
+    SendAssetsEntry *entry = qobject_cast<SendAssetsEntry*>(ui->entries->itemAt(0)->widget());
+    if (entry)
+    {
+        entry->setFocusAssetListBox();
+
+        if (entry->getValue().assetName != "")
+            entry->setFocus();
+    }
+}
+/** RITO END */

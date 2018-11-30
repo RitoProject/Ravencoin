@@ -195,4 +195,3 @@ const UniValue& UniValue::get_array() const
         throw std::runtime_error("JSON value is not an array as expected");
     return *this;
 }
-

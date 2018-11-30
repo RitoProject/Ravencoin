@@ -18,12 +18,12 @@ osx=true
 SIGNER=
 VERSION=
 commit=false
-url=https://github.com/RavenProject/Ravencoin
+url=https://github.com/RitoProject/Ritocoin
 proc=2
 mem=2000
 lxc=true
 osslTarUrl=http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
-osslPatchUrl=https://ravencoin.org/cfields/osslsigncode-Backports-to-1.7.1.patch
+osslPatchUrl=https://ritocoin.org/cfields/osslsigncode-Backports-to-1.7.1.patch
 scriptName=$(basename -- "$0")
 signProg="gpg --detach-sign"
 commitFiles=true
@@ -32,7 +32,7 @@ commitFiles=true
 read -d '' usage <<- EOF
 Usage: $scriptName [-c|u|v|b|s|B|o|h|j|m|] signer version
 
-Run this script from the directory containing the raven, gitian-builder, gitian.sigs, and raven-detached-sigs.
+Run this script from the directory containing the rito, gitian-builder, gitian.sigs, and rito-detached-sigs.
 
 Arguments:
 signer          GPG signer to sign each build assert file
@@ -40,7 +40,7 @@ version		Version number, commit, or branch to build. If building a commit or bra
 
 Options:
 -c|--commit	Indicate that the version argument is for a commit or branch
--u|--url	Specify the URL of the repository. Default is https://github.com/RavenProject/Ravencoin
+-u|--url	Specify the URL of the repository. Default is https://github.com/RitoProject/Ritocoin
 -v|--verify 	Verify the Gitian build
 -b|--build	Do a Gitian build
 -s|--sign	Make signed binaries for Windows and Mac OSX
@@ -246,7 +246,7 @@ then
 fi
 
 # Set up build
-pushd ./raven
+pushd ./rito
 git fetch
 git checkout ${COMMIT}
 popd
@@ -255,17 +255,17 @@ popd
 if [[ $build = true ]]
 then
 	# Make output folder
-	mkdir -p ./raven-binaries/${VERSION}
-	
+	mkdir -p ./rito-binaries/${VERSION}
+
 	# Build Dependencies
 	echo ""
 	echo "Building Dependencies"
 	echo ""
-	pushd ./gitian-builder	
+	pushd ./gitian-builder
 	mkdir -p inputs
 	wget -N -P inputs $osslPatchUrl
 	wget -N -P inputs $osslTarUrl
-	make -C ../raven/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../rito/depends download SOURCES_PATH=`pwd`/cache/common
 
 	# Linux
 	if [[ $linux = true ]]
@@ -273,9 +273,9 @@ then
             echo ""
 	    echo "Compiling ${VERSION} Linux"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit raven=${COMMIT} --url raven=${url} ../raven/contrib/gitian-descriptors/gitian-linux.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../raven/contrib/gitian-descriptors/gitian-linux.yml
-	    mv build/out/raven-*.tar.gz build/out/src/raven-*.tar.gz ../raven-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit rito=${COMMIT} --url rito=${url} ../rito/contrib/gitian-descriptors/gitian-linux.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../rito/contrib/gitian-descriptors/gitian-linux.yml
+	    mv build/out/rito-*.tar.gz build/out/src/rito-*.tar.gz ../rito-binaries/${VERSION}
 	fi
 	# Windows
 	if [[ $windows = true ]]
@@ -283,10 +283,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit raven=${COMMIT} --url raven=${url} ../raven/contrib/gitian-descriptors/gitian-win.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../raven/contrib/gitian-descriptors/gitian-win.yml
-	    mv build/out/raven-*-win-unsigned.tar.gz inputs/raven-win-unsigned.tar.gz
-	    mv build/out/raven-*.zip build/out/raven-*.exe ../raven-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit rito=${COMMIT} --url rito=${url} ../rito/contrib/gitian-descriptors/gitian-win.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../rito/contrib/gitian-descriptors/gitian-win.yml
+	    mv build/out/rito-*-win-unsigned.tar.gz inputs/rito-win-unsigned.tar.gz
+	    mv build/out/rito-*.zip build/out/rito-*.exe ../rito-binaries/${VERSION}
 	fi
 	# Mac OSX
 	if [[ $osx = true ]]
@@ -294,10 +294,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit raven=${COMMIT} --url raven=${url} ../raven/contrib/gitian-descriptors/gitian-osx.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../raven/contrib/gitian-descriptors/gitian-osx.yml
-	    mv build/out/raven-*-osx-unsigned.tar.gz inputs/raven-osx-unsigned.tar.gz
-	    mv build/out/raven-*.tar.gz build/out/raven-*.dmg ../raven-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit rito=${COMMIT} --url rito=${url} ../rito/contrib/gitian-descriptors/gitian-osx.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../rito/contrib/gitian-descriptors/gitian-osx.yml
+	    mv build/out/rito-*-osx-unsigned.tar.gz inputs/rito-osx-unsigned.tar.gz
+	    mv build/out/rito-*.tar.gz build/out/rito-*.dmg ../rito-binaries/${VERSION}
 	fi
 	popd
 
@@ -324,34 +324,34 @@ then
 	echo ""
 	echo "Verifying v${VERSION} Linux"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../raven/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../rito/contrib/gitian-descriptors/gitian-linux.yml
 	# Windows
 	echo ""
 	echo "Verifying v${VERSION} Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../raven/contrib/gitian-descriptors/gitian-win.yml
-	# Mac OSX	
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../rito/contrib/gitian-descriptors/gitian-win.yml
+	# Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Mac OSX"
-	echo ""	
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../raven/contrib/gitian-descriptors/gitian-osx.yml
+	echo ""
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../rito/contrib/gitian-descriptors/gitian-osx.yml
 	# Signed Windows
 	echo ""
 	echo "Verifying v${VERSION} Signed Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../raven/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../rito/contrib/gitian-descriptors/gitian-osx-signer.yml
 	# Signed Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Signed Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../raven/contrib/gitian-descriptors/gitian-osx-signer.yml	
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../rito/contrib/gitian-descriptors/gitian-osx-signer.yml
 	popd
 fi
 
 # Sign binaries
 if [[ $sign = true ]]
 then
-	
+
         pushd ./gitian-builder
 	# Sign Windows
 	if [[ $windows = true ]]
@@ -359,10 +359,10 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../raven/contrib/gitian-descriptors/gitian-win-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../raven/contrib/gitian-descriptors/gitian-win-signer.yml
-	    mv build/out/raven-*win64-setup.exe ../raven-binaries/${VERSION}
-	    mv build/out/raven-*win32-setup.exe ../raven-binaries/${VERSION}
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../rito/contrib/gitian-descriptors/gitian-win-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../rito/contrib/gitian-descriptors/gitian-win-signer.yml
+	    mv build/out/rito-*win64-setup.exe ../rito-binaries/${VERSION}
+	    mv build/out/rito-*win32-setup.exe ../rito-binaries/${VERSION}
 	fi
 	# Sign Mac OSX
 	if [[ $osx = true ]]
@@ -370,9 +370,9 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../raven/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../raven/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    mv build/out/raven-osx-signed.dmg ../raven-binaries/${VERSION}/raven-${VERSION}-osx.dmg
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../rito/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../rito/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    mv build/out/rito-osx-signed.dmg ../rito-binaries/${VERSION}/rito-${VERSION}-osx.dmg
 	fi
 	popd
 

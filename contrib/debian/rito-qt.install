@@ -1,0 +1,6 @@
+usr/local/bin/rito-qt usr/bin
+share/pixmaps/rito32.xpm usr/share/pixmaps
+share/pixmaps/rito16.xpm usr/share/pixmaps
+share/pixmaps/rito128.png usr/share/pixmaps
+debian/rito-qt.desktop usr/share/applications
+debian/rito-qt.protocol usr/share/kde4/services/

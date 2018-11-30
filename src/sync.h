@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_SYNC_H
-#define RAVEN_SYNC_H
+#ifndef RITO_SYNC_H
+#define RITO_SYNC_H
 
 #include "threadsafety.h"
 
@@ -287,4 +287,4 @@ public:
     }
 };
 
-#endif // RAVEN_SYNC_H
+#endif // RITO_SYNC_H
