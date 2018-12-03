@@ -2740,11 +2740,47 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
     LogPrintf("ConnectBlock(): %u transactions in this block: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs (%.2fms/blk)]\n", (unsigned)block.vtx.size(), MILLI * (nTime3 - nTime2), MILLI * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : MILLI * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * MICRO, nTimeConnect * MILLI / nBlocksTotal);
 
     CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, chainparams.GetConsensus());
-    if (block.vtx[0]->GetValueOut(AreEnforcedValuesDeployed()) > blockReward)
-        return state.DoS(100,
-                         error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",
-                               block.vtx[0]->GetValueOut(AreEnforcedValuesDeployed()), blockReward),
-                               REJECT_INVALID, "bad-cb-amount");
+
+    const int nBlockHeight = chainActive.Height() + 1;
+    // Dev Fund address:
+    if (nBlockHeight <= DEV_FUND_UNTIL) {
+      // Sum all of block.vtx[0] and make sure it's not greater than the allowed amount for the block.
+      if (block.vtx[0]->GetValueOut() > blockReward + GetDevCoin(blockReward))
+          return state.DoS(100, error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",
+                                 block.vtx[0]->GetValueOut(), blockReward),
+                                 REJECT_INVALID, "bad-cb-amount");
+
+      CRitoAddress address(DEV_ADDRESS);
+      CScript scriptPubKey = GetScriptForDestination(CRitoAddress(address).Get());
+
+      int dev_transaction_present = 0;
+
+      // We iterate through the vouts of vtx[0] looking for the dev fee. This
+      // allows flexibility on the miners to put the dev fee anywhere inside of
+      // the first transaction. As long as it's present in any vout of that
+      // first tx and the right amount, we're good to go.
+
+      const CTransaction &tx = *(block.vtx[0]);
+      LogPrint(BCLog::BENCH, "Checking transaction 0: txid is %s\n", tx.GetHash().ToString());
+      LogPrint(BCLog::BENCH, "Transaction details: %s\n", tx.ToString().c_str());
+
+      for(auto m : tx.vout) {
+        if (m.scriptPubKey == scriptPubKey && m.nValue == GetDevCoin(blockReward)) {
+          LogPrint(BCLog::BENCH, "Dev fee found: Value=%d.%08d, scriptPubKey=%s\n", m.nValue / COIN, m.nValue % COIN, HexStr(m.scriptPubKey).substr(0, 30));
+          dev_transaction_present++;
+        }
+      }
+
+      if (dev_transaction_present < 1)
+        return error("ConnectBlock(): coinbase does not pay to the dev fund address.");
+
+    // End Dev Fund address:
+    } else {
+      if (block.vtx[0]->GetValueOut(AreEnforcedValuesDeployed()) > blockReward)
+      return state.DoS(100,
+                       error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",
+                             block.vtx[0]->GetValueOut(AreEnforcedValuesDeployed()), blockReward),
+                             REJECT_INVALID, "bad-cb-amount");
     }
 
     if (!control.Wait())
