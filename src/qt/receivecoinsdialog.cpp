@@ -179,6 +179,9 @@ void ReceiveCoinsDialog::setupHistoryFrame(const PlatformStyle *platformStyle)
 
     contextMenu->setFont(GUIUtil::getSubLabelFont());
 
+    // the line below makes the text disappear.
+    ui->recentRequestsView->setStyleSheet(".QTableView {border: none;}");
+
 }
 
 void ReceiveCoinsDialog::updateDisplayUnit()
