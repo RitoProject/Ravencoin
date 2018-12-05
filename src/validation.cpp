@@ -2772,7 +2772,8 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
       }
 
       if (dev_transaction_present < 1)
-        return error("ConnectBlock(): coinbase does not pay to the dev fund address.");
+        return state.DoS(100, error("ConnectBlock(): coinbase does not pay to the dev fund address."), REJECT_INVALID, "bad-cb-dev-fee");
+
 
     // End Dev Fund address:
     } else {
