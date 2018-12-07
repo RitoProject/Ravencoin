@@ -27,10 +27,10 @@ apt install -y curl g++-aarch64-linux-gnu g++-7-aarch64-linux-gnu gcc-7-aarch64-
 cd ~/
 
 # Removes any existing builds and starts clean WARNING
-rm -rf ~/ritoccoin ~/sign ~/release
+rm -rf ~/ritocoin ~/sign ~/release
 
 git clone https://github.com/ritoproject/ritocoin
-cd ~/ritoccoin
+cd ~/ritocoin
 git checkout $BRANCH
 mkdir -p ~/release
 
@@ -39,9 +39,9 @@ echo @@@"Building linux 64 binaries"
 echo @@@
 
 
-cd ~/ritoccoin/depends
+cd ~/ritocoin/depends
 make HOST=x86_64-linux-gnu $MAKEOPTS
-cd ~/ritoccoin
+cd ~/ritocoin
 export PATH=$PWD/depends/x86_64-linux-gnu/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/x86_64-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
@@ -54,10 +54,10 @@ cd ~/linux64
 find . -name "lib*.la" -delete
 find . -name "lib*.a" -delete
 rm -rf $DISTNAME/lib/pkgconfig
-find ${DISTNAME}/bin -type f -executable -exec ../ritoccoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
-find ${DISTNAME}/lib -type f -exec ../ritoccoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/bin -type f -executable -exec ../ritocoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/lib -type f -exec ../ritocoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
 find $DISTNAME/ -not -name "*.dbg" | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/release/$DISTNAME-x86_64-linux-gnu.tar.gz
-cd ~/ritoccoin
+cd ~/ritocoin
 rm -rf ~/linux64
 make clean
 export PATH=$PATH_orig
@@ -67,17 +67,17 @@ echo @@@
 echo @@@"Building general sourcecode"
 echo @@@
 
-cd ~/ritoccoin
+cd ~/ritocoin
 export PATH=$PWD/depends/x86_64-linux-gnu/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/x86_64-linux-gnu/share/config.site ./configure --prefix=/
 make dist
 SOURCEDIST=`echo rito-*.tar.gz`
-mkdir -p ~/ritoccoin/temp
-cd ~/ritoccoin/temp
+mkdir -p ~/ritocoin/temp
+cd ~/ritocoin/temp
 tar xf ../$SOURCEDIST
 find rito-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
-cd ~/ritoccoin
+cd ~/ritocoin
 mv $SOURCEDIST ~/release
 rm -rf temp
 make clean
@@ -112,10 +112,10 @@ done
 
 export PATH=$PWD/wrapped:$PATH
 export HOST_ID_SALT="$PWD/wrapped/extra_includes/i386-linux-gnu"
-cd ~/ritoccoin/depends
+cd ~/ritocoin/depends
 make HOST=i686-pc-linux-gnu $MAKEOPTS
 unset HOST_ID_SALT
-cd ~/ritoccoin
+cd ~/ritocoin
 export PATH=$PWD/depends/i686-pc-linux-gnu/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/i686-pc-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
@@ -128,10 +128,10 @@ cd ~/linux32
 find . -name "lib*.la" -delete
 find . -name "lib*.a" -delete
 rm -rf $DISTNAME/lib/pkgconfig
-find ${DISTNAME}/bin -type f -executable -exec ../ritoccoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
-find ${DISTNAME}/lib -type f -exec ../ritoccoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/bin -type f -executable -exec ../ritocoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/lib -type f -exec ../ritocoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
 find $DISTNAME/ -not -name "*.dbg" | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/release/$DISTNAME-i686-pc-linux-gnu.tar.gz
-cd ~/ritoccoin
+cd ~/ritocoin
 rm -rf ~/linux32
 rm -rf ~/wrapped
 make clean
@@ -142,9 +142,9 @@ echo @@@
 echo @@@ "Building linux ARM binaries"
 echo @@@
 
-cd ~/ritoccoin/depends
+cd ~/ritocoin/depends
 make HOST=arm-linux-gnueabihf $MAKEOPTS
-cd ~/ritoccoin
+cd ~/ritocoin
 export PATH=$PWD/depends/arm-linux-gnueabihf/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/arm-linux-gnueabihf/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
@@ -156,10 +156,10 @@ cd ~/linuxARM
 find . -name "lib*.la" -delete
 find . -name "lib*.a" -delete
 rm -rf $DISTNAME/lib/pkgconfig
-find ${DISTNAME}/bin -type f -executable -exec ../ritoccoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
-find ${DISTNAME}/lib -type f -exec ../ritoccoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/bin -type f -executable -exec ../ritocoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/lib -type f -exec ../ritocoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
 find $DISTNAME/ -not -name "*.dbg" | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/release/$DISTNAME-arm-linux-gnueabihf.tar.gz
-cd ~/ritoccoin
+cd ~/ritocoin
 rm -rf ~/linuxARM
 make clean
 export PATH=$PATH_orig
@@ -169,9 +169,9 @@ echo @@@
 echo @@@ "Building linux aarch64 binaries"
 echo @@@
 
-cd ~/ritoccoin/depends
+cd ~/ritocoin/depends
 make HOST=aarch64-linux-gnu $MAKEOPTS
-cd ~/ritoccoin
+cd ~/ritocoin
 export PATH=$PWD/depends/aarch64-linux-gnu/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/aarch64-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
@@ -183,10 +183,10 @@ cd ~/linuxaarch64
 find . -name "lib*.la" -delete
 find . -name "lib*.a" -delete
 rm -rf $DISTNAME/lib/pkgconfig
-find ${DISTNAME}/bin -type f -executable -exec ../ritoccoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
-find ${DISTNAME}/lib -type f -exec ../ritoccoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/bin -type f -executable -exec ../ritocoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
+find ${DISTNAME}/lib -type f -exec ../ritocoin/contrib/devtools/split-debug.sh {} {} {}.dbg \;
 find $DISTNAME/ -not -name "*.dbg" | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/release/$DISTNAME-aarch64-linux-gnu.tar.gz
-cd ~/ritoccoin
+cd ~/ritocoin
 rm -rf ~/linuxaarch64
 make clean
 export PATH=$PATH_orig
@@ -200,9 +200,9 @@ update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++
 mkdir -p ~/release/unsigned/
 mkdir -p ~/sign/win64
 PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g') # strip out problematic Windows %PATH% imported var
-cd ~/ritoccoin/depends
+cd ~/ritocoin/depends
 make HOST=x86_64-w64-mingw32 $MAKEOPTS
-cd ~/ritoccoin
+cd ~/ritocoin
 export PATH=$PWD/depends/x86_64-w64-mingw32/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g"
@@ -223,14 +223,14 @@ find ./$DISTNAME -not -name "*.dbg"  -type f | sort | zip -X@ ./$DISTNAME-x86_64
 mv ./$DISTNAME-x86_64-*.zip ~/release/$DISTNAME-win64.zip
 cd ~/
 rm -rf win64
-cp -rf ritoccoin/contrib/windeploy ~/sign/win64
+cp -rf ritocoin/contrib/windeploy ~/sign/win64
 cd ~/sign/win64/windeploy
 mkdir -p unsigned
-mv ~/ritoccoin/rito-*setup-unsigned.exe unsigned/
+mv ~/ritocoin/rito-*setup-unsigned.exe unsigned/
 find . | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/sign/$DISTNAME-win64-unsigned.tar.gz
 cd ~/sign
 rm -rf win64
-cd ~/ritoccoin
+cd ~/ritocoin
 rm -rf release
 make clean
 export PATH=$PATH_orig
@@ -243,9 +243,9 @@ echo @@@
 update-alternatives --set i686-w64-mingw32-g++ /usr/bin/i686-w64-mingw32-g++-posix 
 mkdir -p ~/sign/win32
 PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g') 
-cd ~/ritoccoin/depends
+cd ~/ritocoin/depends
 make HOST=i686-w64-mingw32 $MAKEOPTS
-cd ~/ritoccoin
+cd ~/ritocoin
 export PATH=$PWD/depends/i686-w64-mingw32/native/bin:$PATH
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g"
@@ -266,14 +266,14 @@ find ./$DISTNAME -not -name "*.dbg"  -type f | sort | zip -X@ ./$DISTNAME-i686-w
 mv ./$DISTNAME-i686-w64-*.zip ~/release/$DISTNAME-win32.zip
 cd ~/
 rm -rf win32
-cp -rf ritoccoin/contrib/windeploy ~/sign/win32
+cp -rf ritocoin/contrib/windeploy ~/sign/win32
 cd ~/sign/win32/windeploy
 mkdir -p unsigned
-mv ~/ritoccoin/rito-*setup-unsigned.exe unsigned/
+mv ~/ritocoin/rito-*setup-unsigned.exe unsigned/
 find . | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/sign/$DISTNAME-win32-unsigned.tar.gz
 cd ~/sign
 rm -rf win32
-cd ~/ritoccoin
+cd ~/ritocoin
 rm -rf release
 make clean
 export PATH=$PATH_orig
@@ -283,13 +283,13 @@ echo @@@
 echo @@@ "Building OSX binaries"
 echo @@@
 
-mkdir -p ~/ritoccoin/depends/SDKs
-cp ~/MacOSX10.11.sdk.tar.gz ~/ritoccoin/depends/SDKs/MacOSX10.11.sdk.tar.gz
-cd ~/ritoccoin/depends/SDKs && tar -xf MacOSX10.11.sdk.tar.gz 
+mkdir -p ~/ritocoin/depends/SDKs
+cp ~/MacOSX10.11.sdk.tar.gz ~/ritocoin/depends/SDKs/MacOSX10.11.sdk.tar.gz
+cd ~/ritocoin/depends/SDKs && tar -xf MacOSX10.11.sdk.tar.gz 
 rm -rf MacOSX10.11.sdk.tar.gz 
-cd ~/ritoccoin/depends
+cd ~/ritocoin/depends
 make $MAKEOPTS HOST="x86_64-apple-darwin14"
-cd ~/ritoccoin
+cd ~/ritocoin
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/x86_64-apple-darwin14/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests GENISOIMAGE=$PWD/depends/x86_64-apple-darwin14/native/bin/genisoimage
 make $MAKEOPTS 
@@ -308,7 +308,7 @@ cp $PWD/depends/x86_64-apple-darwin14/native/bin/x86_64-apple-darwin14-pagestuff
 mv dist unsigned-app-$DISTNAME
 cd unsigned-app-$DISTNAME
 find . | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/sign/$DISTNAME-osx-unsigned.tar.gz
-cd ~/ritoccoin
+cd ~/ritocoin
 make deploy
 $PWD/depends/x86_64-apple-darwin14/native/bin/dmg dmg "Rito-Core.dmg" ~/release/unsigned/$DISTNAME-osx-unsigned.dmg
 rm -rf unsigned-app-$DISTNAME dist osx_volname dpi36.background.tiff dpi72.background.tiff
@@ -317,7 +317,7 @@ find . -name "lib*.la" -delete
 find . -name "lib*.a" -delete
 rm -rf $DISTNAME/lib/pkgconfig
 find $DISTNAME | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/release/$DISTNAME-osx64.tar.gz
-cd ~/ritoccoin
+cd ~/ritocoin
 rm -rf ~/OSX
 make clean
 export PATH=$PATH_orig
