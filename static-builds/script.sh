@@ -51,7 +51,7 @@ cd ~/ritocoin/depends
 make HOST=x86_64-linux-gnu $MAKEOPTS
 cd ~/ritocoin
 export PATH=$PWD/depends/x86_64-linux-gnu/native/bin:$PATH
-./autogen.sh && CONFIG_SITE=$PWD/depends/x86_64-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++" && make $MAKEOPTS 
+./autogen.sh && CONFIG_SITE=$PWD/depends/x86_64-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-tests --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++" && make $MAKEOPTS 
 make -C src check-security
 make -C src check-symbols 
 mkdir ~/linux64
@@ -128,7 +128,7 @@ unset HOST_ID_SALT
 cd ~/ritocoin
 export PATH=$PWD/depends/i686-pc-linux-gnu/native/bin:$PATH
 ./autogen.sh
-CONFIG_SITE=$PWD/depends/i686-pc-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
+CONFIG_SITE=$PWD/depends/i686-pc-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-tests --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
 make $MAKEOPTS 
 make -C src check-security
 make -C src check-symbols 
@@ -157,7 +157,7 @@ make HOST=arm-linux-gnueabihf $MAKEOPTS
 cd ~/ritocoin
 export PATH=$PWD/depends/arm-linux-gnueabihf/native/bin:$PATH
 ./autogen.sh
-CONFIG_SITE=$PWD/depends/arm-linux-gnueabihf/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
+CONFIG_SITE=$PWD/depends/arm-linux-gnueabihf/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-tests --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
 make $MAKEOPTS 
 make -C src check-security
 mkdir -p ~/linuxARM
@@ -184,7 +184,7 @@ make HOST=aarch64-linux-gnu $MAKEOPTS
 cd ~/ritocoin
 export PATH=$PWD/depends/aarch64-linux-gnu/native/bin:$PATH
 ./autogen.sh
-CONFIG_SITE=$PWD/depends/aarch64-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
+CONFIG_SITE=$PWD/depends/aarch64-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-tests --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
 make $MAKEOPTS 
 make -C src check-security
 mkdir -p ~/linuxaarch64
@@ -215,7 +215,7 @@ make HOST=x86_64-w64-mingw32 $MAKEOPTS
 cd ~/ritocoin
 export PATH=$PWD/depends/x86_64-w64-mingw32/native/bin:$PATH
 ./autogen.sh
-CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g"
+CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-tests --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g"
 make $MAKEOPTS 
 make -C src check-security
 make deploy
@@ -257,7 +257,7 @@ make HOST=i686-w64-mingw32 $MAKEOPTS
 cd ~/ritocoin
 export PATH=$PWD/depends/i686-w64-mingw32/native/bin:$PATH
 ./autogen.sh
-CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g"
+CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-tests --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g"
 make $MAKEOPTS 
 make -C src check-security
 make deploy
@@ -298,7 +298,7 @@ rm ~/ritocoin/depends/SDKs/MacOSX10.11.sdk.tar.gz
 cd ~/ritocoin/depends
 make $MAKEOPTS HOST="x86_64-apple-darwin14"
 cd ~/ritocoin
-./autogen.sh && CONFIG_SITE=$PWD/depends/x86_64-apple-darwin14/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests GENISOIMAGE=$PWD/depends/x86_64-apple-darwin14/native/bin/genisoimage && make $MAKEOPTS 
+./autogen.sh && CONFIG_SITE=$PWD/depends/x86_64-apple-darwin14/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-tests --disable-gui-tests GENISOIMAGE=$PWD/depends/x86_64-apple-darwin14/native/bin/genisoimage && make $MAKEOPTS 
 mkdir -p ~/OSX
 export PATH=$PWD/depends/x86_64-apple-darwin14/native/bin:$PATH
 make install-strip DESTDIR=~/OSX/$DISTNAME
