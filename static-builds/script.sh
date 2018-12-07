@@ -1,22 +1,21 @@
 #!/usr/bin/env bash
-# Set DISTNAME, BRANCH and MAKEOPTS to the desired settings
-DISTNAME=rito-2.1.3.2
-MAKEOPTS="-j$(nproc)"
-BRANCH=master
-clear
+
+# If you do not set DISTNAME if will generate it for you from the values in configure.ac
+# DISTNAME=rito-2.1.3.2
+MAKEOPTS="-j $(nproc)"
+BRANCH="master"
+
+echo -n "Script began at " ; date
+
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run with sudo"
+   echo "This script must be run as root"
    exit 1
 fi
-if [[ $PWD != $HOME ]]; then
-   echo "This script must be run from ~/"
-   exit 1
+if [ ! -f ~/MacOSX10.11.sdk.tar.gz ] ; then
+  echo "Before executing script.sh transfer MacOSX10.11.sdk.tar.gz to ~/"
+  exit 1
 fi
-if [ ! -f ~/MacOSX10.11.sdk.tar.gz ]
-then
-	echo "Before executing script.sh transfer MacOSX10.11.sdk.tar.gz to ~/"
-	exit 1
-fi
+
 export PATH_orig=$PATH
 
 echo @@@
@@ -32,20 +31,27 @@ rm -rf ~/ritocoin ~/sign ~/release
 git clone https://github.com/ritoproject/ritocoin
 cd ~/ritocoin
 git checkout $BRANCH
-mkdir -p ~/release
+if [ -z "$DISTNAME" ] ; then
+  MAJOR=`cat configure.ac |grep CLIENT_VERSION_MAJOR|cut -d")" -f1|cut -d"," -f2|head -1|xargs`
+  MINOR=`cat configure.ac |grep CLIENT_VERSION_MINOR|cut -d")" -f1|cut -d"," -f2|head -1|xargs`
+  REVISION=`cat configure.ac |grep CLIENT_VERSION_REVISION|cut -d")" -f1|cut -d"," -f2|head -1|xargs`
+  BUILD=`cat configure.ac |grep CLIENT_VERSION_BUILD|cut -d")" -f1|cut -d"," -f2|head -1|xargs`
+  DISTNAME="rito-$MAJOR.$MINOR.$REVISION.$BUILD"
+  echo "Generated distname of $DISTNAME"
+fi
+
+mkdir -p ~/release/unsigned/
+
 
 echo @@@
 echo @@@"Building linux 64 binaries"
 echo @@@
 
-
 cd ~/ritocoin/depends
 make HOST=x86_64-linux-gnu $MAKEOPTS
 cd ~/ritocoin
 export PATH=$PWD/depends/x86_64-linux-gnu/native/bin:$PATH
-./autogen.sh
-CONFIG_SITE=$PWD/depends/x86_64-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++"
-make $MAKEOPTS 
+./autogen.sh && CONFIG_SITE=$PWD/depends/x86_64-linux-gnu/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests CFLAGS="-O2 -g" CXXFLAGS="-O2 -g" LDFLAGS="-static-libstdc++" && make $MAKEOPTS 
 make -C src check-security
 make -C src check-symbols 
 mkdir ~/linux64
@@ -63,15 +69,16 @@ make clean
 export PATH=$PATH_orig
 
 
+
+
+
 echo @@@
 echo @@@"Building general sourcecode"
 echo @@@
 
 cd ~/ritocoin
 export PATH=$PWD/depends/x86_64-linux-gnu/native/bin:$PATH
-./autogen.sh
-CONFIG_SITE=$PWD/depends/x86_64-linux-gnu/share/config.site ./configure --prefix=/
-make dist
+./autogen.sh && CONFIG_SITE=$PWD/depends/x86_64-linux-gnu/share/config.site ./configure --prefix=/ && make dist
 SOURCEDIST=`echo rito-*.tar.gz`
 mkdir -p ~/ritocoin/temp
 cd ~/ritocoin/temp
@@ -82,6 +89,9 @@ mv $SOURCEDIST ~/release
 rm -rf temp
 make clean
 export PATH=$PATH_orig
+
+
+
 
 
 echo @@@
@@ -230,8 +240,7 @@ mv ~/ritocoin/rito-*setup-unsigned.exe unsigned/
 find . | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/sign/$DISTNAME-win64-unsigned.tar.gz
 cd ~/sign
 rm -rf win64
-cd ~/ritocoin
-rm -rf release
+cd ~/ritocoin && rm -rf release
 make clean
 export PATH=$PATH_orig
 
@@ -273,8 +282,7 @@ mv ~/ritocoin/rito-*setup-unsigned.exe unsigned/
 find . | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/sign/$DISTNAME-win32-unsigned.tar.gz
 cd ~/sign
 rm -rf win32
-cd ~/ritocoin
-rm -rf release
+cd ~/ritocoin && rm -rf release
 make clean
 export PATH=$PATH_orig
 
@@ -286,13 +294,11 @@ echo @@@
 mkdir -p ~/ritocoin/depends/SDKs
 cp ~/MacOSX10.11.sdk.tar.gz ~/ritocoin/depends/SDKs/MacOSX10.11.sdk.tar.gz
 cd ~/ritocoin/depends/SDKs && tar -xf MacOSX10.11.sdk.tar.gz 
-rm -rf MacOSX10.11.sdk.tar.gz 
+rm ~/ritocoin/depends/SDKs/MacOSX10.11.sdk.tar.gz
 cd ~/ritocoin/depends
 make $MAKEOPTS HOST="x86_64-apple-darwin14"
 cd ~/ritocoin
-./autogen.sh
-CONFIG_SITE=$PWD/depends/x86_64-apple-darwin14/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests GENISOIMAGE=$PWD/depends/x86_64-apple-darwin14/native/bin/genisoimage
-make $MAKEOPTS 
+./autogen.sh && CONFIG_SITE=$PWD/depends/x86_64-apple-darwin14/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-reduce-exports --disable-bench --disable-gui-tests GENISOIMAGE=$PWD/depends/x86_64-apple-darwin14/native/bin/genisoimage && make $MAKEOPTS 
 mkdir -p ~/OSX
 export PATH=$PWD/depends/x86_64-apple-darwin14/native/bin:$PATH
 make install-strip DESTDIR=~/OSX/$DISTNAME
@@ -307,6 +313,7 @@ cp $PWD/depends/x86_64-apple-darwin14/native/bin/x86_64-apple-darwin14-codesign_
 cp $PWD/depends/x86_64-apple-darwin14/native/bin/x86_64-apple-darwin14-pagestuff unsigned-app-$DISTNAME/pagestuff
 mv dist unsigned-app-$DISTNAME
 cd unsigned-app-$DISTNAME
+mkdir ~/sign
 find . | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ~/sign/$DISTNAME-osx-unsigned.tar.gz
 cd ~/ritocoin
 make deploy
@@ -321,3 +328,6 @@ cd ~/ritocoin
 rm -rf ~/OSX
 make clean
 export PATH=$PATH_orig
+
+
+echo -n "Script finished at " ; date
