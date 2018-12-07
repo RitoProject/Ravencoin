@@ -85,7 +85,7 @@ cd ~/ritocoin/temp
 tar xf ../$SOURCEDIST
 find rito-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
 cd ~/ritocoin
-mv $SOURCEDIST ~/release
+mv $SOURCEDIST ~/release/$DISTNAME-src.tar.gz
 rm -rf temp
 make clean
 export PATH=$PATH_orig
