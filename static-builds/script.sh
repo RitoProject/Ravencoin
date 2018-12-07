@@ -2,7 +2,7 @@
 # Set DISTNAME, BRANCH and MAKEOPTS to the desired settings
 DISTNAME=rito-2.1.3.2
 MAKEOPTS="-j$(nproc)"
-BRANCH=release_2.1.3.2
+BRANCH=master
 clear
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run with sudo"
