@@ -23,7 +23,7 @@ git diff -U0 HEAD~1.. | ./contrib/devtools/clang-format-diff.py -p1 -i -v
 copyright\_header.py
 ====================
 
-Provides utilities for managing copyright headers of `The Raven Core
+Provides utilities for managing copyright headers of `The Rito Core
 developers` in repository source files. It has three subcommands:
 
 ```
@@ -42,7 +42,7 @@ Specifying `verbose` will list the full filenames of files of each category.
 
 copyright\_header.py update \<base\_directory\> [verbose]
 ---------------------------------------------------------
-Updates all the copyright headers of `The Raven Core developers` which were
+Updates all the copyright headers of `The Rito Core developers` which were
 changed in a year more recent than is listed. For example:
 ```
 // Copyright (c) <firstYear>-<lastYear> The Bitcoin Core developers
@@ -70,7 +70,7 @@ where the update is appropriate.
 
 copyright\_header.py insert \<file\>
 ------------------------------------
-Inserts a copyright header for `The Raven Core developers` at the top of the
+Inserts a copyright header for `The Rito Core developers` at the top of the
 file in either Python or C++ style as determined by the file extension. If the
 file is a Python file and it has  `#!` starting the first line, the header is
 inserted in the line below it.
@@ -80,7 +80,7 @@ The copyright dates will be set to be `<year_introduced>-<current_year>` where
 `<year_introduced>` is equal to `<current_year>`, it will be set as a single
 year rather than two hyphenated years.
 
-If the file already has a copyright for `The Raven Core developers`, the
+If the file already has a copyright for `The Rito Core developers`, the
 script will exit.
 
 gen-manpages.sh
@@ -160,7 +160,7 @@ still compatible with the minimum supported Linux distribution versions.
 
 Example usage after a gitian build:
 
-    find ../gitian-builder/build -type f -executable | xargs python contrib/devtools/symbol-check.py 
+    find ../gitian-builder/build -type f -executable | xargs python contrib/devtools/symbol-check.py
 
 If only supported symbols are used the return value will be 0 and the output will be empty.
 

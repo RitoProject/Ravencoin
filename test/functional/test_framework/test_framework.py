@@ -24,6 +24,7 @@ from .util import (MAX_NODES, PortSeed, assert_equal, check_json_precision, conn
                    initialize_data_dir, log_filename, p2p_port, set_node_times, sync_blocks, sync_mempools)
 
 
+
 class TestStatus(Enum):
     PASSED = 1
     FAILED = 2
@@ -439,6 +440,7 @@ class RitoTestFramework:
         Useful if a test case wants complete control over initialization."""
         for i in range(self.num_nodes):
             initialize_data_dir(self.options.tmpdir, i)
+
 
 
 class SkipTest(Exception):

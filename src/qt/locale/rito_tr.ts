@@ -3014,7 +3014,6 @@
         <translation>-noconnect ile yalnızca belirtilen düğümleri bağlayın veya yalnız otomatik bağlantıları devre dışı bırakmak için -connect=0 kullanın.</translation>
     </message>
     <message>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>MIT yazılım lisansı altında dağıtılmıştır, beraberindeki %s ya da %s dosyasına bakınız.</translation>
     </message>
     <message>

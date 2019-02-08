@@ -1,3 +1,8 @@
+// Copyright (c)  The Bitcoin Core developers
+// Copyright (c) 2017 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 /* $Id: sph_cubehash.h 180 2010-05-08 02:29:25Z tp $ */
 /**
  * CubeHash interface. CubeHash is a family of functions which differ by

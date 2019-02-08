@@ -88,8 +88,8 @@
 // Application startup time (used for uptime calculation)
 const int64_t nStartupTime = GetTime();
 
-const char * const RITO_CONF_FILENAME = "rito.conf";
-const char * const RITO_PID_FILENAME = "ritod.pid";
+const char *const RITO_CONF_FILENAME = "rito.conf";
+const char *const RITO_PID_FILENAME = "ritod.pid";
 
 ArgsManager gArgs;
 bool fPrintToConsole = false;
@@ -505,7 +505,6 @@ void ArgsManager::ForceSetArg(const std::string &strArg, const int64_t &nValue)
     mapArgs[strArg] = std::to_string(nValue);
     mapMultiArgs[strArg] = {std::to_string(nValue)};
 }
-
 
 static const int screenWidth = 79;
 static const int optIndent = 2;
@@ -926,14 +925,9 @@ std::string CopyrightHolders(const std::string &strPrefix)
 {
     std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));
 
-    // Check for untranslated substitution to make sure Rito Core and Raven Core copyrights are not removed by accident
-    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Bitcoin Core") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The Bitcoin Core developers";
-    }
-    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Raven Core") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The Raven Core developers";
-    }
-    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Rito Core") == std::string::npos) {
+    // Check for untranslated substitution to make sure Rito Core copyright is not removed by accident
+    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Rito Core") == std::string::npos)
+    {
         strCopyrightHolders += "\n" + strPrefix + "The Rito Core developers";
     }
     return strCopyrightHolders;

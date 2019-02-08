@@ -3014,7 +3014,6 @@
         <translation>Verbind enkel met de opgegeven knooppunt(en); -noconnect of -connect = 0 alleen om automatische verbindingen uit te schakelen</translation>
     </message>
     <message>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Uitgegeven onder de MIT software licentie, zie het bijgevoegde bestand %s of %s</translation>
     </message>
     <message>

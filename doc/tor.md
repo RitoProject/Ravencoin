@@ -42,11 +42,11 @@ reachable from the Tor network. Add these lines to your /etc/tor/torrc (or equiv
 config file):
 
 	HiddenServiceDir /var/lib/tor/rito-service/
-	HiddenServicePort 8767 127.0.0.1:8767
-	HiddenServicePort 18767 127.0.0.1:18767
+	HiddenServicePort 7342 127.0.0.1:7342
+	HiddenServicePort 17342 127.0.0.1:17342
 
 The directory can be different of course, but (both) port numbers should be equal to
-your ritod's P2P listen port (8767 by default).
+your ritod's P2P listen port (7342 by default).
 
 	-externalip=X   You can tell rito about its publicly reachable address using
 	                this option, and this can be a .onion address. Given the above
@@ -81,7 +81,7 @@ as well, use `discover` instead:
 
 	./ritod ... -discover
 
-and open port 8767 on your firewall (or use -upnp).
+and open port 7342 on your firewall (or use -upnp).
 
 If you only want to use Tor to reach onion addresses, but not use it as a proxy
 for normal IPv4/IPv6 communication, use:

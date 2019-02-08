@@ -3014,7 +3014,6 @@
         <translation>Conectar somente a nós específicos; -noconnect ou -connect=0 sozinhos para desativar conecções automáticas</translation>
     </message>
     <message>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Distribuído sob a MIT software license, veja o arquivo %s ou %s</translation>
     </message>
     <message>

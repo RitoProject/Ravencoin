@@ -7,7 +7,6 @@
 #define RITO_QT_OVERVIEWPAGE_H
 
 #include "amount.h"
-#include "init.h"
 
 #include <QSortFilterProxyModel>
 #include <QWidget>

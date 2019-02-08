@@ -1,3 +1,8 @@
+// Copyright (c) 2018 The Bitcoin Core developers
+// Copyright (c) 2017 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 /* $Id: sph_simd.h 154 2010-04-26 17:00:24Z tp $ */
 /**
  * SIMD interface. SIMD is a family of functions which differ by

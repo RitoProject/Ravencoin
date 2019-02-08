@@ -84,17 +84,12 @@ def compile_copyright_regex(copyright_style, year_style, name):
 
 EXPECTED_HOLDER_NAMES = [
     "Satoshi Nakamoto\n",
-    "The Raven Core developers\n",
-    "The Raven Core developers \n",
-    "Raven Core Developers\n",
-    "the Raven Core developers\n",
-    "The Raven developers\n",
-    "The LevelDB Authors\. All rights reserved\.\n",
     "The Rito Core developers\n",
     "The Rito Core developers \n",
     "Rito Core Developers\n",
     "the Rito Core developers\n",
     "The Rito developers\n",
+    "The LevelDB Authors\. All rights reserved\.\n",
     "BitPay Inc\.\n",
     "BitPay, Inc\.\n",
     "University of Illinois at Urbana-Champaign\.\n",

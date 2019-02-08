@@ -85,7 +85,7 @@ src/qt/test/moc*.cpp
 *.qm
 Makefile
 rito-qt
-rito-Qt.app
+Raven-Qt.app
 
 # Unit-tests
 Makefile.test

@@ -3018,7 +3018,6 @@
         <translation>지정된 노드에만 연결; 자동 연결을 사용하지 않으려면 -noconnect 또는 -connect=0 을 단독으로 사용하십시오.</translation>
     </message>
     <message>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>MIT 소프트웨어 라이센스에 따라 배포 됨, 첨부 파일 %s 또는 %s을 참조하십시오.</translation>
     </message>
     <message>

@@ -3018,7 +3018,6 @@
         <translation>Připojovat se pouze k určeným uzlům; samotné -noconnect nebo -connect=0 zakáží automatické připojování</translation>
     </message>
     <message>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Šířen pod softwarovou licencí MIT, viz přiložený soubor %s nebo %s</translation>
     </message>
     <message>

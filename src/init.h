@@ -7,6 +7,7 @@
 #ifndef RITO_INIT_H
 #define RITO_INIT_H
 
+#include <string>
 #include "amount.h"
 
 // Dev fee will go for about 1 year and then cease.
@@ -15,10 +16,7 @@
 #define DEV_ADDRESS "BDevFund7Z8aLVAy1pwsPXak7pRUNDTkHv"
 #define DEV_FUND_UNTIL 525600
 CAmount GetDevCoin(CAmount reward);
-
 #define ASSET_ACTIVATION_HEIGHT 50000
-
-#include <string>
 
 class CScheduler;
 
@@ -80,7 +78,8 @@ bool AppInitMain(boost::thread_group &threadGroup, CScheduler &scheduler);
 void PrepareShutdown();
 
 /** The help message mode determines what help message to show */
-enum HelpMessageMode {
+enum HelpMessageMode
+{
     HMM_RITOD,
     HMM_RITO_QT
 };

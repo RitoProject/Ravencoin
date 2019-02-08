@@ -1,3 +1,8 @@
+// Copyright (c)  The Bitcoin Core developers
+// Copyright (c) 2017 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 /* $Id: sph_skein.h 253 2011-06-07 18:33:10Z tp $ */
 /**
  * Skein interface. The Skein specification defines three main

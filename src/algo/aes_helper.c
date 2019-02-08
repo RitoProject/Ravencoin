@@ -1,3 +1,8 @@
+// Copyright (c)  The Bitcoin Core developers
+// Copyright (c) 2017 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 /* $Id: aes_helper.c 220 2010-06-09 09:21:50Z tp $ */
 /*
  * AES tables. This file is not meant to be compiled by itself; it

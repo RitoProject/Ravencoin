@@ -1,3 +1,8 @@
+// Copyright (c) 2018 The Bitcoin Core developers
+// Copyright (c) 2017 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 /* $Id: sph_sha2.h 216 2010-06-08 09:46:57Z tp $ */
 /**
  * SHA-224, SHA-256, SHA-384 and SHA-512 interface.

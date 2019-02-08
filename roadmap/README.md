@@ -1,25 +1,25 @@
-# Ravencoin Roadmap
+# Ritocoin Roadmap
 
 ### Phase 1 - (Complete)
 
-Ravencoin (RVN) is a Proof of Work coin built on the Bitcoin UTXO model. As with other Bitcoin derivatives, RVN coins are distributed to persons augmenting the Raven network by mining Raven.
+Ritocoin (RITO) is a Proof of Work coin built on the Bitcoin UTXO model. As with other Bitcoin derivatives, RITO coins are distributed to persons augmenting the Rito network by mining Rito.
 *  x1000 coin distribution (21 Billion Total)
 *  10x faster blocks (1 per minute)
 *  In app CPU verification, with GPU specific PoW decentralised mining
 *  Dark Gravity Wave difficulty adjustment (180 block average)
 *  Addresses start with R... for regular addresses, or r... for multisig
-*  Network Port: 8767
-*  RPC Port: 8766
+*  Network Port: 7342
+*  RPC Port: 8501
 
 ### Phase 2 - Assets (Complete)
 
 #### ASIC Resistance
 
-ASIC Resistance - A published commitment to continual attempts at ASIC resistance. If ASICs are created for x16r, then we will, at a specific block number, modify one of the algorithms to add some varients of Equihash or similar efforts to increase the resistance to ASIC miners for Raven. ASIC's have been developed for X16R (and X16RV2) and the community has forked to KAWPOW (a variant of ethash and progpow) to maximise the ASIC resistance by reducing the potential efficiency increase of ASICs by requiring the feature set and capabilities within over the counter consumer graphics cards. We are not anticipating future forks to change the algorithm as the current algorithm allows a fair distribution of RVN via PoW to the community.
+ASIC Resistance - A published commitment to continual attempts at ASIC resistance. If ASICs are created for x16r, then we will, at a specific block number, modify one of the algorithms to add some varients of Equihash or similar efforts to increase the resistance to ASIC miners for Rito.
 
 #### Asset Support
 
-Ravencoin will be a hard fork that extends Raven to include the ability to issue and transfer assets. The expected release of asset capabilities will be approximately seven months after the release of RVN. Raven will be extended to allow issuing, reissuing, and transfer of assets. Assets can be reissuable or limited to a set supply at the point of issuance. The cost to create assets will be 500 RVN to create any qty of an asset. Each asset name must be unique. Asset names will be limited to A-Z and 0-9, '_' and '.' and must be at least three characters long. The '.' and the '_' cannot be the first, or the last character, or be consecutive.  
+Ritocoin will be a hard fork that extends Rito to include the ability to issue and transfer assets. The expected release of asset capabilities will be approximately seven months after the release of RITO. Rito will be extended to allow issuing, reissuing, and transfer of assets. Assets can be reissuable or limited to a set supply at the point of issuance. The cost to create assets will be 500 RITO to create any qty of an asset. Each asset name must be unique. Asset names will be limited to A-Z and 0-9, '_' and '.' and must be at least three characters long. The '.' and the '_' cannot be the first, or the last character, or be consecutive.  
 
 Examples of valid assets:  
 THE_GAME  
@@ -35,9 +35,9 @@ AB
 .FIRST
 apple
 
-The RVN used to issue assets will be sent to a burn address, which will reduce the amount of RVN available. 
+The RITO used to issue assets will be sent to a burn address, which will reduce the amount of RITO available.  
 
-Asset transfers require the standard RVN transaction fees for transfer from one address to another.
+Asset transfers require the standard RITO transaction fees for transfer from one address to another.
 
 #### Metadata
 
@@ -45,44 +45,37 @@ Metadata about the token can be stored in IPFS.
 
 #### Rewards
 
-Reward capabilities will be added to allow payment (in RVN) to all holders of an asset. Payments of RVN would be distributed to all asset holders pro rata. This is useful for paying dividends, dividing payments, or rewarding a group of token holders.
+Reward capabilities will be added to allow payment (in RITO) to all holders of an asset. Payments of RITO would be distributed to all asset holders pro rata. This is useful for paying dividends, dividing payments, or rewarding a group of token holders.  
 
-Example: A small software company issues an asset GAMECO that represents a share of the project. GAMECO tokens can be traded with others. Once the software company profits, those profits can be distributed to all holders of GAMECO by sending the profits (via RVN) to all holders of GAMECO.
+Example: A small software company issues an asset GAMECO that represents a share of the project. GAMECO tokens can be traded with others. Once the software company profits, those profits can be distributed to all holders of GAMECO by sending the profits (via RITO) to all holders of GAMECO.
 
 #### Block Size
 
-Raven may increase the blocksize from 2 MB to X MB to allow for more on-chain transactions.
+Rito may increase the blocksize from 2 MB to X MB to allow for more on-chain transactions.
 
 ### Phase 3 - Rewards
 
-Rewards allow payment in RVN to asset holders.
-
-[More on rewards...](./rewards/README.md)
+Rewards allow payment in RITO to asset holders.
 
 ### Phase 4 - Unique Assets (Complete)
 
-Once created, assets can be made unique for a cost of 5 RVN. Only non-divisible assets can be made unique. This moves an asset to a UTXO and associates a unique identifier with the txid. From this point the asset can be moved from one address to another and can be traced back to its origin. Only the issuer of the original asset can make an asset unique.  
+Once created, assets can be made unique for a cost of 5 RITO. Only non-divisible assets can be made unique. This moves an asset to a UTXO and associates a unique identifier with the txid. From this point the asset can be moved from one address to another and can be traced back to its origin. Only the issuer of the original asset can make an asset unique.  
 The costs to make unique assets will be sent to a burn address.  
 
 Some examples of unique assets:  
-*  Imagine that an art dealer issues the asset named ART. The dealer can then make unique ART assets by attaching a name or a serialized number to each piece of art. These unique tokens can be transferred to the new owner along with the artwork as a proof of authenticity. The tokens ART#MonaLisa and ART#VenusDeMilo are not fungible and represent distinct pieces of art.
-*  A software developer can issue the asset with the name of their software ABCGAME, and then assign each ABCGAME token a unique id or license key. The game tokens could be transferred as the license transfers. Each token ABCGAME#398222 and ABCGAME#398223 are unique tokens.
-*  In game assets. A game ZYX_GAME could create unique limited edition in-game assets that are owned and used by the game player. Example: ZYX_GAME#Sword005 and ZYX_GAME#Purse
-*  RVN based unique assets can be tied to real world assets. Create an asset named GOLDVAULT. Each gold coin or gold bar in a vault can be serialized and audited. Associated unique assets GOLDVAULT#444322 and GOLDVAULT#555994 can be created to represent the specific assets in the physical gold vault. The public nature of the chain allows for full transparency.
+*  Imagine that an art dealer issues the asset named ART. The dealer can then make unique ART assets by attaching a name or a serialized number to each piece of art. These unique tokens can be transferred to the new owner along with the artwork as a proof of authenticity. The tokens ART:MonaLisa and ART:VenusDeMilo are not fungible and represent distinct pieces of art.
+*  A software developer can issue the asset with the name of their software ABCGAME, and then assign each ABCGAME token a unique id or license key. The game tokens could be transferred as the license transfers. Each token ABCGAME:398222 and ABCGAME:
+are unique tokens.
+*  In game assets. A game ZYX_GAME could create unique limited edition in-game assets that are owned and used by the game player. Example: ZYX_GAME:Sword005 and ZYX_GAME:Purse
+*  RITO based unique assets can be tied to real world assets. Create an asset named GOLDVAULT. Each gold coin or gold bar in a vault can be serialized and audited. Associated unique assets GOLDVAULT:444322 and GOLDVAULT:555994 can be created to represent the specific assets in the physical gold vault. The public nature of the chain allows for full transparency.
 
 ### Phase 5 - Messaging
 
-Messaging to token holders by authorized senders will be layered on top of the Phase 4 unique assets. See [KAAAWWW Protocol](https://medium.com/@tronblack/ravencoin-kaaawww-2f72077aece) for additional information.
-
-[More on messaging...](./messaging/README.md)  
-[More on preventing message spam...](./messaging-antispam/README.md)  
-[More on IPFS...](./ipfs/README.md)  
+Messaging to token holders by authorized senders will be layered on top of the Phase 4 unique assets. See KAAAWWW Protocol for additional information.
 
 ### Phase 6 - Voting
 
-Voting will be accomplished by creating and distributing parallel tokens to token holders. These tokens can be sent to RVN addresses to record a vote.
-
-[More on voting...](./voting/README.md)
+Voting will be accomplished by creating and distributing parallel tokens to token holders. These tokens can be sent to RITO addresses to record a vote.
 
 ### Phase 7 - Compatibility Mode
 
@@ -114,17 +107,16 @@ Issue more of a specific asset. This is only allowed by the original issuer of t
 This sends assets from one asset holder to another.
 
 `listassets (assets, verbose, count, start)`  
-This lists assets that have already been created. 
-  
+This lists assets that have already been created.
+
 `listmyassets ( asset_name, verbose, count, start )`
 Lists your assets.
 
 `listassetbalancesbyaddress (address)`
 Lists asset balance by address.
 
-`listaddressesbyasset (asset_name)` 
+`listaddressesbyasset (asset_name)`
 Lists addresses by asset.
 
 `getassetdata (asset_name)`
 Lists asset data of an asset.
-

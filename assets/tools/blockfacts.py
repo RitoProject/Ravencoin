@@ -1,3 +1,8 @@
+# Copyright (c) 2018 The Bitcoin Core developers
+# Copyright (c) 2017 The Raven Core developers
+# Copyright (c) 2018 The Rito Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #Shows data from the first 1000 blocks
 
 import random
@@ -11,7 +16,7 @@ cli = "rito-cli"
 
 #mode = "-testnet"
 mode = ""
-rpc_port = 8766
+rpc_port = 8501
 #Set this information in your rito.conf file (in datadir, not testnet3)
 rpc_user = 'rpcuser'
 rpc_pass = 'rpcpass555'

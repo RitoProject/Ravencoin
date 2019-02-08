@@ -3018,7 +3018,6 @@
         <translation>Se connecter seulement aux nœuds précisés ; -noconnect ou -connect=0 seul pour désactiver les connexions automatiques</translation>
     </message>
     <message>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Distribué sous la licence MIT d'utilisation d'un logiciel. Consulter le fichier joint %s ou %s</translation>
     </message>
     <message>

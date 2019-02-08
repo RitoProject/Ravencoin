@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Copyright (c) 2018 The Bitcoin Core developers
+# Copyright (c) 2017 The Raven Core developers
+# Copyright (c) 2018 The Rito Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
 # Script to issue assets on the Ritocoin platform
 # Reads from a csv file
 # Template Google Spreadsheet at:  
@@ -27,7 +32,7 @@ import hashlib
 cli = "rito-cli"
 
 mode =  "-testnet"
-rpc_port = 18766
+rpc_port = 18501
 #mode =  "-regtest"
 #rpc_port = 18443
 csv_file = "Rito Assets - Sheet1.csv"

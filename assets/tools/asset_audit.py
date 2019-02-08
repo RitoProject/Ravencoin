@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Copyright (c) 2018 The Bitcoin Core developers
+# Copyright (c) 2017 The Raven Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
 # Script to audit the assets
 # Reads the asset (amount has all issuances)
 # Reads the balances in every address for the asset.
@@ -23,11 +27,8 @@ import logging
 #Set this to your rito-cli program
 cli = "rito-cli"
 
-mode = "-main"
-rpc_port = 8766
-
-#mode = "-testnet"
-#rpc_port = 18770
+mode =  "-testnet"
+rpc_port = 18501
 #mode =  "-regtest"
 #rpc_port = 18444
 

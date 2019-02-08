@@ -1,7 +1,5 @@
 dnl Copyright (c) 2013-2016 The Bitcoin Core developers
-dnl Copyright (c) 2017 The Raven Core developers
-dnl Distributed under the MIT software license, see the accompanying
-dnl file COPYING or http://www.opensource.org/licenses/mit-license.php.
+dnl Copyright (c) 2017 The Rito Core developers
 
 dnl Helper for cases where a qt dependency is not met.
 dnl Output: If qt version is auto, set rito_enable_qt to false. Else, exit.

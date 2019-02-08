@@ -171,6 +171,8 @@ public:
 
         bool admin = index.data(AssetTableModel::AdministratorRole).toBool();
 
+        bool admin = index.data(AssetTableModel::AdministratorRole).toBool();
+
         /** Need to know the heigh to the pixmap. If it is 0 we don't we dont own this asset so dont have room for the icon */
         int nIconSize = admin ? pixmap.height() : 0;
         int nIPFSIconSize = ipfspixmap.height();
@@ -280,6 +282,7 @@ public:
         /** Paint the asset name */
         painter->setPen(penName);
         painter->drawText(assetNameRect, Qt::AlignLeft|Qt::AlignVCenter, name);
+
 
         /** Paint the amount */
         painter->setFont(amountFont);
@@ -472,11 +475,12 @@ void OverviewPage::handleTransactionClicked(const QModelIndex &index)
 void OverviewPage::handleAssetRightClicked(const QModelIndex &index)
 {
     if(assetFilter) {
-        // Grab the data elements from the index that we need to disable and enable menu items
-        QString name = index.data(AssetTableModel::AssetNameRole).toString();
-        QString ipfshash = index.data(AssetTableModel::AssetIPFSHashRole).toString();
 
+
+        QString name = index.data(AssetTableModel::AssetNameRole).toString();
+        bool fOwner = false;
         if (IsAssetNameAnOwner(name.toStdString())) {
+            fOwner = true;
             name = name.left(name.size() - 1);
             sendAction->setDisabled(true);
         } else {

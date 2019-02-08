@@ -1356,14 +1356,14 @@ bool IsInitialBlockDownload()
     }
     if (chainActive.Tip()->nChainWork < nMinimumChainWork)
     {
-    		// LogPrintf("IsInitialBlockDownload (min chain work)");
-    		// LogPrintf("Work found: %s", chainActive.Tip()->nChainWork.GetHex());
-    		// LogPrintf("Work needed: %s", nMinimumChainWork.GetHex());
+//    		LogPrintf("IsInitialBlockDownload (min chain work)");
+//    		LogPrintf("Work found: %s", chainActive.Tip()->nChainWork.GetHex());
+//    		LogPrintf("Work needed: %s", nMinimumChainWork.GetHex());
         return true;
     }
     if (chainActive.Tip()->GetBlockTime() < (GetTime() - nMaxTipAge))
     {
-        // LogPrintf("%s: (tip age): %d\n", __func__, nMaxTipAge);
+//        LogPrintf("%s: (tip age): %d\n", __func__, nMaxTipAge);
         return true;
     }
 //    LogPrintf("Leaving InitialBlockDownload (latching to false)\n");
@@ -2736,8 +2736,7 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
         pos.nTxOffset += ::GetSerializeSize(tx, SER_DISK, CLIENT_VERSION);
     }
     int64_t nTime3 = GetTimeMicros(); nTimeConnect += nTime3 - nTime2;
-
-    LogPrintf("ConnectBlock(): %u transactions in this block: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs (%.2fms/blk)]\n", (unsigned)block.vtx.size(), MILLI * (nTime3 - nTime2), MILLI * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : MILLI * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * MICRO, nTimeConnect * MILLI / nBlocksTotal);
+    LogPrint(BCLog::BENCH, "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs (%.2fms/blk)]\n", (unsigned)block.vtx.size(), MILLI * (nTime3 - nTime2), MILLI * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : MILLI * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * MICRO, nTimeConnect * MILLI / nBlocksTotal);
 
     CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, chainparams.GetConsensus());
 
@@ -5772,6 +5771,20 @@ double GuessVerificationProgress(const ChainTxData& data, CBlockIndex *pindex) {
     return pindex->nChainTx / fTxTotal;
 }
 
+class CMainCleanup
+{
+public:
+    CMainCleanup() {}
+    ~CMainCleanup() {
+        // block headers
+        BlockMap::iterator it1 = mapBlockIndex.begin();
+        for (; it1 != mapBlockIndex.end(); it1++)
+            delete (*it1).second;
+        mapBlockIndex.clear();
+    }
+} instance_of_cmaincleanup;
+
+
 /** RITO START */
 
 // Only used by test framework
@@ -5876,19 +5889,6 @@ CAssetsCache* GetCurrentAssetCache()
     return passets;
 }
 /** RITO END */
-
-class CMainCleanup
-{
-public:
-    CMainCleanup() {}
-    ~CMainCleanup() {
-        // block headers
-        BlockMap::iterator it1 = mapBlockIndex.begin();
-        for (; it1 != mapBlockIndex.end(); it1++)
-            delete (*it1).second;
-        mapBlockIndex.clear();
-    }
-} instance_of_cmaincleanup;
 
 CAmount GetDevCoin(CAmount reward) {
   return 0.01 * reward;

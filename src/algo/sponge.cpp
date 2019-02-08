@@ -1,3 +1,8 @@
+// Copyright (c)  The Bitcoin Core developers
+// Copyright (c) 2017 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 /**
  * A simple implementation of Blake2b's internal permutation
  * in the form of a sponge.

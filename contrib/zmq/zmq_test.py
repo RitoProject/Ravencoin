@@ -9,10 +9,10 @@
 
     Rito should be started with the command line arguments:
         ritod -testnet -daemon \
-                -zmqpubhashblock=tcp://127.0.0.1:28766 \
-                -zmqpubrawtx=tcp://127.0.0.1:28766 \
-                -zmqpubhashtx=tcp://127.0.0.1:28766 \
-                -zmqpubhashblock=tcp://127.0.0.1:28766
+                -zmqpubhashblock=tcp://127.0.0.1:28501 \
+                -zmqpubrawtx=tcp://127.0.0.1:28501 \
+                -zmqpubhashtx=tcp://127.0.0.1:28501 \
+                -zmqpubhashblock=tcp://127.0.0.1:28501
 """
 
 import sys
@@ -26,7 +26,7 @@ context = zmq.Context()
 socket = context.socket(zmq.SUB)
 
 print("Getting Ritocoin msgs")
-socket.connect("tcp://localhost:28766")
+socket.connect("tcp://localhost:28501")
 
 socket.setsockopt_string(zmq.SUBSCRIBE, "hashtx")
 socket.setsockopt_string(zmq.SUBSCRIBE, "hashblock")

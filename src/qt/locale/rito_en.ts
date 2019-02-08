@@ -4016,7 +4016,6 @@
     </message>
     <message>
         <location line="-207"/>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

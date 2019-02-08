@@ -1,3 +1,8 @@
+// Copyright (c) 2018 The Bitcoin Core developers
+// Copyright (c) 2017 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 /* $Id: sph_shabal.h 175 2010-05-07 16:03:20Z tp $ */
 /**
  * Shabal interface. Shabal is a family of functions which differ by

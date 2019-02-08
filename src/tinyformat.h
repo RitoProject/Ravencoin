@@ -1,5 +1,9 @@
+// Copyright (c) 2014-2018 The Bitcoin Core developers
+// Copyright (c) 2017 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 // tinyformat.h
-// Copyright (C) 2011, Chris Foster [chris42f (at) gmail (d0t) com]
 //
 // Boost Software License - Version 1.0
 //

@@ -15,7 +15,6 @@
 #include <memory>
 #include <vector>
 
-
 struct CDNSSeedData {
     std::string host;
     bool supportsServiceBitsFiltering;

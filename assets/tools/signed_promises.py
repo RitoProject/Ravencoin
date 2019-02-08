@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Copyright (c) 2018 The Bitcoin Core developers
+# Copyright (c) 2017 The Raven Core developers
+# Copyright (c) 2018 The Rito Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
 # Script to find signed contract_urls
 # Reads from a Ritocoin node - make sure its running
 # Runs through the assets looking for ones with meta data
@@ -36,7 +41,7 @@ def rpc_call(params):
 
 def get_rpc_connection():
     from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
-    rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:18766"%(rpc_user, rpc_pass))
+    rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:18501"%(rpc_user, rpc_pass))
     return(rpc_connection)
 
 

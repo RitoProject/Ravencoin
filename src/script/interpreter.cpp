@@ -1114,10 +1114,10 @@ bool EvalScript(std::vector<std::vector<unsigned char> > &stack, const CScript &
                     }
                         break;
 
-                    /** RITO START */
+                        /** RITO START */
                     case OP_RITO_ASSET:
                         break;
-                    /** RITO END */
+                        /** RITO END */
 
 
                     default:

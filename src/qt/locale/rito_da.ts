@@ -3018,7 +3018,6 @@
         <translation>Forbind kun til de specificerede knuder; -noconnect eller -connect=0 alene for at deaktivere automatiske forbindelser</translation>
     </message>
     <message>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Distribueret under MIT-softwarelicensen; se den vedlagte fil %s eller %s</translation>
     </message>
     <message>

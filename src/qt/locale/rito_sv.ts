@@ -2963,7 +2963,6 @@ Var vänlig och försök igen.</translation>
         <translation>Anslut endast till angivna nod(er); -noconnect eller -connect=0 ensam för att inaktivera automatiska anslutningar</translation>
     </message>
     <message>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Distribuerad under MIT mjukvarulicens, se den bifogade filen %s eller %s</translation>
     </message>
     <message>

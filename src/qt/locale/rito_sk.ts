@@ -2955,7 +2955,6 @@
         <translation>Prijímať príkazy z príkazového riadku a JSON-RPC</translation>
     </message>
     <message>
-        <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Distribuované pod softvérovou licenciou MIT, viď sprievodný súbor %s alebo %s</translation>
     </message>
     <message>

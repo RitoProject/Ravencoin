@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+# Copyright (c) 2016-2018 The Bitcoin Core developers
+# Copyright (c) 2017 The Raven Core developers
+# Copyright (c) 2018 The Rito Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #
 #===- clang-format-diff.py - ClangFormat Diff Reformatter ----*- python -*--===#
 #
@@ -12,7 +17,6 @@
 # University of Illinois/NCSA
 # Open Source License
 #
-# Copyright (c) 2007-2015 University of Illinois at Urbana-Champaign.
 # All rights reserved.
 #
 # Developed by:

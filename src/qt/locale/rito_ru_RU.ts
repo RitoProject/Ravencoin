@@ -523,7 +523,7 @@
     <name>QObject</name>
     <message>
         <source>Enter a Rito address (e.g. %1)</source>
-        <translation>Введите биткоин-адрес (напр. %1)</translation>
+        <translation>Введите Rito-адрес (напр. %1)</translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
