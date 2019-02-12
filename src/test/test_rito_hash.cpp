@@ -18,7 +18,7 @@ int main(int argc, char **argv)
         std::vector<unsigned char> rawHashPrevBlock(rawHeader.begin() + 4, rawHeader.begin() + 36);
         uint256 hashPrevBlock(rawHashPrevBlock);
 
-        std::cout << HashX16R(rawHeader.data(), rawHeader.data() + 80, hashPrevBlock).GetHex();
+        std::cout << HashX21S(rawHeader.data(), rawHeader.data() + 80, hashPrevBlock).GetHex();
     } else
     {
         std::cerr << "Usage: test_rito_hash blockHex" << std::endl;
