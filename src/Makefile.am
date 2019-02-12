@@ -216,6 +216,7 @@ RITO_CORE_H = \
   utilmoneystr.h \
   utiltime.h \
   validation.h \
+  emission.h \
   validationinterface.h \
   versionbits.h \
   wallet/coincontrol.h \
@@ -340,6 +341,7 @@ librito_server_a_SOURCES = \
   txmempool.cpp \
   ui_interface.cpp \
   validation.cpp \
+  emission.cpp \
   validationinterface.cpp \
   versionbits.cpp \
   $(RITO_CORE_H)
