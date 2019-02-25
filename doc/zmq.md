@@ -66,7 +66,7 @@ address. The same address can be used in more than one notification.
 
 For instance:
 
-    $ ritod -zmqpubhashtx=tcp://127.0.0.1:28766 \
+    $ ritod -zmqpubhashtx=tcp://127.0.0.1:28501 \
                -zmqpubrawtx=ipc:///tmp/ritod.tx.raw
 
 Each PUB notification has a topic and body, where the header

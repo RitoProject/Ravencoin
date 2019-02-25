@@ -18,6 +18,7 @@
 CAmount GetDevCoin(CAmount reward);
 #define ASSET_ACTIVATION_HEIGHT 50000
 
+
 class CScheduler;
 
 class CWallet;

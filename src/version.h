@@ -61,4 +61,7 @@ static const int ASSETDATA_VERSION_UPDATED = 70020;
 static const int MESSAGING_RESTRICTED_ASSETS_VERSION = 70026;
 
 
+//! getassetdata reutrn asstnotfound, and assetdata doesn't have blockhash in the data
+static const int ASSETDATA_VERSION_UPDATED = 70020;
+
 #endif // RITO_VERSION_H

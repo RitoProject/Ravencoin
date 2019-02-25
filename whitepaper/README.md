@@ -8,12 +8,12 @@ https://www.ritocoin.org
 December 2018
 </p>
 <p align="center"><i>
-Ritocoin is a blockchain software development project designed to experiment with alternative and additional concepts with ideas based on those begun by the Ritocoin project.
+Ritocoin is a blockchain software development project designed to experiment with alternative and additional concepts with ideas based on those begun by the Ravencoin project.
 </i></p>
 
-Thank you to the founders, developers and community members of Bitcoin and Ritocoin. The Ritocoin project was launched based on the hard work and continuous effort of countless developers across all the vast realms of the cryptocurrency ecosystem. We are eternally grateful to them for their contributions to the science of free software and the open source blockchain community. The Ritocoin project is built above the foundation they have collectively created.
+Thank you to the founders, developers and community members of Bitcoin and Ravencoin. The Ritocoin project was launched based on the hard work and continuous effort of countless developers across all the vast realms of the cryptocurrency ecosystem. We are eternally grateful to them for their contributions to the science of free software and the open source blockchain community. The Ritocoin project is built above the foundation they have collectively created.
 
-> **Abstract**. Abstract. Ritocoin launches with the spirit of community, cypherpunk culture and hacker ethics. Ritocoin is a fork of the Ritocoin codebase, which is an experimental blockchain and platform optimized for transferring assets, such as tokens, from one holder to another. The launch of Ritocoin offers several improvements to Ritocoin. First, a change in the proof-of-work mining algorithm, second, a commitment to keeping mining accessible to casual hobbyists, third, a roadmap for masternode functionality to be added, and finally, an emphasis on the community-driven development of user friendly features and add-on utilities. The culture of Ritocoin will be of rapid software development and frequent releases of experimental features.
+> **Abstract**. Abstract. Ritocoin launches with the spirit of community, cypherpunk culture and hacker ethics. Ritocoin is a fork of the Ravencoin codebase, which is an experimental blockchain and platform optimized for transferring assets, such as tokens, from one holder to another. The launch of Ritocoin offers several improvements to Ravencoin. First, a change in the proof-of-work mining algorithm, second, a commitment to keeping mining accessible to casual hobbyists, third, a roadmap for masternode functionality to be added, and finally, an emphasis on the community-driven development of user friendly features and add-on utilities. The culture of Ritocoin will be of rapid software development and frequent releases of experimental features.
 
 Ritocoins (RITO) are fairly issued and mined publicly and transparently using Proof of Work (POW) with the X21S algorithm, which was created for this project. The network produces, with the aid of DGW[1], a block on average every 60 seconds which contains 5,000 RITO. For the first 525,600 blocks, which corresponds to approximately 1 year, each block will generate an additional 50 RITO (approximately 1% of the full reward) sent to a fund that will provide funding for community-driven developments and community events. The intention is to distribute these coins to members of the community for development work and other services they provide during the first year of this coin’s life. Unless the community consensus dictates otherwise, this development fund will cease approximately a year after Ritocoin’s launch.
 
@@ -45,19 +45,19 @@ Masternodes give miners fun and interesting goals to mine toward, as they work t
 
 Through early 2019, we will be conducting open conversations about this topic with the Ritocoin community of miners and holders, and we will collaboratively design and implement a masternode system for Ritocoin. Masternodes will be available to anyone who owns enough RITO. The only way to obtain a masternode will be to mine RITO or obtain the coins from other RITO holders.
 
-**Track Ritocoin developments and incorporate their future additions**
-The asset layer has already been launched by Ritocoin, and has been added to Ritocoin. It will activate on the Ritocoin blockchain at block height 50,000. Future additions, such as asset reward distribution, unique assets, messaging and voting, will all be added to Ritocoin as they become available in the Ritocoin codebase. We want to explore innovative and different ways to enhance our blockchain to put these features to new uses, experimenting with new utilities that take these features to new and surprising places.
+**Track Ravencoin developments and incorporate their future additions**
+The asset layer has already been launched by Ravencoin, and has been added to Ritocoin. It will activate on the Ritocoin blockchain at block height 50,000. Future additions, such as asset reward distribution, unique assets, messaging and voting, will all be added to Ritocoin as they become available in the Ravencoin codebase. We want to explore innovative and different ways to enhance our blockchain to put these features to new uses, experimenting with new utilities that take these features to new and surprising places.
 
 **Collaborate with the larger cryptocurrency ecosystem**
 We do not see other cryptocurrency projects as competitors. Our default position is one of cooperation and collaboration with all free software projects. We want to track developments across the entire sector incorporating the best ideas, and contributing back the best ideas of our own. There have already been initial discussions with the developers of other coin projects centered around developments that can provide additional security to both chains. We enthusiastically embrace all such conversations.
 
 ## 2. The Rito want to have fun
 
-Some members of the Ritocoin and blockchain communities are thirsty for new horizons to cross and new worlds to explore. As Ritocoin continues maturing through its inexorable march toward blockchain supremacy, the cypherpunks among us wish to remain in hacker space and have fun with a coin that we can easily mine without worrying about FPGA, ASIC and NiceHash coming in and taking away our fun. We want to mine our coin, write new wallets, create new explorers, and make interesting utilities that do unusual and surprising things with the blockchain. We want to mine coins and then spend those coins freely amongst ourselves and to the burn addresses where we will make assets for pleasure and for business. Ritocoin is a playground for programmers and the coins are not intended to be hoarded as money, but held and used as tools.
+Some members of the Ravencoin and blockchain communities are thirsty for new horizons to cross and new worlds to explore. As Ravencoin continues maturing through its inexorable march toward blockchain supremacy, the cypherpunks among us wish to remain in hacker space and have fun with a coin that we can easily mine without worrying about FPGA, ASIC and NiceHash coming in and taking away our fun. We want to mine our coin, write new wallets, create new explorers, and make interesting utilities that do unusual and surprising things with the blockchain. We want to mine coins and then spend those coins freely amongst ourselves and to the burn addresses where we will make assets for pleasure and for business. Ritocoin is a playground for programmers and the coins are not intended to be hoarded as money, but held and used as tools.
 
 ## 3. We want to mine our coin
 
-We are on the brink of entering a post-GPU era of cryptocurrency mining, and those of us who own farms of rigs wish to continue to see our hardware continue to be put to use. This desire is, in fact, the primary reason many of us joined the Ritocoin ranks in the first place. The X16R algorithm on which Ritocoin was founded was designed specifically for ASIC resistance.[3] While we applaud Ritocoin's commitment to resist ASIC domination of their chain, we are sorry that they have adopted the decision to allow FPGAs to mine their coin. Until the day comes that FPGAs are commonplace in homes across the world, Ritocoin is committed to ensuring that GPUs will always have a fair and even chance to mine the blocks in this chain.
+We are on the brink of entering a post-GPU era of cryptocurrency mining, and those of us who own farms of rigs wish to continue to see our hardware continue to be put to use. This desire is, in fact, the primary reason many of us joined the Ravencoin ranks in the first place. The X16R algorithm on which Ravencoin was founded was designed specifically for ASIC resistance.[3] While we applaud Ravencoin's commitment to resist ASIC domination of their chain, we are sorry that they have adopted the decision to allow FPGAs to mine their coin. Until the day comes that FPGAs are commonplace in homes across the world, Ritocoin is committed to ensuring that GPUs will always have a fair and even chance to mine the blocks in this chain.
 
 Additionally, centralized hash renting services such as NiceHash have a similarly chilling effect on miners. At the time of this writing, about 33% of the network hash for X16R is coming through NiceHash. For the sake of the security of the network and for the other reasons we mentioned above, we desire for our coin’s network to remain inaccessible to services like NiceHash. We do recognize that these kinds of services can easily add new algorithms to their offerings, but we remain committed to staying ahead of that cat and mouse game. We are willing to make periodic hard forks to new algorithms in order to keep our chain safe and minable by our GPUs.
 
@@ -71,7 +71,7 @@ At the present time, Ritocoin is the only coin using X21S and we are not current
 
 ## 5. The Block Mining Reward
 
-Ritocoin was launched as a fork of Ritocoin, with no changes to the block reward schedule. 5,000 RITO are generated by each block with an average block time of 60 seconds. The block reward is scheduled to be reduced in half every 4 years. Add to this the 50 RITO per block that are generated  for the development fund for the first year, the coin amounts to a final supply of 21,026,280,000 RITO.
+Ritocoin was launched as a fork of Ravencoin, with no changes to the block reward schedule. 5,000 RITO are generated by each block with an average block time of 60 seconds. The block reward is scheduled to be reduced in half every 4 years. Add to this the 50 RITO per block that are generated  for the development fund for the first year, the coin amounts to a final supply of 21,026,280,000 RITO.
 
 These numbers are valid and true as of the time of the writing of this paper, but they are subject to change. The introduction of masternodes will change the distribution of new coins in a way that has not yet been determined. The Ritocoin community also has the option in the future to reduce the time between reward halvenings, thereby reducing the overall supply of RITO.
 
@@ -87,15 +87,15 @@ We believe that the best ideas are discovered when many voices are heard. We des
 
 The developer fund is a key component of fostering a development-oriented community. By setting aside coins from the block reward for development, we can offer bounties to give to community members for work they do. This has already borne fruit with the development of the GPL-licensed ccminer for X21S, as well as improved compilation code, algorithm work, explorer code, an android wallet, and website development. We feel that the developer fund will continue to be a valuable tool to motivate the members of the community to invest their time and energy into this project during its early life.
 
-## 8. What about Ritocoin?
+## 8. What about Ravencoin?
 
-We remain committed fans of Ritocoin, and will continue to support that project and hope for its continued success. It is our hope that Ritocoin continues its trajectory toward success, and we desire and expect that the developments we make for Ritocoin will be welcomed back into the Ritocoin fold.
+We remain committed fans of Ravencoin, and will continue to support that project and hope for its continued success. It is our hope that Ravencoin continues its trajectory toward success, and we desire and expect that the developments we make for Ritocoin will be welcomed back into the Ravencoin fold.
 
 References
 
-[1] https://medium.com/@tronblack/ritocoin-dark-gravity-wave-1da0a71657f7
+[1] https://medium.com/@tronblack/ravencoin-dark-gravity-wave-1da0a71657f7
 [2] https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar
-[3] https://ritocoin.org/wp-content/uploads/2018/03/X16R-Whitepaper.pdf
+[3] https://ravencoin.org/wp-content/uploads/2018/03/X16R-Whitepaper.pdf
 [4] https://suqa.org/file/2018/10/x22i-proof-of-work-algorithm.pdf
 [5] https://github.com/Pigeoncoin/brand/blob/master/X16S-whitepaper.pdf
 [6] https://github.com/bsdphk/PHC/blob/master/Lyra2/Lyra2ReferenceGuide.pdf

@@ -1,4 +1,6 @@
-// Copyright (c) 2019 The Rito Core developers
+// Copyright (c)  The Bitcoin Core developers
+// Copyright (c) 2017 The Raven Core developers
+// Copyright (c) 2018 The Rito Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -339,7 +341,7 @@ static int rito_emission_table[] = {
 187173, 187193, 187213, 187234, 187254, 187275, 187295, 187315, 
 187336, 187356, 187377, 187397, 187418, 187438, 187459, 187479, 
 187500, 187520, 187541, 187562, 187582, 187603, 187624, 187644, 
-187665, 187686, 187706, 187727, 187748, 187768, 187789, 187810, 
+185015, 187686, 187706, 187727, 187748, 187768, 187789, 187810, 
 187831, 187852, 187873, 187893, 187914, 187935, 187956, 187977, 
 187998, 188019, 188040, 188061, 188082, 188103, 188124, 188145, 
 188166, 188187, 188208, 188229, 188250, 188271, 188292, 188314, 
@@ -626,14 +628,15 @@ static int rito_emission_table[] = {
 2914950, 2939814, 2965521, 2992130, 3019707, 3048325, 3078065, 3109019, 
 3141292, 3174998, 3210274, 3247270, 3286165, 3327163, 3370505, 3416476, 
 3465414, 3517730, 3573925, 3634619, 3700598, 3772870, 3852763, 3942076, 
-4043330, 4160219, 4298470, 4467676, 4685819, 4993276, 5518876, 0x7fffffff
+4043330, 4160219, 4298470, 4467676, 4685819, 4993276, 5518876, 0x7ffffff 
 };
 
 
-int GetBlockEmission(int nHeight) {
+int GetBlockEmission(int height) {
   int index = 0;
-  while (rito_emission_table[index+1] <= nHeight) {
+  while (rito_emission_table[index+1] <= height) {
     index++;
   }
   return 5000-index;
 }
+

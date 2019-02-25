@@ -2776,6 +2776,11 @@ bool CAssetsCache::DumpCacheToDatabase()
                             message = "_Failed Erasing a Spent Asset from AddressAsset database";
                         }
 
+                        if (!passetsdb->EraseAddressAssetQuantity(spentAsset.address, spentAsset.assetName)) {
+                            dirty = true;
+                            message = "_Failed Erasing a Spent Asset from AddressAsset database";
+                        }
+
                         if (dirty) {
                             return error("%s : %s", __func__, message);
                         }
@@ -4814,6 +4819,14 @@ bool CAssetsCache::CheckForGlobalRestriction(const std::string &restricted_name,
         return setIterator->type == RestrictedType::GLOBAL_FREEZE;
     }
 
+    setIterator = passets->setNewAssetsToAdd.find(cachedAsset);
+    if (setIterator != passets->setNewAssetsToAdd.end()) {
+        asset = setIterator->asset;
+        nHeight = setIterator->blockHeight;
+        blockHash = setIterator->blockHash;
+        return true;
+    }
+
     // Check the cache, if it doesn't exist in the cache. Try and read it from database
     if (passetsGlobalRestrictionCache) {
         if (passetsGlobalRestrictionCache->Exists(cachedRestrictedGlobal.assetName)) {
@@ -4829,6 +4842,7 @@ bool CAssetsCache::CheckForGlobalRestriction(const std::string &restricted_name,
         }
     }
 
+    LogPrintf("%s : Didn't find asset meta data anywhere. Returning False\n", __func__);
     return false;
 }
 

@@ -619,6 +619,7 @@ class RawTransactionsTest(RitoTestFramework):
 
         inputs = []
         outputs = {self.nodes[3].getnewaddress() : 1}
+        pprint(self.nodes[3].getbalance())
         rawtx = self.nodes[3].createrawtransaction(inputs, outputs)
         result = self.nodes[3].fundrawtransaction(rawtx) # uses DEFAULT_TRANSACTION_MINFEE
         result2 = self.nodes[3].fundrawtransaction(rawtx, {"feeRate": 2*0.01})

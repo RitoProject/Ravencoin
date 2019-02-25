@@ -1088,6 +1088,15 @@ void AssetsDialog::focusAssetListBox()
 
         if (entry->getValue().assetName != "")
             entry->setFocus();
+
+    }
+}
+
+void AssetsDialog::handleFirstSelection()
+{
+    SendAssetsEntry *entry = qobject_cast<SendAssetsEntry*>(ui->entries->itemAt(0)->widget());
+    if (entry) {
+        entry->refreshAssetList();
     }
 }
 /** RITO END */

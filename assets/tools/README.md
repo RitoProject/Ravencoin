@@ -35,7 +35,7 @@ Loops through blocks and transactions and pins asset issuance meta-data and then
 
 * Install ipfsapi with ```pip3 install ipfsapi```
 
-* Run ritod or rito-qt with parameter to use zmq: ```-zmqpubrawtx=tcp://127.0.0.1:28766```
+* Run ritod or rito-qt with parameter to use zmq: ```-zmqpubrawtx=tcp://127.0.0.1:28501```
 
 Optional Arguments
 ```  

@@ -3,14 +3,14 @@ Jenkinsfile
 *.tar.gz
 
 *.exe
-src/rito
-src/ritod
-src/rito-cli
-src/rito-tx
-src/test/test_rito
-src/test/test_rito_fuzzy
-src/test/test_rito_hash
-src/qt/test/test_rito-qt
+src/raven
+src/ravend
+src/raven-cli
+src/raven-tx
+src/test/test_raven
+src/test/test_raven_fuzzy
+src/test/test_raven_hash
+src/qt/test/test_raven-qt
 .vscode
 output.txt
 
@@ -35,8 +35,8 @@ config.log
 config.status
 configure
 libtool
-src/config/rito-config.h
-src/config/rito-config.h.in
+src/config/raven-config.h
+src/config/raven-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
@@ -84,12 +84,12 @@ src/qt/test/moc*.cpp
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-rito-qt
+raven-qt
 Raven-Qt.app
 
 # Unit-tests
 Makefile.test
-rito-qt_test
+raven-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -102,7 +102,7 @@ build
 *.gcno
 *.gcda
 /*.info
-test_rito.coverage/
+test_raven.coverage/
 total.coverage/
 coverage_percent.txt
 
@@ -117,7 +117,7 @@ test/cache/*
 
 /doc/doxygen/
 
-libritoconsensus.pc
+libravenconsensus.pc
 contrib/devtools/split-debug.sh
 .idea
 cmake-build-debug

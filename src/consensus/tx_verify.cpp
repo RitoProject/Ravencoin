@@ -698,6 +698,7 @@ bool Consensus::CheckTxAssets(const CTransaction& tx, CValidationState& state, c
             else
                 totalOutputs.insert(make_pair(transfer.strName, transfer.nAmount));
 
+            auto currentActiveAssetCache = GetCurrentAssetCache();
             if (!fRunningUnitTests) {
                 if (IsAssetNameAnOwner(transfer.strName)) {
                     if (transfer.nAmount != OWNER_ASSET_AMOUNT)

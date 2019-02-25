@@ -9,8 +9,6 @@
 #include "arith_uint256.h"
 #include "chain.h"
 #include "chainparams.h"
-#include "base58.h"
-#include "emission.h"
 #include "checkpoints.h"
 #include "checkqueue.h"
 #include "consensus/consensus.h"
@@ -18,6 +16,8 @@
 #include "consensus/tx_verify.h"
 #include "consensus/validation.h"
 #include "cuckoocache.h"
+#include "base58.h"
+#include "emission.h"
 #include "fs.h"
 #include "hash.h"
 #include "init.h"
@@ -239,6 +239,8 @@ CBlockTreeDB *pblocktree = nullptr;
 
 CAssetsDB *passetsdb = nullptr;
 CAssetsCache *passets = nullptr;
+
+CAssetsCache *tmpAssetCache = nullptr;
 CLRUCache<std::string, CDatabasedAssetData> *passetsCache = nullptr;
 CLRUCache<std::string, CMessage> *pMessagesCache = nullptr;
 CLRUCache<std::string, int> *pMessageSubscribedChannelsCache = nullptr;
@@ -5761,20 +5763,6 @@ double GuessVerificationProgress(const ChainTxData& data, CBlockIndex *pindex) {
     return pindex->nChainTx / fTxTotal;
 }
 
-class CMainCleanup
-{
-public:
-    CMainCleanup() {}
-    ~CMainCleanup() {
-        // block headers
-        BlockMap::iterator it1 = mapBlockIndex.begin();
-        for (; it1 != mapBlockIndex.end(); it1++)
-            delete (*it1).second;
-        mapBlockIndex.clear();
-    }
-} instance_of_cmaincleanup;
-
-
 /** RITO START */
 
 // Only used by test framework
@@ -5852,6 +5840,10 @@ bool AreRestrictedAssetsDeployed() {
 
     return IsRip5Active();
 }
+CAmount GetDevCoin(CAmount reward) {
+  return 0.01 * reward;
+}
+
 
 bool IsDGWActive(unsigned int nBlockNumber) {
     return nBlockNumber >= GetParams().DGWActivationBlock();
@@ -5878,8 +5870,8 @@ CAssetsCache* GetCurrentAssetCache()
 {
     return passets;
 }
-/** RITO END */
 
-CAmount GetDevCoin(CAmount reward) {
-  return 0.01 * reward;
+CAssetsCache* GetCurrentAssetCache()
+{
+    return passets;
 }

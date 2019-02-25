@@ -364,7 +364,7 @@ def monitor_zmq():
 	socket = context.socket(zmq.SUB)
 
 	print("Getting Ritocoin msgs")
-	socket.connect("tcp://localhost:28766")
+	socket.connect("tcp://localhost:28501")
 
 	#socket.setsockopt_string(zmq.SUBSCRIBE, u'hashtx')
 	#socket.setsockopt_string(zmq.SUBSCRIBE, u'hashblock')

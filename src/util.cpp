@@ -933,7 +933,7 @@ std::string CopyrightHolders(const std::string &strPrefix)
         strCopyrightHolders += "\n" + strPrefix + "The Raven Core developers";
     }
     if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Rito Core") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The Rito Core developers";
+         strCopyrightHolders += "\n" + strPrefix + "The Rito Core developers";
     }
     return strCopyrightHolders;
 }
