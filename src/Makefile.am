@@ -253,7 +253,6 @@ RITO_CORE_H = \
   algo/lyra2.h \
   algo/sponge.h \
   algo/gost_streebog.h \
-  algo/SWIFFTX/SWIFFTX.h \
   algo/hashx21s.h \
   algo/groestl.c \
   algo/blake.c \
@@ -279,8 +278,7 @@ RITO_CORE_H = \
   algo/lyra2.cpp \
   algo/sponge.cpp \
   algo/sph_sha2.c \
-  algo/gost_streebog.c \
-  algo/SWIFFTX/SWIFFTX.c
+  algo/gost_streebog.c 
 
 obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj

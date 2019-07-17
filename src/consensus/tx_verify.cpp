@@ -606,6 +606,15 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, c
 //! Check to make sure that the inputs and outputs CAmount match exactly.
 bool Consensus::CheckTxAssets(const CTransaction& tx, CValidationState& state, const CCoinsViewCache& inputs, CAssetsCache* assetCache, bool fCheckMempool, std::vector<std::pair<std::string, uint256> >& vPairReissueAssets, const bool fRunningUnitTests, std::set<CMessage>* setMessages, int64_t nBlocktime,   std::vector<std::pair<std::string, CNullAssetTxData>>* myNullAssetData)
 {
+    if (!fRunningUnitTests) {
+        if (!assetsCache)
+            assetsCache = GetCurrentAssetCache();
+    }
+
+    if (!assetsCache && !fRunningUnitTests) {
+        return error("%s : Assets Cache is null, failing", __func__);
+    }
+
     // are the actual inputs available?
     if (!inputs.HaveInputs(tx)) {
         return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-missing-or-spent", false,
@@ -698,7 +707,6 @@ bool Consensus::CheckTxAssets(const CTransaction& tx, CValidationState& state, c
             else
                 totalOutputs.insert(make_pair(transfer.strName, transfer.nAmount));
 
-            auto currentActiveAssetCache = GetCurrentAssetCache();
             if (!fRunningUnitTests) {
                 if (IsAssetNameAnOwner(transfer.strName)) {
                     if (transfer.nAmount != OWNER_ASSET_AMOUNT)

@@ -16,8 +16,6 @@
 #include "consensus/tx_verify.h"
 #include "consensus/validation.h"
 #include "cuckoocache.h"
-#include "base58.h"
-#include "emission.h"
 #include "fs.h"
 #include "hash.h"
 #include "init.h"
@@ -45,6 +43,8 @@
 #include "versionbits.h"
 #include "warnings.h"
 #include "net.h"
+#include "base58.h"
+#include "emission.h"
 
 #include <atomic>
 #include <sstream>
@@ -2293,6 +2293,8 @@ int32_t ComputeBlockVersion(const CBlockIndex* pindexPrev, const Consensus::Para
     LOCK(cs_main);
     int32_t nVersion = VERSIONBITS_TOP_BITS_REWARD;
 
+    /** If the assets are deployed now. We need to use the correct block version */
+
     for (int i = 0; i < (int)Consensus::MAX_VERSION_BITS_DEPLOYMENTS; i++) {
         ThresholdState state = VersionBitsState(pindexPrev, params, (Consensus::DeploymentPos)i, versionbitscache);
         if (state == THRESHOLD_LOCKED_IN || state == THRESHOLD_STARTED) {
@@ -4199,7 +4201,7 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
     //         return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
     //                              strprintf("rejected nVersion=0x%08x block", block.nVersion));
 
-    // Reject outdated version blocks once we reach the new reward height
+    // Reject outdated veresion blocks onces assets are active.
     if ((nHeight >= 157081) && block.nVersion < VERSIONBITS_TOP_BITS_REWARD)
         return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion), strprintf("rejected nVersion=0x%08x block", block.nVersion));
 
@@ -5843,7 +5845,6 @@ bool AreRestrictedAssetsDeployed() {
 CAmount GetDevCoin(CAmount reward) {
   return 0.01 * reward;
 }
-
 
 bool IsDGWActive(unsigned int nBlockNumber) {
     return nBlockNumber >= GetParams().DGWActivationBlock();

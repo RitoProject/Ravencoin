@@ -21,13 +21,13 @@ EXCLUDE = [
     'src/secp256k1/include/secp256k1_ecdh.h',
     'src/secp256k1/include/secp256k1_recovery.h',
     'src/secp256k1/include/secp256k1_schnorr.h',
-    'src/secp256k1/src/java/org_rito_NativeSecp256k1.c',
-    'src/secp256k1/src/java/org_rito_NativeSecp256k1.h',
-    'src/secp256k1/src/java/org_rito_Secp256k1Context.c',
-    'src/secp256k1/src/java/org_rito_Secp256k1Context.h',
+    'src/secp256k1/src/java/org_raven_NativeSecp256k1.c',
+    'src/secp256k1/src/java/org_raven_NativeSecp256k1.h',
+    'src/secp256k1/src/java/org_raven_Secp256k1Context.c',
+    'src/secp256k1/src/java/org_raven_Secp256k1Context.h',
     # auto generated:
     'src/univalue/lib/univalue_escapes.h',
-    'src/qt/ritostrings.cpp',
+    'src/qt/ravenstrings.cpp',
     'src/chainparamsseeds.h',
     # other external copyrights:
     'src/tinyformat.h',
@@ -84,12 +84,17 @@ def compile_copyright_regex(copyright_style, year_style, name):
 
 EXPECTED_HOLDER_NAMES = [
     "Satoshi Nakamoto\n",
+    "The Raven Core developers\n",
+    "The Raven Core developers \n",
+    "Raven Core Developers\n",
+    "the Raven Core developers\n",
+    "The Raven developers\n",
+    "The LevelDB Authors\. All rights reserved\.\n",
     "The Rito Core developers\n",
     "The Rito Core developers \n",
     "Rito Core Developers\n",
     "the Rito Core developers\n",
     "The Rito developers\n",
-    "The LevelDB Authors\. All rights reserved\.\n",
     "BitPay Inc\.\n",
     "BitPay, Inc\.\n",
     "University of Illinois at Urbana-Champaign\.\n",
@@ -278,7 +283,7 @@ Usage:
     $ ./copyright_header.py report <base_directory> [verbose]
 
 Arguments:
-    <base_directory> - The base directory of a rito source code repository.
+    <base_directory> - The base directory of a raven source code repository.
     [verbose] - Includes a list of every file of each subcategory in the report.
 """
 
@@ -442,7 +447,7 @@ Usage:
     $ ./copyright_header.py update <base_directory>
 
 Arguments:
-    <base_directory> - The base directory of a rito source code repository.
+    <base_directory> - The base directory of a raven source code repository.
 """
 
 def print_file_action_message(filename, action):
@@ -568,7 +573,7 @@ Usage:
     $ ./copyright_header.py insert <file>
 
 Arguments:
-    <file> - A source file in the rito repository.
+    <file> - A source file in the raven repository.
 """
 
 def insert_cmd(argv):
@@ -593,7 +598,7 @@ def insert_cmd(argv):
 ################################################################################
 
 USAGE = """
-copyright_header.py - utilities for managing copyright headers of 'The Rito
+copyright_header.py - utilities for managing copyright headers of 'The Rito 
 Core developers' in repository source files.
 
 Usage:
