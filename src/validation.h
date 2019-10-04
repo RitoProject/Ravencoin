@@ -533,6 +533,7 @@ bool LoadMempool();
 
 /** RITO START */
 bool AreAssetsDeployed();
+bool AreAssetFixDeployed();
 
 bool IsDGWActive(unsigned int nBlockNumber);
 

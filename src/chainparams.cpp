@@ -137,12 +137,17 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_ASSETS].bit = 6;  //Assets (RIP2)
         consensus.vDeployments[Consensus::DEPLOYMENT_ASSETS].nStartTime = 1540944000; // Oct 31, 2018
         consensus.vDeployments[Consensus::DEPLOYMENT_ASSETS].nTimeout = 1572480000; // Oct 31, 2019
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].bit = 7;
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nStartTime = 1568641754; // Oct 16, 2019
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nTimeout = 1600624800; // Oct 20, 2020
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nOverrideMinerConfirmationWindow = 2016; // ~1.4 days
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nOverrideRuleChangeActivationThreshold = 1612; // ~80%
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x00");
+        consensus.defaultAssumeValid = uint256S("0x00000000013697c13b8828e90af4370fb642a20413e92cbfba27966bf4e4bfa6");
 
         pchMessageStart[0] = 0xa1;
         pchMessageStart[1] = 0xc0;
@@ -173,9 +178,10 @@ public:
         fMineBlocksOnDemand = false;
         fMiningRequiresPeers = true;
 
+        // When adding a checkpoint. Update the default assume valid hash above to speed up sync times
         checkpointData = (CCheckpointData) {
             {
-
+                    { 417000, uint256S("00000000013697c13b8828e90af4370fb642a20413e92cbfba27966bf4e4bfa6") },
             }
         };
 
@@ -287,14 +293,17 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_ASSETS].bit = 5;
         consensus.vDeployments[Consensus::DEPLOYMENT_ASSETS].nStartTime = 1533924000; // GMT: Friday, August 10, 2018 6:00:00 PM
         consensus.vDeployments[Consensus::DEPLOYMENT_ASSETS].nTimeout = 1538351999; // GMT: Sunday, September 30, 2018 11:59:59 PM
-
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].bit = 7;
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nStartTime = 1568641754; // Oct 16, 2019
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nTimeout = 1600624800; // Oct 20, 2020
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nOverrideMinerConfirmationWindow = 2016; // ~1.4 days
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nOverrideRuleChangeActivationThreshold = 1612; // ~80%
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
-
 
         pchMessageStart[0] = 0x52;
         pchMessageStart[1] = 0x53;
@@ -441,6 +450,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_ASSETS].bit = 6;
         consensus.vDeployments[Consensus::DEPLOYMENT_ASSETS].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_ASSETS].nTimeout = 999999999999ULL;
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].bit = 7;
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nStartTime = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nTimeout = 999999999999ULL;
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nOverrideMinerConfirmationWindow = 0; // ~1.4 days
+        consensus.vDeployments[Consensus::DEPLOYMENT_ASSET_FIX].nOverrideRuleChangeActivationThreshold = 0; // ~80%
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
@@ -455,19 +469,12 @@ public:
         nDefaultPort = 17343;
         nPruneAfterHeight = 1000;
 
-// This is used inorder to mine the genesis block. Once found, we can use the nonce and block hash found to create a valid genesis block
-//        /////////////////////////////////////////////////////////////////
-//
-//
-
-//        /////////////////////////////////////////////////////////////////
-
-
-        genesis = CreateGenesisBlock(1524179366, 1, 0x207fffff, 4, 5000 * COIN);
+        uint32_t nGenesisTime = 1543578342;
+        genesis = CreateGenesisBlock(nGenesisTime, 0, 0x207259FF, 2, 5000 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        assert(consensus.hashGenesisBlock == uint256S("0x0b2c703dc93bb63a36c4e33b85be4855ddbca2ac951a7a0a29b8de0408200a3c "));
-        assert(genesis.hashMerkleRoot == uint256S("0x28ff00a867739a352523808d301f504bc4547699398d70faf2266a8bae5f3516"));
+        assert(consensus.hashGenesisBlock == uint256S("0x582976baeedc8d19c522961458564bc673dbabfee122221f3ac0da226c11b351"));
+        assert(genesis.hashMerkleRoot == uint256S("0x7a1c5d650b7bff62cd66623e0c79a2c8156597f51c6b962f9364c7e824702bb1"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.

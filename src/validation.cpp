@@ -5467,6 +5467,18 @@ bool AreAssetsDeployed() {
   }
   return fAssetsIsActive;
 }
+
+bool AreAssetFixDeployed() {
+    if (fAssetsFixIsActive)
+        return true;
+
+    const ThresholdState thresholdState = VersionBitsTipState(Params().GetConsensus(), Consensus::DEPLOYMENT_ASSET_FIX);
+    if (thresholdState == THRESHOLD_ACTIVE)
+        fAssetsFixIsActive = true;
+
+    return fAssetsFixIsActive;
+}
+
 CAmount GetDevCoin(CAmount reward) {
   return 0.01 * reward;
 }

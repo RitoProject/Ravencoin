@@ -109,7 +109,7 @@ public:
     /** RITO End **/
 
 protected:
-    CChainParams() {}
+    CChainParams() {};
 
     Consensus::Params consensus;
     CMessageHeader::MessageStartChars pchMessageStart;

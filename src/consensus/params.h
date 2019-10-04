@@ -20,6 +20,7 @@ enum DeploymentPos
     // DEPLOYMENT_CSV, // Deployment of BIP68, BIP112, and BIP113.
 //    DEPLOYMENT_SEGWIT, // Deployment of BIP141, BIP143, and BIP147.
     // NOTE: Also add new deployments to VersionBitsDeploymentInfo in versionbits.cpp
+    DEPLOYMENT_ASSET_FIX,
     MAX_VERSION_BITS_DEPLOYMENTS
 };
 
@@ -33,6 +34,10 @@ struct BIP9Deployment {
     int64_t nStartTime;
     /** Timeout/expiry MedianTime for the deployment attempt. */
     int64_t nTimeout;
+    /** Ability to override the activation threshold number */
+    int64_t nOverrideRuleChangeActivationThreshold;
+    /** Ability to override miner confirmation window */
+    int64_t nOverrideMinerConfirmationWindow;
 };
 
 /**
@@ -57,7 +62,7 @@ struct Params {
      */
     uint32_t nRuleChangeActivationThreshold;
     uint32_t nMinerConfirmationWindow;
-    BIP9Deployment vDeployments[MAX_VERSION_BITS_DEPLOYMENTS];
+    BIP9Deployment vDeployments[MAX_VERSION_BITS_DEPLOYMENTS] {};
     /** Proof of work parameters */
     uint256 powLimit;
     bool fPowAllowMinDifficultyBlocks;

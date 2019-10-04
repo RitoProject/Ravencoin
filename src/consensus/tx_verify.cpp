@@ -432,6 +432,13 @@ bool Consensus::CheckTxAssets(const CTransaction& tx, CValidationState& state, c
             if (!TransferAssetFromScript(txout.scriptPubKey, transfer, address))
                 return state.DoS(100, false, REJECT_INVALID, "bad-tx-asset-transfer-bad-deserialize");
 
+            std::string strError = "";
+            if (AreAssetFixDeployed()) {
+                if (!transfer.IsValid(strError)) {
+                    return state.DoS(100, false, REJECT_INVALID, strError);
+                }
+            }
+
             // Add to the total value of assets in the outputs
             if (totalOutputs.count(transfer.strName))
                 totalOutputs.at(transfer.strName) += transfer.nAmount;
