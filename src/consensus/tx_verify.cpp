@@ -247,6 +247,13 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state, CAssetsCa
     {
         if (tx.vin[0].scriptSig.size() < 2 || tx.vin[0].scriptSig.size() > 100)
             return state.DoS(100, false, REJECT_INVALID, "bad-cb-length");
+
+        for (auto vout : tx.vout) {
+            if (vout.scriptPubKey.IsAssetScript()) {
+                return state.DoS(0, error("%s: coinbase contains asset transaction", __func__),
+                                 REJECT_INVALID, "bad-txns-coinbase-contains-asset-txes");
+            }
+        }
     }
     else
     {

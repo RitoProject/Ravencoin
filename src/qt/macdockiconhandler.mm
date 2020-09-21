@@ -20,20 +20,20 @@ static MacDockIconHandler *s_instance = nullptr;
 bool dockClickHandler(id self,SEL _cmd,...) {
     Q_UNUSED(self)
     Q_UNUSED(_cmd)
-    
+
     s_instance->handleDockIconClickEvent();
-    
+
     // Return NO (false) to suppress the default OS X actions
     return false;
 }
 
 void setupDockClickHandler() {
     Class cls = objc_getClass("NSApplication");
-    id appInst = objc_msgSend((id)cls, sel_registerName("sharedApplication"));
-    
+    id appInst = ((id (*)(id, SEL))objc_msgSend)((id)cls, sel_registerName("sharedApplication"));
+
     if (appInst != nullptr) {
-        id delegate = objc_msgSend(appInst, sel_registerName("delegate"));
-        Class delClass = (Class)objc_msgSend(delegate,  sel_registerName("class"));
+        id delegate = ((id (*)(id, SEL))objc_msgSend)(appInst, sel_registerName("delegate"));
+        Class delClass = (Class)((id (*)(id, SEL))objc_msgSend)(delegate,  sel_registerName("class"));
         SEL shouldHandle = sel_registerName("applicationShouldHandleReopen:hasVisibleWindows:");
         if (class_getInstanceMethod(delClass, shouldHandle))
             class_replaceMethod(delClass, shouldHandle, (IMP)dockClickHandler, "B@:");
