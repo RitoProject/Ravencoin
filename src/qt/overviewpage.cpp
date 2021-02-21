@@ -171,8 +171,6 @@ public:
 
         bool admin = index.data(AssetTableModel::AdministratorRole).toBool();
 
-        bool admin = index.data(AssetTableModel::AdministratorRole).toBool();
-
         /** Need to know the heigh to the pixmap. If it is 0 we don't we dont own this asset so dont have room for the icon */
         int nIconSize = admin ? pixmap.height() : 0;
         int nIPFSIconSize = ipfspixmap.height();
@@ -475,12 +473,11 @@ void OverviewPage::handleTransactionClicked(const QModelIndex &index)
 void OverviewPage::handleAssetRightClicked(const QModelIndex &index)
 {
     if(assetFilter) {
-
-
+        // Grab the data elements from the index that we need to disable and enable menu items
         QString name = index.data(AssetTableModel::AssetNameRole).toString();
-        bool fOwner = false;
+        QString ipfshash = index.data(AssetTableModel::AssetIPFSHashRole).toString();
+
         if (IsAssetNameAnOwner(name.toStdString())) {
-            fOwner = true;
             name = name.left(name.size() - 1);
             sendAction->setDisabled(true);
         } else {
@@ -705,11 +702,4 @@ void OverviewPage::openIPFSForAsset(const QModelIndex &index)
     if (ipfshash.count() > 0 && ipfshash.indexOf("Qm") == 0) {
         QDesktopServices::openUrl(QUrl::fromUserInput("https://cloudflare-ipfs.com/ipfs/" + ipfshash));
     }
-}
-
-void OverviewPage::assetSearchChanged()
-{
-    if (!assetFilter)
-        return;
-    assetFilter->setAssetNamePrefix(ui->assetSearch->text());
 }

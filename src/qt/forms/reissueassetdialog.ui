@@ -847,73 +847,7 @@
             <property name="text">
              <string>ERROR TEXT</string>
             </property>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_10">
-              <property name="rightMargin">
-               <number>15</number>
-              </property>
-              <item>
-               <widget class="QCheckBox" name="reissuableBox">
-                <property name="toolTip">
-                 <string>If the owner of this asset will be able to issue more assets in the future</string>
-                </property>
-                <property name="text">
-                 <string>Reissuable</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_12">
-              <property name="rightMargin">
-               <number>15</number>
-              </property>
-              <item>
-               <widget class="QCheckBox" name="ipfsBox">
-                <property name="layoutDirection">
-                 <enum>Qt::LeftToRight</enum>
-                </property>
-                <property name="text">
-                 <string>Change IPFS Hash</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_13"/>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_11">
-              <property name="spacing">
-               <number>10</number>
-              </property>
-              <item>
-               <widget class="QLineEdit" name="ipfsText">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="toolTip">
-                 <string>The ipfs hash that contains information about the asset</string>
-                </property>
-                <property name="maxLength">
-                 <number>46</number>
-                </property>
-                <property name="placeholderText">
-                 <string>The IPFS Hash that is associated with the asset being created (e.g. QmU4h365LYMHx...)</string>
-                </property>
-                <property name="clearButtonEnabled">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="reissueWarningLabel">
@@ -1396,7 +1330,7 @@
                  <item>
                   <widget class="QRadioButton" name="radioCustomFee">
                    <property name="text">
-                    <string>Custom:</string>
+                    <string>Cus&amp;tom:</string>
                    </property>
                    <attribute name="buttonGroup">
                     <string notr="true">groupFee</string>

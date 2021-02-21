@@ -1062,41 +1062,4 @@ void AssetsDialog::handleFirstSelection()
         entry->refreshAssetList();
     }
 }
-
-void AssetsDialog::focusAsset(const QModelIndex &idx)
-{
-
-    clear();
-
-    SendAssetsEntry *entry = qobject_cast<SendAssetsEntry*>(ui->entries->itemAt(0)->widget());
-    if(entry)
-    {
-        SendAssetsRecipient recipient;
-        recipient.assetName = idx.data(AssetTableModel::AssetNameRole).toString();
-
-        entry->setValue(recipient);
-        entry->setFocus();
-    }
-}
-
-void AssetsDialog::focusAssetListBox()
-{
-    SendAssetsEntry *entry = qobject_cast<SendAssetsEntry*>(ui->entries->itemAt(0)->widget());
-    if (entry)
-    {
-        entry->setFocusAssetListBox();
-
-        if (entry->getValue().assetName != "")
-            entry->setFocus();
-
-    }
-}
-
-void AssetsDialog::handleFirstSelection()
-{
-    SendAssetsEntry *entry = qobject_cast<SendAssetsEntry*>(ui->entries->itemAt(0)->widget());
-    if (entry) {
-        entry->refreshAssetList();
-    }
-}
 /** RITO END */

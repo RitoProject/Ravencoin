@@ -257,6 +257,8 @@ public:
         /// nMessagingActivationBlock = 1092672; // Messaging activated block height
         /// nRestrictedActivationBlock = 1092672; // Restricted activated block height
 
+        nKAAAWWWPOWActivationTime = 1588788000; // UTC: Wed May 06 2020 18:00:00
+        nKAWPOWActivationTime = nKAAAWWWPOWActivationTime;
         /** RITO End **/
     }
 };
@@ -457,6 +459,8 @@ public:
         /// nMessagingActivationBlock = 10080; // Messaging activated block height
         /// nRestrictedActivationBlock = 10080; // Restricted activated block height
 
+        nKAAAWWWPOWActivationTime = 1585159200; //Wed Mar 25 2020 18:00:00 UTC
+        nKAWPOWActivationTime = nKAAAWWWPOWActivationTime;
         /** RITO End **/
     }
 };
@@ -604,6 +608,11 @@ public:
         /// nMessagingActivationBlock = 0; // Messaging activated block height
         /// nRestrictedActivationBlock = 0; // Restricted activated block height
 
+        // TODO, we need to figure out what to do with this for regtest. This effects the unit tests
+        // For now we can use a timestamp very far away
+        // If you are looking to test the kawpow hashing function in regtest. You will need to change this number
+        nKAAAWWWPOWActivationTime = 3582830167;
+        nKAWPOWActivationTime = nKAAAWWWPOWActivationTime;
         /** RITO End **/
     }
 };

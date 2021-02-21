@@ -5871,8 +5871,3 @@ CAssetsCache* GetCurrentAssetCache()
 {
     return passets;
 }
-
-CAssetsCache* GetCurrentAssetCache()
-{
-    return passets;
-}

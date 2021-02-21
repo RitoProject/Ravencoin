@@ -7,13 +7,49 @@
 #include "primitives/block.h"
 
 #include "algo/hashx21s.h"
+#include <hash.h>
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 #include "crypto/common.h"
 
+uint32_t nKAWPOWActivationTime;
+
+BlockNetwork bNetwork = BlockNetwork();
+
+BlockNetwork::BlockNetwork()
+{
+    fOnTestnet = false;
+    fOnRegtest = false;
+}
+
+void BlockNetwork::SetNetwork(const std::string& net)
+{
+    if (net == "test") {
+        fOnTestnet = true;
+    } else if (net == "regtest") {
+        fOnRegtest = true;
+    }
+}
 uint256 CBlockHeader::GetHash() const
 {
     return HashX21S(BEGIN(nVersion), END(nNonce), hashPrevBlock);
+}
+
+uint256 CBlockHeader::GetHashFull(uint256& mix_hash) const
+{
+    return HashX21S(BEGIN(nVersion), END(nNonce), hashPrevBlock);
+}
+
+/**
+ * @brief This takes a block header, removes the nNonce64 and the mixHash. Then performs a serialized hash of it SHA256D.
+ * This will be used as the input to the KAAAWWWPOW hashing function
+ * @note Only to be called and used on KAAAWWWPOW block headers
+ */
+uint256 CBlockHeader::GetKAWPOWHeaderHash() const
+{
+    CKAWPOWInput input{*this};
+
+    return SerializeHash(input);
 }
 
 std::string CBlock::ToString() const

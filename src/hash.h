@@ -15,9 +15,8 @@
 #include "uint256.h"
 #include "version.h"
 
-extern "C" {
-#include "crypto/sph_sha2.h"
-}
+#include <crypto/ethash/helpers.hpp>
+
 #include <vector>
 
 class CBlockHeader;

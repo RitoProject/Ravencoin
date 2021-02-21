@@ -4522,7 +4522,7 @@ bool CNullAssetTxData::IsValid(std::string &strError, CAssetsCache &assetCache, 
         return false;
     }
 
-    if (flag != 0 || flag != 1) {
+    if (flag != 0 && flag != 1) {
         strError = _("Flag must be 1 or 0");
         return false;
     }
@@ -4817,14 +4817,6 @@ bool CAssetsCache::CheckForGlobalRestriction(const std::string &restricted_name,
     if (setIterator != passets->setNewRestrictedGlobalToAdd.end()) {
         // Return true if we are adding a freeze command
         return setIterator->type == RestrictedType::GLOBAL_FREEZE;
-    }
-
-    setIterator = passets->setNewAssetsToAdd.find(cachedAsset);
-    if (setIterator != passets->setNewAssetsToAdd.end()) {
-        asset = setIterator->asset;
-        nHeight = setIterator->blockHeight;
-        blockHash = setIterator->blockHash;
-        return true;
     }
 
     // Check the cache, if it doesn't exist in the cache. Try and read it from database
@@ -5643,61 +5635,4 @@ std::string GetUserErrorString(const ErrorReport& report)
         default:
             return _("Error not set");
     }
-}
-
-bool ParseAssetScript(CScript scriptPubKey, uint160 &hashBytes, std::string &assetName, CAmount &assetAmount) {
-    int nType;
-    bool fIsOwner;
-    int _nStartingPoint;
-    std::string _strAddress;
-    bool isAsset = false;
-    if (scriptPubKey.IsAssetScript(nType, fIsOwner, _nStartingPoint)) {
-        if (nType == TX_NEW_ASSET) {
-            if (fIsOwner) {
-                if (OwnerAssetFromScript(scriptPubKey, assetName, _strAddress)) {
-                    assetAmount = OWNER_ASSET_AMOUNT;
-                    isAsset = true;
-                } else {
-                    LogPrintf("%s : Couldn't get new owner asset from script: %s", __func__, HexStr(scriptPubKey));
-                }
-            } else {
-                CNewAsset asset;
-                if (AssetFromScript(scriptPubKey, asset, _strAddress)) {
-                    assetName = asset.strName;
-                    assetAmount = asset.nAmount;
-                    isAsset = true;
-                } else {
-                    LogPrintf("%s : Couldn't get new asset from script: %s", __func__, HexStr(scriptPubKey));
-                }
-            }
-        } else if (nType == TX_REISSUE_ASSET) {
-            CReissueAsset asset;
-            if (ReissueAssetFromScript(scriptPubKey, asset, _strAddress)) {
-                assetName = asset.strName;
-                assetAmount = asset.nAmount;
-                isAsset = true;
-            } else {
-                LogPrintf("%s : Couldn't get reissue asset from script: %s", __func__, HexStr(scriptPubKey));
-            }
-        } else if (nType == TX_TRANSFER_ASSET) {
-            CAssetTransfer asset;
-            if (TransferAssetFromScript(scriptPubKey, asset, _strAddress)) {
-                assetName = asset.strName;
-                assetAmount = asset.nAmount;
-                isAsset = true;
-            } else {
-                LogPrintf("%s : Couldn't get transfer asset from script: %s", __func__, HexStr(scriptPubKey));
-            }
-        } else {
-            LogPrintf("%s : Unsupported asset type: %s", __func__, nType);
-        }
-    } else {
-//        LogPrintf("%s : Found no asset in script: %s", __func__, HexStr(scriptPubKey));
-    }
-    if (isAsset) {
-//        LogPrintf("%s : Found assets in script at address %s : %s (%s)", __func__, _strAddress, assetName, assetAmount);
-        hashBytes = uint160(std::vector <unsigned char>(scriptPubKey.begin()+3, scriptPubKey.begin()+23));
-        return true;
-    }
-    return false;
 }
